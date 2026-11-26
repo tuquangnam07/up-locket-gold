@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Đại lý — Locket Gold</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 10%, #1a2238, #07090f 70%);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #e8ecff; padding: 18px 14px 60px;
+  }
+  .topbar {
+    max-width: 1100px; margin: 0 auto 22px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size: 18px; }
+  .brand-icon {
+    width:38px; height:38px; border-radius:10px;
+    background: linear-gradient(135deg, #48dbfb, #6c5ce7);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .top-actions { display:flex; gap:10px; flex-wrap: wrap; }
+  .btn-sm {
+    padding: 9px 16px; border-radius: 10px; font-size: 13px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06);
+    color: #e8ecff; transition: background 0.2s;
+  }
+  .btn-sm:hover { background: rgba(255,255,255,0.12); }
+  .btn-sm.danger:hover { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.4); }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .quota-banner {
+    background: linear-gradient(135deg, rgba(72,219,251,0.1), rgba(108,92,231,0.1));
+    border: 1px solid rgba(72,219,251,0.3);
+    border-radius: 16px; padding: 22px; margin-bottom: 22px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
+  }
+  .quota-info h3 { font-size: 14px; opacity: 0.7; margin-bottom: 6px; letter-spacing: 0.4px; }
+  .quota-info .big {
+    font-size: 32px; font-weight: 800;
+    background: linear-gradient(90deg, #48dbfb, #6c5ce7);
+    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+  }
+  .quota-info .sub { font-size: 13px; opacity: 0.6; margin-top: 4px; }
+  .quota-bar-wrap {
+    flex: 1; min-width: 200px; max-width: 340px;
+  }
+  .quota-bar {
+    height: 12px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden;
+  }
+  .quota-fill {
+    height: 100%; background: linear-gradient(90deg, #48dbfb, #6c5ce7);
+    transition: width 0.4s ease;
+  }
+  .quota-bar-label { font-size: 12px; opacity: 0.6; margin-top: 6px; text-align: right; }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px; margin-bottom: 22px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 18px;
+  }
+  .stat-label { font-size: 12px; opacity: 0.6; margin-bottom: 8px; letter-spacing: 0.4px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #48dbfb; }
+
+  .panel {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; padding: 22px; margin-bottom: 22px;
+  }
+  .panel h2 { font-size: 16px; margin-bottom: 16px; }
+  .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .form-row .field { flex: 1; min-width: 160px; }
+  label { display: block; font-size: 12px; opacity: 0.7; margin-bottom: 6px; }
+  input, select {
+    width: 100%; padding: 11px 13px;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; color: #fff; font-size: 14px; outline: none;
+  }
+  input:focus, select:focus { border-color: #48dbfb; }
+  select option { background: #1a2238; }
+
+  .btn-primary {
+    padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    border: none; cursor: pointer; color: #0a1628;
+    background: linear-gradient(135deg, #48dbfb, #6c5ce7);
+    transition: transform 0.15s, opacity 0.2s;
+  }
+  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .toolbar input, .toolbar select { max-width: 220px; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 11px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  th { font-size: 12px; opacity: 0.6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+  .tag {
+    display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+  .tag.user { background: rgba(80,150,255,0.15); color: #8ab8ff; }
+  .tag.ok { background: rgba(80,255,150,0.12); color: #7dffab; }
+  .tag.no { background: rgba(255,255,255,0.07); color: #aaa; }
+  .tag.locked { background: rgba(255,80,80,0.12); color: #ff9a9a; }
+
+  .row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .row-actions button {
+    padding: 5px 10px; border-radius: 7px; font-size: 11px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: #e8ecff;
+  }
+  .row-actions button:hover { background: rgba(255,255,255,0.12); }
+  .row-actions .danger { color: #ff9a9a; border-color: rgba(255,80,80,0.3); }
+  .row-actions .danger:hover { background: rgba(255,80,80,0.15); }
+
+  .empty { text-align: center; padding: 30px; opacity: 0.5; font-size: 14px; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
+    background: rgba(30,40,70,0.95); border: 1px solid rgba(255,255,255,0.12);
+    padding: 13px 22px; border-radius: 12px; font-size: 14px;
+    transition: transform 0.3s; z-index: 99; max-width: 90vw;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.err { border-color: rgba(255,80,80,0.4); color: #ff9a9a; }
+  .toast.ok { border-color: rgba(80,255,150,0.4); color: #9affc0; }
+
+  @media (max-width: 600px) {
+    .quota-info .big { font-size: 24px; }
+    .stat-value { font-size: 22px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-icon">🏪</div>
+    <span>Locket Gold — Đại lý</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn-sm" id="viewUserPage">Xem trang người dùng</button>
+    <button class="btn-sm danger" id="logoutBtn">Đăng xuất</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- Quota banner -->
+  <div class="quota-banner">
+    <div class="quota-info">
+      <h3>HẠN MỨC ĐÃ DÙNG</h3>
+      <div class="big" id="quotaText">— / —</div>
+      <div class="sub" id="quotaSub">Đang tải...</div>
+    </div>
+    <div class="quota-bar-wrap">
+      <div class="quota-bar"><div class="quota-fill" id="quotaFill" style="width:0%"></div></div>
+      <div class="quota-bar-label" id="quotaPercent">0%</div>
+    </div>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Tổng user đã tạo</div><div class="stat-value" id="statTotal">—</div></div>
+    <div class="stat-card"><div class="stat-label">Đã tải cấu hình</div><div class="stat-value" id="statDownloaded">—</div></div>
+    <div class="stat-card"><div class="stat-label">Chưa tải</div><div class="stat-value" id="statNotDownloaded">—</div></div>
+  </div>
+
+  <!-- Tạo user -->
+  <div class="panel">
+    <h2>➕ Tạo tài khoản user mới</h2>
+    <form id="createForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="newUsername">Username</label>
+          <input id="newUsername" type="text" required maxlength="32" placeholder="vd: user001">
+        </div>
+        <div class="field">
+          <label for="newPassword">Mật khẩu</label>
+          <input id="newPassword" type="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" id="createBtn">Tạo user</button>
+    </form>
+  </div>
+
+  <!-- Danh sách user do agency tạo -->
+  <div class="panel">
+    <h2>📋 Danh sách user của bạn</h2>
+    <div class="toolbar">
+      <input type="text" id="searchInput" placeholder="Tìm theo username...">
+      <select id="filterDownload">
+        <option value="">Mọi trạng thái tải</option>
+        <option value="downloaded">Đã tải</option>
+        <option value="not_downloaded">Chưa tải</option>
+      </select>
+      <button class="btn-sm" id="reloadBtn">Làm mới</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Trạng thái</th>
+            <th>Tải cấu hình</th>
+            <th>Ngày tạo</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody">
+          <tr><td colspan="5" class="empty">Đang tải...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, updateDoc, deleteDoc, setDoc,
+  collection, query, where, getDocs, runTransaction
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCrrHvwoCn_TNkFa8HjC3XdRtpMqHl-k4w",
+  authDomain: "locket-gold-tuquangnam.firebaseapp.com",
+  projectId: "locket-gold-tuquangnam",
+  storageBucket: "locket-gold-tuquangnam.firebasestorage.app",
+  messagingSenderId: "577811797475",
+  appId: "1:577811797475:web:e05032ffdaf0e9ef737cd6",
+  measurementId: "G-PHMRVB5DJ6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const $ = (id) => document.getElementById(id);
+const toastEl = $("toast");
+let toastTimer = null;
+
+function toast(text, type = "ok") {
+  toastEl.textContent = text;
+  toastEl.className = "toast show " + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toastEl.className = "toast " + type; }, 3500);
+}
+
+let currentUser = null;
+let currentData = null;
+let allUsers = [];
+
+function normalizeUsername(u) { return String(u).trim().toLowerCase(); }
+function emailOf(username) { return `${normalizeUsername(username)}@locketgold.local`; }
+
+// === TẠO USER QUA SECONDARY APP ===
+async function createAuthUserSecondary(username, password) {
+  const secondaryApp = initializeApp(firebaseConfig, "secondary-" + Date.now());
+  const secondaryAuth = getAuth(secondaryApp);
+  try {
+    const cred = await createUserWithEmailAndPassword(secondaryAuth, emailOf(username), password);
+    const uid = cred.user.uid;
+    await signOut(secondaryAuth);
+    return uid;
+  } finally {
+    await deleteApp(secondaryApp);
+  }
+}
+
+async function loadMe() {
+  const snap = await getDoc(doc(db, "users", currentUser.uid));
+  if (!snap.exists()) throw new Error("Không tìm thấy dữ liệu đại lý.");
+  currentData = snap.data();
+  if (currentData.role !== "agency") {
+    throw new Error("Chỉ đại lý mới được truy cập trang này.");
+  }
+  if (currentData.status === "locked") throw new Error("Tài khoản đã bị khóa.");
+  renderQuota();
+}
+
+function renderQuota() {
+  const used = currentData.usedQuota || 0;
+  const max = currentData.maxQuota || 0;
+  const remaining = Math.max(0, max - used);
+  const percent = max > 0 ? Math.min(100, Math.round((used / max) * 100)) : 0;
+
+  $("quotaText").textContent = `${used} / ${max}`;
+  $("quotaSub").textContent = max === 0
+    ? "Chưa được cấp hạn mức — liên hệ Admin"
+    : (remaining === 0
+        ? "Đã hết hạn mức — liên hệ Admin để thêm"
+        : `Còn lại ${remaining} lượt tạo user`);
+  $("quotaFill").style.width = percent + "%";
+  $("quotaPercent").textContent = percent + "%";
+
+  // Khóa form nếu hết quota
+  const outOfQuota = max === 0 || used >= max;
+  $("createBtn").disabled = outOfQuota;
+  if (outOfQuota) {
+    $("createBtn").textContent = "🔒 Đã hết hạn mức";
+  } else {
+    $("createBtn").textContent = "Tạo user";
+  }
+}
+
+async function loadUsers() {
+  const tbody = $("userTableBody");
+  tbody.innerHTML = `<tr><td colspan="5" class="empty">Đang tải...</td></tr>`;
+  try {
+    const q = query(collection(db, "users"), where("createdBy", "==", currentData.username));
+    const snap = await getDocs(q);
+    allUsers = [];
+    snap.forEach(d => allUsers.push({ uid: d.id, ...d.data() }));
+    allUsers.sort((a, b) => (a.username || "").localeCompare(b.username || ""));
+    renderUsers();
+    renderStats();
+  } catch (e) {
+    console.error(e);
+    tbody.innerHTML = `<tr><td colspan="5" class="empty">Lỗi tải danh sách: ${e.message}</td></tr>`;
+  }
+}
+
+function renderStats() {
+  const total = allUsers.length;
+  const downloaded = allUsers.filter(u => u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1).length;
+  $("statTotal").textContent = total;
+  $("statDownloaded").textContent = downloaded;
+  $("statNotDownloaded").textContent = total - downloaded;
+}
+
+function renderUsers() {
+  const tbody = $("userTableBody");
+  const search = $("searchInput").value.trim().toLowerCase();
+  const fDl = $("filterDownload").value;
+
+  let list = allUsers.slice();
+  if (search) list = list.filter(u => (u.username || "").toLowerCase().includes(search));
+  if (fDl === "downloaded") list = list.filter(u => u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1);
+  if (fDl === "not_downloaded") list = list.filter(u => !(u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1));
+
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="5" class="empty">Không có user phù hợp.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(u => {
+    const dl = u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1;
+    const dlTag = dl
+      ? `<span class="tag ok">Đã tải (1/1)</span>`
+      : `<span class="tag no">Chưa tải</span>`;
+    const statusTag = u.status === "locked"
+      ? `<span class="tag locked">Đã khóa</span>`
+      : `<span class="tag ok">Hoạt động</span>`;
+    const created = u.createdAt?.toDate?.();
+    const createdStr = created ? created.toLocaleDateString("vi-VN") : "—";
+
+    const actions = [];
+    if (dl) {
+      // Agency không có quyền reset — chỉ admin
+      actions.push(`<span style="opacity:0.4;font-size:11px;">—</span>`);
+    } else {
+      actions.push(`<span style="opacity:0.4;font-size:11px;">—</span>`);
+    }
+
+    return `<tr>
+      <td><b>${u.username || "?"}</b></td>
+      <td>${statusTag}</td>
+      <td>${dlTag}</td>
+      <td style="opacity:0.7;">${createdStr}</td>
+      <td><div class="row-actions">${actions.join("")}</div></td>
+    </tr>`;
+  }).join("");
+}
+
+// === TẠO USER (có kiểm tra quota + transaction) ===
+$("createForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = $("createBtn");
+  btn.disabled = true;
+
+  const username = normalizeUsername($("newUsername").value);
+  const password = $("newPassword").value;
+
+  if (!/^[a-z0-9_.]{3,32}$/.test(username)) {
+    toast("Username chỉ gồm chữ thường, số, _ hoặc . (3–32 ký tự).", "err");
+    btn.disabled = false; return;
+  }
+  if (password.length < 6) {
+    toast("Mật khẩu tối thiểu 6 ký tự.", "err");
+    btn.disabled = false; return;
+  }
+
+  // Kiểm tra quota trước
+  if ((currentData.usedQuota || 0) >= (currentData.maxQuota || 0)) {
+    toast("Đã đạt giới hạn số tài khoản được cấp, vui lòng liên hệ Admin.", "err");
+    btn.disabled = false; return;
+  }
+
+  try {
+    // Kiểm tra trùng username
+    const dupQ = query(collection(db, "users"), where("username", "==", username));
+    const dupSnap = await getDocs(dupQ);
+    if (!dupSnap.empty) {
+      toast("Username đã tồn tại.", "err");
+      btn.disabled = false; return;
+    }
+
+    // Tạo Auth user qua secondary app
+    const newUid = await createAuthUserSecondary(username, password);
+
+    // Ghi Firestore + tăng usedQuota trong TRANSACTION
+    const userRef = doc(db, "users", newUid);
+    const agencyRef = doc(db, "users", currentUser.uid);
+
+    await runTransaction(db, async (tx) => {
+      const agencySnap = await tx.get(agencyRef);
+      if (!agencySnap.exists()) throw new Error("Không tìm thấy tài khoản đại lý.");
+      const a = agencySnap.data();
+      const used = a.usedQuota || 0;
+      const max = a.maxQuota || 0;
+      if (used >= max) throw new Error("Đã đạt giới hạn số tài khoản được cấp, vui lòng liên hệ Admin.");
+
+      const userData = {
+        username,
+        role: "user",
+        status: "active",
+        createdBy: currentData.username,
+        createdAt: new Date(),
+        hasDownloadedConfig: false,
+        downloadCount: 0,
+        downloadedAt: null,
+        downloadedFilename: null,
+        profileUsernameUsed: null
+      };
+
+      tx.set(userRef, userData);
+      tx.update(agencyRef, { usedQuota: used + 1 });
+    });
+
+    toast(`Đã tạo user "${username}" thành công.`, "ok");
+    $("createForm").reset();
+    await loadMe();
+    await loadUsers();
+    btn.disabled = false;
+
+  } catch (err) {
+    console.error(err);
+    let msg = err.message || String(err);
+    if (err.code === "auth/email-already-in-use") msg = "Username đã tồn tại trong Auth.";
+    if (err.code === "auth/weak-password") msg = "Mật khẩu quá yếu.";
+    toast("Lỗi tạo user: " + msg, "err");
+    btn.disabled = false;
+  }
+});
+
+// Filters
+$("searchInput").addEventListener("input", renderUsers);
+$("filterDownload").addEventListener("change", renderUsers);
+$("reloadBtn").addEventListener("click", loadUsers);
+
+// Top actions
+$("logoutBtn").addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.replace("/login/index.html");
+});
+$("viewUserPage").addEventListener("click", () => {
+  window.open("/trangchu/index.html", "_blank");
+});
+
+// === AUTH GUARD: chỉ agency ===
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.replace("/login/index.html");
+    return;
+  }
+  currentUser = user;
+  try {
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if (!snap.exists()) {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+      return;
+    }
+    const d = snap.data();
+    if (d.status === "locked") {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+      return;
+    }
+    if (d.role === "admin") {
+      window.location.replace("/admin/index.html");
+      return;
+    }
+    if (d.role !== "agency") {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+      return;
+    }
+    await loadMe();
+    await loadUsers();
+  } catch (e) {
+    toast(e.message || "Lỗi truy cập.", "err");
+    setTimeout(async () => {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+    }, 1500);
+  }
+});
+</script>
+</body>
+</html>
