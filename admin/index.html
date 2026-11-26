@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin — Locket Gold</title>
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    min-height: 100vh;
+    background: radial-gradient(circle at 20% 10%, #1a2238, #07090f 70%);
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    color: #e8ecff; padding: 18px 14px 60px;
+  }
+  .topbar {
+    max-width: 1100px; margin: 0 auto 22px;
+    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+  }
+  .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size: 18px; }
+  .brand-icon {
+    width:38px; height:38px; border-radius:10px;
+    background: linear-gradient(135deg, #ffb347, #ff7a59);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .top-actions { display:flex; gap:10px; flex-wrap: wrap; }
+  .btn-sm {
+    padding: 9px 16px; border-radius: 10px; font-size: 13px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06);
+    color: #e8ecff; transition: background 0.2s;
+  }
+  .btn-sm:hover { background: rgba(255,255,255,0.12); }
+  .btn-sm.danger:hover { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.4); }
+
+  .container { max-width: 1100px; margin: 0 auto; }
+
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 14px; margin-bottom: 22px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 16px; padding: 18px;
+  }
+  .stat-label { font-size: 12px; opacity: 0.6; margin-bottom: 8px; letter-spacing: 0.4px; }
+  .stat-value { font-size: 28px; font-weight: 700; color: #ffb347; }
+
+  .panel {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; padding: 22px; margin-bottom: 22px;
+  }
+  .panel h2 { font-size: 16px; margin-bottom: 16px; }
+  .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
+  .form-row .field { flex: 1; min-width: 160px; }
+  label { display: block; font-size: 12px; opacity: 0.7; margin-bottom: 6px; }
+  input, select {
+    width: 100%; padding: 11px 13px;
+    background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 10px; color: #fff; font-size: 14px; outline: none;
+  }
+  input:focus, select:focus { border-color: #ffb347; }
+  select option { background: #1a2238; }
+
+  .btn-primary {
+    padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    border: none; cursor: pointer; color: #1a1200;
+    background: linear-gradient(135deg, #ffb347, #ff7a59);
+    transition: transform 0.15s, opacity 0.2s;
+  }
+  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
+  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+
+  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
+  .toolbar input, .toolbar select { max-width: 200px; }
+
+  .table-wrap { overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  th, td { padding: 11px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.07); }
+  th { font-size: 12px; opacity: 0.6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
+  tr:hover td { background: rgba(255,255,255,0.03); }
+  .tag {
+    display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
+  }
+  .tag.admin { background: rgba(255,80,80,0.15); color: #ff8a8a; }
+  .tag.agency { background: rgba(255,179,71,0.15); color: #ffcf8a; }
+  .tag.user { background: rgba(80,150,255,0.15); color: #8ab8ff; }
+  .tag.ok { background: rgba(80,255,150,0.12); color: #7dffab; }
+  .tag.no { background: rgba(255,255,255,0.07); color: #aaa; }
+  .tag.locked { background: rgba(255,80,80,0.12); color: #ff9a9a; }
+
+  .row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
+  .row-actions button {
+    padding: 5px 10px; border-radius: 7px; font-size: 11px; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: #e8ecff;
+  }
+  .row-actions button:hover { background: rgba(255,255,255,0.12); }
+  .row-actions .danger { color: #ff9a9a; border-color: rgba(255,80,80,0.3); }
+  .row-actions .danger:hover { background: rgba(255,80,80,0.15); }
+
+  .empty { text-align: center; padding: 30px; opacity: 0.5; font-size: 14px; }
+
+  .toast {
+    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
+    background: rgba(30,40,70,0.95); border: 1px solid rgba(255,255,255,0.12);
+    padding: 13px 22px; border-radius: 12px; font-size: 14px;
+    transition: transform 0.3s; z-index: 99; max-width: 90vw;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+  .toast.err { border-color: rgba(255,80,80,0.4); color: #ff9a9a; }
+  .toast.ok { border-color: rgba(80,255,150,0.4); color: #9affc0; }
+
+  .modal-backdrop {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
+    display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: #111726; border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 16px; padding: 24px; width: 100%; max-width: 400px;
+  }
+  .modal h3 { font-size: 16px; margin-bottom: 14px; }
+  .modal .field { margin-bottom: 14px; }
+  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand">
+    <div class="brand-icon">⚙️</div>
+    <span>Locket Gold — Quản trị</span>
+  </div>
+  <div class="top-actions">
+    <button class="btn-sm" id="viewUserPage">Xem trang người dùng</button>
+    <button class="btn-sm danger" id="logoutBtn">Đăng xuất</button>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="stats-grid" id="statsGrid">
+    <div class="stat-card"><div class="stat-label">Tổng tài khoản</div><div class="stat-value" id="statTotal">—</div></div>
+    <div class="stat-card"><div class="stat-label">Quản trị (admin)</div><div class="stat-value" id="statAdmin">—</div></div>
+    <div class="stat-card"><div class="stat-label">Đại lý (agency)</div><div class="stat-value" id="statAgency">—</div></div>
+    <div class="stat-card"><div class="stat-label">Người dùng (user)</div><div class="stat-value" id="statUser">—</div></div>
+    <div class="stat-card"><div class="stat-label">Đã tải cấu hình</div><div class="stat-value" id="statDownloaded">—</div></div>
+  </div>
+
+  <div class="panel" id="createPanel">
+    <h2>➕ Tạo tài khoản mới</h2>
+    <form id="createForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="newUsername">Username</label>
+          <input id="newUsername" type="text" required maxlength="32" placeholder="vd: user001">
+        </div>
+        <div class="field">
+          <label for="newPassword">Mật khẩu</label>
+          <input id="newPassword" type="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
+        </div>
+        <div class="field">
+          <label for="newRole">Vai trò</label>
+          <select id="newRole">
+            <option value="user">user</option>
+            <option value="agency">agency</option>
+            <option value="admin">admin</option>
+          </select>
+        </div>
+        <div class="field" id="quotaField" style="display:none;">
+          <label for="newQuota">Hạn mức (maxQuota)</label>
+          <input id="newQuota" type="number" min="0" value="10">
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" id="createBtn">Tạo tài khoản</button>
+    </form>
+  </div>
+
+  <div class="panel">
+    <h2>📋 Danh sách tài khoản</h2>
+    <div class="toolbar">
+      <input type="text" id="searchInput" placeholder="Tìm theo username...">
+      <select id="filterRole">
+        <option value="">Tất cả vai trò</option>
+        <option value="admin">admin</option>
+        <option value="agency">agency</option>
+        <option value="user">user</option>
+      </select>
+      <select id="filterDownload">
+        <option value="">Mọi trạng thái tải</option>
+        <option value="downloaded">Đã tải</option>
+        <option value="not_downloaded">Chưa tải</option>
+      </select>
+      <button class="btn-sm" id="reloadBtn">Làm mới</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Username</th>
+            <th>Vai trò</th>
+            <th>Trạng thái</th>
+            <th>Tải cấu hình</th>
+            <th>Người tạo</th>
+            <th>Hạn mức</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="userTableBody">
+          <tr><td colspan="7" class="empty">Đang tải...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <h3 id="modalTitle">Chỉnh sửa</h3>
+    <div class="field" id="modalQuotaWrap">
+      <label for="modalQuota">Hạn mức (maxQuota)</label>
+      <input id="modalQuota" type="number" min="0">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm" id="modalCancel">Hủy</button>
+      <button class="btn-primary" id="modalSave">Lưu</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script type="module">
+import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword,
+  signInWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+import {
+  getFirestore, doc, getDoc, updateDoc, deleteDoc,
+  collection, query, where, getDocs
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyCrrHvwoCn_TNkFa8HjC3XdRtpMqHl-k4w",
+  authDomain: "locket-gold-tuquangnam.firebaseapp.com",
+  projectId: "locket-gold-tuquangnam",
+  storageBucket: "locket-gold-tuquangnam.firebasestorage.app",
+  messagingSenderId: "577811797475",
+  appId: "1:577811797475:web:e05032ffdaf0e9ef737cd6",
+  measurementId: "G-PHMRVB5DJ6"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+const $ = (id) => document.getElementById(id);
+const toastEl = $("toast");
+let toastTimer = null;
+
+function toast(text, type = "ok") {
+  toastEl.textContent = text;
+  toastEl.className = "toast show " + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { toastEl.className = "toast " + type; }, 3500);
+}
+
+let currentUser = null;
+let currentData = null;
+let allUsers = [];
+let editingUid = null;
+
+function normalizeUsername(u) { return String(u).trim().toLowerCase(); }
+function emailOf(username) { return `${normalizeUsername(username)}@locketgold.local`; }
+
+// === TẠO USER QUA SECONDARY APP (không ảnh hưởng phiên chính) ===
+async function createAuthUserSecondary(username, password) {
+  const secondaryApp = initializeApp(firebaseConfig, "secondary-" + Date.now());
+  const secondaryAuth = getAuth(secondaryApp);
+  try {
+    const cred = await createUserWithEmailAndPassword(secondaryAuth, emailOf(username), password);
+    const uid = cred.user.uid;
+    await signOut(secondaryAuth);
+    return uid;
+  } finally {
+    await deleteApp(secondaryApp);
+  }
+}
+
+async function loadMe() {
+  const snap = await getDoc(doc(db, "users", currentUser.uid));
+  if (!snap.exists()) throw new Error("Không tìm thấy dữ liệu quản trị.");
+  currentData = snap.data();
+  if (currentData.role !== "admin") {
+    throw new Error("Chỉ admin mới được truy cập trang này.");
+  }
+  if (currentData.status === "locked") throw new Error("Tài khoản đã bị khóa.");
+}
+
+function applyRoleUI() {
+  $("newRole").addEventListener("change", () => {
+    $("quotaField").style.display = $("newRole").value === "agency" ? "" : "none";
+  });
+  $("quotaField").style.display = $("newRole").value === "agency" ? "" : "none";
+}
+
+async function loadUsers() {
+  const tbody = $("userTableBody");
+  tbody.innerHTML = `<tr><td colspan="7" class="empty">Đang tải...</td></tr>`;
+  try {
+    const q = query(collection(db, "users"));
+    const snap = await getDocs(q);
+    allUsers = [];
+    snap.forEach(d => allUsers.push({ uid: d.id, ...d.data() }));
+    allUsers.sort((a, b) => (a.username || "").localeCompare(b.username || ""));
+    renderUsers();
+    renderStats();
+  } catch (e) {
+    console.error(e);
+    tbody.innerHTML = `<tr><td colspan="7" class="empty">Lỗi tải danh sách: ${e.message}</td></tr>`;
+  }
+}
+
+function renderStats() {
+  const total = allUsers.length;
+  const adminCount = allUsers.filter(u => u.role === "admin").length;
+  const agencyCount = allUsers.filter(u => u.role === "agency").length;
+  const userCount = allUsers.filter(u => u.role === "user").length;
+  const downloaded = allUsers.filter(u => u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1).length;
+  $("statTotal").textContent = total;
+  $("statAdmin").textContent = adminCount;
+  $("statAgency").textContent = agencyCount;
+  $("statUser").textContent = userCount;
+  $("statDownloaded").textContent = downloaded;
+}
+
+function renderUsers() {
+  const tbody = $("userTableBody");
+  const search = $("searchInput").value.trim().toLowerCase();
+  const fRole = $("filterRole").value;
+  const fDl = $("filterDownload").value;
+
+  let list = allUsers.slice();
+  if (search) list = list.filter(u => (u.username || "").toLowerCase().includes(search));
+  if (fRole) list = list.filter(u => u.role === fRole);
+  if (fDl === "downloaded") list = list.filter(u => u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1);
+  if (fDl === "not_downloaded") list = list.filter(u => !(u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1));
+
+  if (list.length === 0) {
+    tbody.innerHTML = `<tr><td colspan="7" class="empty">Không có tài khoản phù hợp.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(u => {
+    const dl = u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1;
+    const dlTag = dl
+      ? `<span class="tag ok">Đã tải (1/1)</span>`
+      : `<span class="tag no">Chưa tải</span>`;
+    const statusTag = u.status === "locked"
+      ? `<span class="tag locked">Đã khóa</span>`
+      : `<span class="tag ok">Hoạt động</span>`;
+    const roleTag = `<span class="tag ${u.role}">${u.role}</span>`;
+    const quota = u.role === "agency"
+      ? `<span>${u.usedQuota || 0} / ${u.maxQuota || 0}</span>`
+      : `<span style="opacity:0.4;">—</span>`;
+
+    const actions = [];
+    if (u.role === "agency") {
+      actions.push(`<button data-action="editQuota" data-uid="${u.uid}">Sửa quota</button>`);
+    }
+    if (u.role === "user" && dl) {
+      actions.push(`<button data-action="resetDownload" data-uid="${u.uid}">Reset tải</button>`);
+    }
+    if (u.uid !== currentUser.uid) {
+      actions.push(`<button data-action="toggleLock" data-uid="${u.uid}">${u.status === "locked" ? "Mở khóa" : "Khóa"}</button>`);
+      actions.push(`<button class="danger" data-action="delete" data-uid="${u.uid}">Xóa</button>`);
+    }
+
+    return `<tr>
+      <td><b>${u.username || "?"}</b></td>
+      <td>${roleTag}</td>
+      <td>${statusTag}</td>
+      <td>${dlTag}</td>
+      <td style="opacity:0.7;">${u.createdBy || "—"}</td>
+      <td>${quota}</td>
+      <td><div class="row-actions">${actions.join("")}</div></td>
+    </tr>`;
+  }).join("");
+
+  tbody.querySelectorAll("button[data-action]").forEach(btn => {
+    btn.addEventListener("click", () => handleRowAction(btn.dataset.action, btn.dataset.uid));
+  });
+}
+
+async function handleRowAction(action, uid) {
+  const target = allUsers.find(u => u.uid === uid);
+  if (!target) return;
+
+  if (action === "editQuota") {
+    editingUid = uid;
+    $("modalTitle").textContent = `Sửa hạn mức — ${target.username}`;
+    $("modalQuotaWrap").style.display = "block";
+    $("modalQuota").value = target.maxQuota || 0;
+    $("modalBackdrop").classList.add("open");
+    return;
+  }
+
+  if (action === "resetDownload") {
+    if (!confirm(`Reset lượt tải cho "${target.username}"?`)) return;
+    try {
+      await updateDoc(doc(db, "users", uid), {
+        hasDownloadedConfig: false,
+        downloadCount: 0,
+        downloadedAt: null,
+        downloadedFilename: null,
+        profileUsernameUsed: null
+      });
+      toast("Đã reset lượt tải.", "ok");
+      await loadUsers();
+    } catch (e) { toast("Lỗi: " + e.message, "err"); }
+    return;
+  }
+
+  if (action === "toggleLock") {
+    const newStatus = target.status === "locked" ? "active" : "locked";
+    if (!confirm(`Chuyển trạng thái "${target.username}" sang ${newStatus}?`)) return;
+    try {
+      await updateDoc(doc(db, "users", uid), { status: newStatus });
+      toast("Đã cập nhật trạng thái.", "ok");
+      await loadUsers();
+    } catch (e) { toast("Lỗi: " + e.message, "err"); }
+    return;
+  }
+
+  if (action === "delete") {
+    if (!confirm(`XÓA VĨNH VIỄN tài khoản "${target.username}"?`)) return;
+    try {
+      await deleteDoc(doc(db, "users", uid));
+      toast("Đã xóa tài khoản khỏi Firestore.", "ok");
+      await loadUsers();
+    } catch (e) { toast("Lỗi: " + e.message, "err"); }
+  }
+}
+
+$("modalCancel").addEventListener("click", () => {
+  $("modalBackdrop").classList.remove("open");
+  editingUid = null;
+});
+$("modalSave").addEventListener("click", async () => {
+  if (!editingUid) return;
+  const val = parseInt($("modalQuota").value, 10);
+  if (isNaN(val) || val < 0) { toast("Hạn mức không hợp lệ.", "err"); return; }
+  try {
+    const target = allUsers.find(u => u.uid === editingUid);
+    if (target && val < (target.usedQuota || 0)) {
+      if (!confirm(`Hạn mức mới (${val}) nhỏ hơn số đã dùng (${target.usedQuota}). Tiếp tục?`)) return;
+    }
+    await updateDoc(doc(db, "users", editingUid), { maxQuota: val });
+    toast("Đã cập nhật hạn mức.", "ok");
+    $("modalBackdrop").classList.remove("open");
+    editingUid = null;
+    await loadUsers();
+  } catch (e) { toast("Lỗi: " + e.message, "err"); }
+});
+
+// === TẠO TÀI KHOẢN ===
+$("createForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = $("createBtn");
+  btn.disabled = true;
+
+  const username = normalizeUsername($("newUsername").value);
+  const password = $("newPassword").value;
+  const role = $("newRole").value;
+  const quota = role === "agency" ? Math.max(0, parseInt($("newQuota").value, 10) || 0) : 0;
+
+  if (!/^[a-z0-9_.]{3,32}$/.test(username)) {
+    toast("Username chỉ gồm chữ thường, số, _ hoặc . (3–32 ký tự).", "err");
+    btn.disabled = false; return;
+  }
+  if (password.length < 6) {
+    toast("Mật khẩu tối thiểu 6 ký tự.", "err");
+    btn.disabled = false; return;
+  }
+
+  try {
+    // Kiểm tra trùng username
+    const dupQ = query(collection(db, "users"), where("username", "==", username));
+    const dupSnap = await getDocs(dupQ);
+    if (!dupSnap.empty) {
+      toast("Username đã tồn tại.", "err");
+      btn.disabled = false; return;
+    }
+
+    // Tạo Auth user qua secondary app (không ảnh hưởng phiên admin)
+    const newUid = await createAuthUserSecondary(username, password);
+
+    // Ghi Firestore
+    const userData = {
+      username,
+      role,
+      status: "active",
+      createdBy: currentData.username,
+      createdAt: new Date(),
+      hasDownloadedConfig: false,
+      downloadCount: 0,
+      downloadedAt: null,
+      downloadedFilename: null,
+      profileUsernameUsed: null
+    };
+    if (role === "agency") {
+      userData.maxQuota = quota;
+      userData.usedQuota = 0;
+    }
+
+    const { setDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
+    await setDoc(doc(db, "users", newUid), userData);
+
+    toast(`Đã tạo tài khoản "${username}" (${role}).`, "ok");
+    $("createForm").reset();
+    $("quotaField").style.display = "none";
+    await loadUsers();
+    btn.disabled = false;
+
+  } catch (err) {
+    console.error(err);
+    let msg = err.message || String(err);
+    if (err.code === "auth/email-already-in-use") msg = "Username đã tồn tại trong Auth.";
+    if (err.code === "auth/weak-password") msg = "Mật khẩu quá yếu.";
+    toast("Lỗi tạo tài khoản: " + msg, "err");
+    btn.disabled = false;
+  }
+});
+
+// Filters
+$("searchInput").addEventListener("input", renderUsers);
+$("filterRole").addEventListener("change", renderUsers);
+$("filterDownload").addEventListener("change", renderUsers);
+$("reloadBtn").addEventListener("click", loadUsers);
+
+// Top actions
+$("logoutBtn").addEventListener("click", async () => {
+  await signOut(auth);
+  window.location.replace("/login/index.html");
+});
+$("viewUserPage").addEventListener("click", () => {
+  window.open("/trangchu/index.html", "_blank");
+});
+
+// === AUTH GUARD: chỉ admin ===
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.replace("/login/index.html");
+    return;
+  }
+  currentUser = user;
+  try {
+    const snap = await getDoc(doc(db, "users", user.uid));
+    if (!snap.exists()) {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+      return;
+    }
+    const d = snap.data();
+    if (d.status === "locked") {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+      return;
+    }
+    if (d.role === "agency") {
+      // Agency không được vào admin → chuyển sang trang agency
+      window.location.replace("/agency/index.html");
+      return;
+    }
+    if (d.role !== "admin") {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+      return;
+    }
+    await loadMe();
+    applyRoleUI();
+    await loadUsers();
+  } catch (e) {
+    toast(e.message || "Lỗi truy cập.", "err");
+    setTimeout(async () => {
+      await signOut(auth);
+      window.location.replace("/login/index.html");
+    }, 1500);
+  }
+});
+</script>
+</body>
+</html>
