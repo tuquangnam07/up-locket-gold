@@ -7,13 +7,11 @@
 <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    min-height: 100vh;
-    background: radial-gradient(circle at 20% 10%, #1a2238, #07090f 70%);
-    font-family: 'Segoe UI', system-ui, sans-serif;
-    color: #e8ecff; padding: 18px 14px 60px;
+    min-height: 100vh; background: radial-gradient(circle at 20% 10%, #1a2238, #07090f 70%);
+    font-family: 'Segoe UI', system-ui, sans-serif; color: #e8ecff; padding: 18px 14px 60px;
   }
   .topbar {
-    max-width: 1100px; margin: 0 auto 22px;
+    max-width: 1200px; margin: 0 auto 22px;
     display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
   }
   .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size: 18px; }
@@ -26,39 +24,48 @@
   .btn-sm {
     padding: 9px 16px; border-radius: 10px; font-size: 13px; cursor: pointer;
     border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06);
-    color: #e8ecff; transition: background 0.2s;
+    color: #e8ecff; transition: background 0.2s; font-family: inherit;
   }
   .btn-sm:hover { background: rgba(255,255,255,0.12); }
   .btn-sm.danger:hover { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.4); }
 
-  .container { max-width: 1100px; margin: 0 auto; }
+  .container { max-width: 1200px; margin: 0 auto; }
 
   .stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
     gap: 14px; margin-bottom: 22px;
   }
   .stat-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
     border-radius: 16px; padding: 18px;
   }
   .stat-label { font-size: 12px; opacity: 0.6; margin-bottom: 8px; letter-spacing: 0.4px; }
-  .stat-value { font-size: 28px; font-weight: 700; color: #ffb347; }
+  .stat-value { font-size: 26px; font-weight: 700; color: #ffb347; }
+
+  .tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
+  .tab {
+    padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
+    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+    color: #e8ecff; cursor: pointer; font-family: inherit;
+  }
+  .tab.active {
+    background: linear-gradient(135deg, #ffb347, #ff7a59);
+    color: #1a1200; border-color: transparent;
+  }
 
   .panel {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 16px; padding: 22px; margin-bottom: 22px;
+    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 16px; padding: 22px; margin-bottom: 22px; display: none;
   }
+  .panel.active { display: block; }
   .panel h2 { font-size: 16px; margin-bottom: 16px; }
   .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
   .form-row .field { flex: 1; min-width: 160px; }
   label { display: block; font-size: 12px; opacity: 0.7; margin-bottom: 6px; }
   input, select {
-    width: 100%; padding: 11px 13px;
-    background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 10px; color: #fff; font-size: 14px; outline: none;
+    width: 100%; padding: 11px 13px; background: rgba(0,0,0,0.35);
+    border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
+    color: #fff; font-size: 14px; outline: none; font-family: inherit;
   }
   input:focus, select:focus { border-color: #ffb347; }
   select option { background: #1a2238; }
@@ -67,13 +74,13 @@
     padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
     border: none; cursor: pointer; color: #1a1200;
     background: linear-gradient(135deg, #ffb347, #ff7a59);
-    transition: transform 0.15s, opacity 0.2s;
+    transition: transform 0.15s, opacity 0.2s; font-family: inherit;
   }
   .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
   .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
 
   .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
-  .toolbar input, .toolbar select { max-width: 200px; }
+  .toolbar input, .toolbar select { max-width: 220px; }
 
   .table-wrap { overflow-x: auto; }
   table { width: 100%; border-collapse: collapse; font-size: 13px; }
@@ -83,17 +90,19 @@
   .tag {
     display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
   }
-  .tag.admin { background: rgba(255,80,80,0.15); color: #ff8a8a; }
   .tag.agency { background: rgba(255,179,71,0.15); color: #ffcf8a; }
-  .tag.user { background: rgba(80,150,255,0.15); color: #8ab8ff; }
-  .tag.ok { background: rgba(80,255,150,0.12); color: #7dffab; }
-  .tag.no { background: rgba(255,255,255,0.07); color: #aaa; }
+  .tag.admin { background: rgba(255,80,80,0.15); color: #ff8a8a; }
+  .tag.unused { background: rgba(80,255,150,0.12); color: #7dffab; }
+  .tag.used { background: rgba(255,80,80,0.12); color: #ff9a9a; }
   .tag.locked { background: rgba(255,80,80,0.12); color: #ff9a9a; }
+  .tag.ok { background: rgba(80,255,150,0.12); color: #7dffab; }
+  .code-cell { font-family: ui-monospace, Menlo, monospace; font-weight: 700; color: #ffb347; letter-spacing: 0.5px; }
 
   .row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
   .row-actions button {
     padding: 5px 10px; border-radius: 7px; font-size: 11px; cursor: pointer;
     border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: #e8ecff;
+    font-family: inherit;
   }
   .row-actions button:hover { background: rgba(255,255,255,0.12); }
   .row-actions .danger { color: #ff9a9a; border-color: rgba(255,80,80,0.3); }
@@ -119,43 +128,81 @@
   .modal-backdrop.open { display: flex; }
   .modal {
     background: #111726; border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px; padding: 24px; width: 100%; max-width: 400px;
+    border-radius: 16px; padding: 24px; width: 100%; max-width: 420px;
   }
-  .modal h3 { font-size: 16px; margin-bottom: 14px; }
+  .modal h3 { font-size: 16px; margin-bottom: 8px; }
+  .modal p { font-size: 13px; opacity: 0.6; margin-bottom: 16px; line-height: 1.5; }
   .modal .field { margin-bottom: 14px; }
   .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
+
+  .code-result {
+    margin-top: 14px; padding: 14px; border-radius: 12px;
+    background: rgba(80,255,150,0.08); border: 1px solid rgba(80,255,150,0.3);
+    font-size: 13px; line-height: 1.6; display: none;
+  }
+  .code-result.show { display: block; }
+  .code-result .big-code {
+    font-family: ui-monospace, Menlo, monospace; font-size: 20px; font-weight: 800;
+    color: #7dffab; letter-spacing: 1px; margin: 8px 0; word-break: break-all;
+  }
+  .quota-badge {
+    display: inline-block; padding: 2px 8px; border-radius: 6px;
+    background: rgba(255,179,71,0.15); color: #ffcf8a; font-size: 11px; font-weight: 700;
+  }
 </style>
 </head>
 <body>
 
 <div class="topbar">
-  <div class="brand">
-    <div class="brand-icon">⚙️</div>
-    <span>Locket Gold — Quản trị</span>
-  </div>
+  <div class="brand"><div class="brand-icon">⚙️</div><span>Locket Gold — Quản trị</span></div>
   <div class="top-actions">
-    <button class="btn-sm" id="viewUserPage">Xem trang người dùng</button>
+    <button class="btn-sm" id="viewUserPage">Trang kích hoạt mã</button>
     <button class="btn-sm danger" id="logoutBtn">Đăng xuất</button>
   </div>
 </div>
 
 <div class="container">
 
-  <div class="stats-grid" id="statsGrid">
-    <div class="stat-card"><div class="stat-label">Tổng tài khoản</div><div class="stat-value" id="statTotal">—</div></div>
-    <div class="stat-card"><div class="stat-label">Quản trị (admin)</div><div class="stat-value" id="statAdmin">—</div></div>
-    <div class="stat-card"><div class="stat-label">Đại lý (agency)</div><div class="stat-value" id="statAgency">—</div></div>
-    <div class="stat-card"><div class="stat-label">Người dùng (user)</div><div class="stat-value" id="statUser">—</div></div>
-    <div class="stat-card"><div class="stat-label">Đã tải cấu hình</div><div class="stat-value" id="statDownloaded">—</div></div>
+  <div class="stats-grid">
+    <div class="stat-card"><div class="stat-label">Tổng mã code</div><div class="stat-value" id="statCodes">—</div></div>
+    <div class="stat-card"><div class="stat-label">Chưa dùng</div><div class="stat-value" id="statUnused">—</div></div>
+    <div class="stat-card"><div class="stat-label">Đã dùng</div><div class="stat-value" id="statUsed">—</div></div>
+    <div class="stat-card"><div class="stat-label">Đại lý</div><div class="stat-value" id="statAgency">—</div></div>
+    <div class="stat-card"><div class="stat-label">Admin</div><div class="stat-value" id="statAdmin">—</div></div>
   </div>
 
-  <div class="panel" id="createPanel">
-    <h2>➕ Tạo tài khoản mới</h2>
-    <form id="createForm">
+  <div class="tabs">
+    <button class="tab active" data-tab="codes">🎫 Mã code</button>
+    <button class="tab" data-tab="users">👥 Tài khoản</button>
+  </div>
+
+  <!-- TAB CODES -->
+  <div class="panel active" id="panel-codes">
+    <h2>➕ Tạo mã code</h2>
+    <form id="createCodeForm">
+      <div class="form-row">
+        <div class="field">
+          <label for="codeCount">Số lượng mã cần tạo</label>
+          <input id="codeCount" type="number" min="1" max="50" value="1">
+        </div>
+        <div class="field">
+          <label for="codePrefix">Tiền tố (tùy chọn)</label>
+          <input id="codePrefix" type="text" maxlength="6" placeholder="VD: LG" value="LG">
+        </div>
+      </div>
+      <button type="submit" class="btn-primary" id="createCodeBtn">Tạo mã</button>
+      <div class="code-result" id="codeResult"></div>
+    </form>
+  </div>
+
+  <!-- TAB USERS -->
+  <div class="panel" id="panel-users">
+    <h2>➕ Tạo tài khoản đại lý / admin</h2>
+    <form id="createUserForm">
       <div class="form-row">
         <div class="field">
           <label for="newUsername">Username</label>
-          <input id="newUsername" type="text" required maxlength="32" placeholder="vd: user001">
+          <input id="newUsername" type="text" required maxlength="32" placeholder="vd: daily01">
         </div>
         <div class="field">
           <label for="newPassword">Mật khẩu</label>
@@ -164,36 +211,64 @@
         <div class="field">
           <label for="newRole">Vai trò</label>
           <select id="newRole">
-            <option value="user">user</option>
             <option value="agency">agency</option>
             <option value="admin">admin</option>
           </select>
         </div>
-        <div class="field" id="quotaField" style="display:none;">
-          <label for="newQuota">Hạn mức (maxQuota)</label>
+        <div class="field" id="quotaField">
+          <label for="newQuota">Hạn mức tạo mã</label>
           <input id="newQuota" type="number" min="0" value="10">
         </div>
       </div>
-      <button type="submit" class="btn-primary" id="createBtn">Tạo tài khoản</button>
+      <button type="submit" class="btn-primary" id="createUserBtn">Tạo tài khoản</button>
     </form>
   </div>
 
-  <div class="panel">
-    <h2>📋 Danh sách tài khoản</h2>
+  <!-- BẢNG MÃ CODE -->
+  <div class="panel active" id="codesTablePanel">
+    <h2>📋 Danh sách mã code</h2>
     <div class="toolbar">
-      <input type="text" id="searchInput" placeholder="Tìm theo username...">
+      <input type="text" id="searchCode" placeholder="Tìm theo mã...">
+      <select id="filterCodeStatus">
+        <option value="">Mọi trạng thái</option>
+        <option value="unused">Chưa dùng</option>
+        <option value="used">Đã dùng</option>
+      </select>
+      <input type="text" id="searchCodeUser" placeholder="Tìm theo người tạo...">
+      <button class="btn-sm" id="reloadCodesBtn">Làm mới</button>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Mã code</th>
+            <th>Người tạo</th>
+            <th>Vai trò</th>
+            <th>Tạo lúc</th>
+            <th>Trạng thái</th>
+            <th>Người dùng</th>
+            <th>Dùng lúc</th>
+            <th>Thao tác</th>
+          </tr>
+        </thead>
+        <tbody id="codesBody">
+          <tr><td colspan="8" class="empty">Đang tải...</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- BẢNG USERS -->
+  <div class="panel" id="usersTablePanel">
+    <h2>👥 Danh sách tài khoản</h2>
+    <div class="toolbar">
+      <input type="text" id="searchUser" placeholder="Tìm theo username...">
       <select id="filterRole">
         <option value="">Tất cả vai trò</option>
         <option value="admin">admin</option>
         <option value="agency">agency</option>
-        <option value="user">user</option>
       </select>
-      <select id="filterDownload">
-        <option value="">Mọi trạng thái tải</option>
-        <option value="downloaded">Đã tải</option>
-        <option value="not_downloaded">Chưa tải</option>
-      </select>
-      <button class="btn-sm" id="reloadBtn">Làm mới</button>
+      <button class="btn-sm" id="reloadUsersBtn">Làm mới</button>
     </div>
     <div class="table-wrap">
       <table>
@@ -202,13 +277,13 @@
             <th>Username</th>
             <th>Vai trò</th>
             <th>Trạng thái</th>
-            <th>Tải cấu hình</th>
-            <th>Người tạo</th>
             <th>Hạn mức</th>
+            <th>Ngày tạo</th>
+            <th>Người tạo</th>
             <th>Thao tác</th>
           </tr>
         </thead>
-        <tbody id="userTableBody">
+        <tbody id="usersBody">
           <tr><td colspan="7" class="empty">Đang tải...</td></tr>
         </tbody>
       </table>
@@ -217,16 +292,34 @@
 
 </div>
 
-<div class="modal-backdrop" id="modalBackdrop">
+<!-- MODAL SỬA QUOTA -->
+<div class="modal-backdrop" id="quotaModalBackdrop">
   <div class="modal">
-    <h3 id="modalTitle">Chỉnh sửa</h3>
-    <div class="field" id="modalQuotaWrap">
-      <label for="modalQuota">Hạn mức (maxQuota)</label>
+    <h3>Sửa hạn mức</h3>
+    <p id="quotaModalDesc">—</p>
+    <div class="field">
+      <label for="modalQuota">Hạn mức tạo mã (maxQuota)</label>
       <input id="modalQuota" type="number" min="0">
     </div>
     <div class="modal-actions">
-      <button class="btn-sm" id="modalCancel">Hủy</button>
-      <button class="btn-primary" id="modalSave">Lưu</button>
+      <button class="btn-sm" id="quotaModalCancel">Hủy</button>
+      <button class="btn-primary" id="quotaModalSave">Lưu</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL XÁC NHẬN LẠI MẬT KHẨU ADMIN -->
+<div class="modal-backdrop" id="pwdModalBackdrop">
+  <div class="modal">
+    <h3>🔐 Xác nhận mật khẩu admin</h3>
+    <p>Phiên đăng nhập vừa bị thay đổi do tạo tài khoản. Vui lòng nhập lại mật khẩu admin để tiếp tục.</p>
+    <div class="field">
+      <label for="adminPassword">Mật khẩu admin</label>
+      <input id="adminPassword" type="password" placeholder="Nhập mật khẩu...">
+    </div>
+    <div class="modal-actions">
+      <button class="btn-sm" id="pwdModalCancel">Hủy</button>
+      <button class="btn-primary" id="pwdModalConfirm">Xác nhận</button>
     </div>
   </div>
 </div>
@@ -240,8 +333,8 @@ import {
   signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
-  getFirestore, doc, getDoc, updateDoc, deleteDoc,
-  collection, query, where, getDocs
+  getFirestore, doc, getDoc, updateDoc, deleteDoc, setDoc, addDoc,
+  collection, query, where, getDocs, onSnapshot, orderBy, limit
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -261,335 +354,470 @@ const db = getFirestore(app);
 const $ = (id) => document.getElementById(id);
 const toastEl = $("toast");
 let toastTimer = null;
-
-function toast(text, type = "ok") {
+function toast(text, type="ok"){
   toastEl.textContent = text;
   toastEl.className = "toast show " + type;
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => { toastEl.className = "toast " + type; }, 3500);
+  toastTimer = setTimeout(()=>{ toastEl.className = "toast " + type; }, 4000);
 }
 
 let currentUser = null;
 let currentData = null;
+let allCodes = [];
 let allUsers = [];
-let editingUid = null;
+let editingQuotaUid = null;
 
-function normalizeUsername(u) { return String(u).trim().toLowerCase(); }
-function emailOf(username) { return `${normalizeUsername(username)}@locketgold.local`; }
+function normalizeUsername(u){ return String(u).trim().toLowerCase(); }
+function emailOf(username){ return `${normalizeUsername(username)}@locketgold.local`; }
 
-// === TẠO USER QUA SECONDARY APP (không ảnh hưởng phiên chính) ===
-async function createAuthUserSecondary(username, password) {
-  const secondaryApp = initializeApp(firebaseConfig, "secondary-" + Date.now());
+// === SINH MÃ CODE ===
+function generateCode(prefix){
+  const p = (prefix || 'LG').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6) || 'LG';
+  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // bỏ I,O,0,1 dễ nhầm
+  const part = (n) => Array.from({length:n},()=>chars[Math.random()*chars.length|0]).join('');
+  return `${p}-${part(4)}-${part(4)}`;
+}
+
+// === TẠO AUTH USER QUA SECONDARY APP ===
+async function createAuthUserSecondary(username, password){
+  const appName = "secondary-" + Date.now() + "-" + Math.random().toString(36).slice(2);
+  const secondaryApp = initializeApp(firebaseConfig, appName);
   const secondaryAuth = getAuth(secondaryApp);
   try {
     const cred = await createUserWithEmailAndPassword(secondaryAuth, emailOf(username), password);
     const uid = cred.user.uid;
     await signOut(secondaryAuth);
+    await new Promise(r => setTimeout(r, 300));
     return uid;
   } finally {
-    await deleteApp(secondaryApp);
+    try { await deleteApp(secondaryApp); } catch(e){ console.warn("deleteApp:", e); }
   }
 }
 
-async function loadMe() {
+// === XÁC NHẬN LẠI PHIÊN ADMIN ===
+async function ensureAdminSession(){
+  if (auth.currentUser && auth.currentUser.uid === currentUser.uid) return true;
+  return new Promise((resolve) => {
+    $("pwdModalBackdrop").classList.add("open");
+    $("adminPassword").focus();
+    $("pwdModalConfirm").onclick = async () => {
+      const pwd = $("adminPassword").value;
+      if (!pwd){ toast("Vui lòng nhập mật khẩu.", "err"); return; }
+      try {
+        await signInWithEmailAndPassword(auth, emailOf(currentData.username), pwd);
+        $("pwdModalBackdrop").classList.remove("open");
+        $("adminPassword").value = "";
+        resolve(true);
+      } catch(e){ toast("Sai mật khẩu admin: " + e.message, "err"); }
+    };
+    $("pwdModalCancel").onclick = () => {
+      $("pwdModalBackdrop").classList.remove("open");
+      resolve(false);
+    };
+  });
+}
+
+async function loadMe(){
   const snap = await getDoc(doc(db, "users", currentUser.uid));
   if (!snap.exists()) throw new Error("Không tìm thấy dữ liệu quản trị.");
   currentData = snap.data();
-  if (currentData.role !== "admin") {
-    throw new Error("Chỉ admin mới được truy cập trang này.");
-  }
+  if (currentData.role !== "admin") throw new Error("Chỉ admin mới được truy cập trang này.");
   if (currentData.status === "locked") throw new Error("Tài khoản đã bị khóa.");
 }
 
-function applyRoleUI() {
-  $("newRole").addEventListener("change", () => {
-    $("quotaField").style.display = $("newRole").value === "agency" ? "" : "none";
+// === TABS ===
+document.querySelectorAll(".tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+    const target = tab.dataset.tab;
+    $("panel-codes").classList.toggle("active", target === "codes");
+    $("codesTablePanel").classList.toggle("active", target === "codes");
+    $("panel-users").classList.toggle("active", target === "users");
+    $("usersTablePanel").classList.toggle("active", target === "users");
   });
-  $("quotaField").style.display = $("newRole").value === "agency" ? "" : "none";
-}
+});
 
-async function loadUsers() {
-  const tbody = $("userTableBody");
-  tbody.innerHTML = `<tr><td colspan="7" class="empty">Đang tải...</td></tr>`;
+// Role change → show/hide quota
+$("newRole").addEventListener("change", () => {
+  $("quotaField").style.display = $("newRole").value === "agency" ? "" : "none";
+});
+
+// === LOAD CODES ===
+async function loadCodes(){
+  const tbody = $("codesBody");
+  tbody.innerHTML = `<tr><td colspan="8" class="empty">Đang tải...</td></tr>`;
   try {
-    const q = query(collection(db, "users"));
-    const snap = await getDocs(q);
-    allUsers = [];
-    snap.forEach(d => allUsers.push({ uid: d.id, ...d.data() }));
-    allUsers.sort((a, b) => (a.username || "").localeCompare(b.username || ""));
-    renderUsers();
+    const snap = await getDocs(collection(db, "codes"));
+    allCodes = [];
+    snap.forEach(d => allCodes.push({ id: d.id, ...d.data() }));
+    allCodes.sort((a,b) => {
+      const ta = a.createdAt?.toMillis?.() || 0;
+      const tb = b.createdAt?.toMillis?.() || 0;
+      return tb - ta;
+    });
+    renderCodes();
     renderStats();
-  } catch (e) {
+  } catch(e){
     console.error(e);
-    tbody.innerHTML = `<tr><td colspan="7" class="empty">Lỗi tải danh sách: ${e.message}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="8" class="empty">Lỗi tải mã: ${e.message}</td></tr>`;
   }
 }
 
-function renderStats() {
-  const total = allUsers.length;
-  const adminCount = allUsers.filter(u => u.role === "admin").length;
-  const agencyCount = allUsers.filter(u => u.role === "agency").length;
-  const userCount = allUsers.filter(u => u.role === "user").length;
-  const downloaded = allUsers.filter(u => u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1).length;
-  $("statTotal").textContent = total;
-  $("statAdmin").textContent = adminCount;
-  $("statAgency").textContent = agencyCount;
-  $("statUser").textContent = userCount;
-  $("statDownloaded").textContent = downloaded;
-}
+function renderCodes(){
+  const tbody = $("codesBody");
+  const s = $("searchCode").value.trim().toUpperCase();
+  const su = $("searchCodeUser").value.trim().toLowerCase();
+  const f = $("filterCodeStatus").value;
 
-function renderUsers() {
-  const tbody = $("userTableBody");
-  const search = $("searchInput").value.trim().toLowerCase();
-  const fRole = $("filterRole").value;
-  const fDl = $("filterDownload").value;
+  let list = allCodes.slice();
+  if (s) list = list.filter(c => (c.id||'').toUpperCase().includes(s));
+  if (su) list = list.filter(c => (c.createdBy||'').toLowerCase().includes(su));
+  if (f) list = list.filter(c => c.status === f);
 
-  let list = allUsers.slice();
-  if (search) list = list.filter(u => (u.username || "").toLowerCase().includes(search));
-  if (fRole) list = list.filter(u => u.role === fRole);
-  if (fDl === "downloaded") list = list.filter(u => u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1);
-  if (fDl === "not_downloaded") list = list.filter(u => !(u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1));
-
-  if (list.length === 0) {
-    tbody.innerHTML = `<tr><td colspan="7" class="empty">Không có tài khoản phù hợp.</td></tr>`;
+  if (list.length === 0){
+    tbody.innerHTML = `<tr><td colspan="8" class="empty">Không có mã phù hợp.</td></tr>`;
     return;
   }
 
-  tbody.innerHTML = list.map(u => {
-    const dl = u.hasDownloadedConfig === true || (u.downloadCount || 0) >= 1;
-    const dlTag = dl
-      ? `<span class="tag ok">Đã tải (1/1)</span>`
-      : `<span class="tag no">Chưa tải</span>`;
-    const statusTag = u.status === "locked"
-      ? `<span class="tag locked">Đã khóa</span>`
-      : `<span class="tag ok">Hoạt động</span>`;
-    const roleTag = `<span class="tag ${u.role}">${u.role}</span>`;
-    const quota = u.role === "agency"
-      ? `<span>${u.usedQuota || 0} / ${u.maxQuota || 0}</span>`
-      : `<span style="opacity:0.4;">—</span>`;
+  tbody.innerHTML = list.map(c => {
+    const statusTag = c.status === 'used'
+      ? `<span class="tag used">Đã dùng</span>`
+      : `<span class="tag unused">Chưa dùng</span>`;
+    const roleTag = c.createdByRole === 'admin'
+      ? `<span class="tag admin">admin</span>`
+      : `<span class="tag agency">agency</span>`;
+    const created = c.createdAt?.toDate?.();
+    const usedAt = c.usedAt?.toDate?.();
+    const createdStr = created ? created.toLocaleString('vi-VN') : '—';
+    const usedAtStr = usedAt ? usedAt.toLocaleString('vi-VN') : '—';
 
     const actions = [];
-    if (u.role === "agency") {
-      actions.push(`<button data-action="editQuota" data-uid="${u.uid}">Sửa quota</button>`);
-    }
-    if (u.role === "user" && dl) {
-      actions.push(`<button data-action="resetDownload" data-uid="${u.uid}">Reset tải</button>`);
-    }
-    if (u.uid !== currentUser.uid) {
-      actions.push(`<button data-action="toggleLock" data-uid="${u.uid}">${u.status === "locked" ? "Mở khóa" : "Khóa"}</button>`);
-      actions.push(`<button class="danger" data-action="delete" data-uid="${u.uid}">Xóa</button>`);
+    if (c.status === 'unused'){
+      actions.push(`<button class="danger" data-action="deleteCode" data-id="${c.id}">Xóa</button>`);
+    } else {
+      actions.push(`<button data-action="resetCode" data-id="${c.id}">Reset</button>`);
     }
 
     return `<tr>
-      <td><b>${u.username || "?"}</b></td>
+      <td class="code-cell">${c.id}</td>
+      <td>${c.createdBy || '—'}</td>
       <td>${roleTag}</td>
+      <td style="opacity:0.7;">${createdStr}</td>
       <td>${statusTag}</td>
-      <td>${dlTag}</td>
-      <td style="opacity:0.7;">${u.createdBy || "—"}</td>
-      <td>${quota}</td>
+      <td>${c.usedByUsername || '<span style="opacity:0.4">—</span>'}</td>
+      <td style="opacity:0.7;">${usedAtStr}</td>
       <td><div class="row-actions">${actions.join("")}</div></td>
     </tr>`;
   }).join("");
 
   tbody.querySelectorAll("button[data-action]").forEach(btn => {
-    btn.addEventListener("click", () => handleRowAction(btn.dataset.action, btn.dataset.uid));
+    btn.addEventListener("click", () => handleCodeAction(btn.dataset.action, btn.dataset.id));
   });
 }
 
-async function handleRowAction(action, uid) {
-  const target = allUsers.find(u => u.uid === uid);
-  if (!target) return;
-
-  if (action === "editQuota") {
-    editingUid = uid;
-    $("modalTitle").textContent = `Sửa hạn mức — ${target.username}`;
-    $("modalQuotaWrap").style.display = "block";
-    $("modalQuota").value = target.maxQuota || 0;
-    $("modalBackdrop").classList.add("open");
+async function handleCodeAction(action, id){
+  if (action === 'deleteCode'){
+    if (!confirm(`Xóa mã "${id}"?`)) return;
+    try {
+      await deleteDoc(doc(db, 'codes', id));
+      toast("Đã xóa mã.", "ok");
+      await loadCodes();
+    } catch(e){ toast("Lỗi: " + e.message, "err"); }
     return;
   }
-
-  if (action === "resetDownload") {
-    if (!confirm(`Reset lượt tải cho "${target.username}"?`)) return;
+  if (action === 'resetCode'){
+    if (!confirm(`Reset mã "${id}" về trạng thái chưa dùng?`)) return;
     try {
-      await updateDoc(doc(db, "users", uid), {
-        hasDownloadedConfig: false,
-        downloadCount: 0,
-        downloadedAt: null,
+      await updateDoc(doc(db, 'codes', id), {
+        status: 'unused',
+        usedByUsername: null,
+        usedAt: null,
         downloadedFilename: null,
-        profileUsernameUsed: null
+        userAgent: null
       });
-      toast("Đã reset lượt tải.", "ok");
-      await loadUsers();
-    } catch (e) { toast("Lỗi: " + e.message, "err"); }
-    return;
-  }
-
-  if (action === "toggleLock") {
-    const newStatus = target.status === "locked" ? "active" : "locked";
-    if (!confirm(`Chuyển trạng thái "${target.username}" sang ${newStatus}?`)) return;
-    try {
-      await updateDoc(doc(db, "users", uid), { status: newStatus });
-      toast("Đã cập nhật trạng thái.", "ok");
-      await loadUsers();
-    } catch (e) { toast("Lỗi: " + e.message, "err"); }
-    return;
-  }
-
-  if (action === "delete") {
-    if (!confirm(`XÓA VĨNH VIỄN tài khoản "${target.username}"?`)) return;
-    try {
-      await deleteDoc(doc(db, "users", uid));
-      toast("Đã xóa tài khoản khỏi Firestore.", "ok");
-      await loadUsers();
-    } catch (e) { toast("Lỗi: " + e.message, "err"); }
+      toast("Đã reset mã.", "ok");
+      await loadCodes();
+    } catch(e){ toast("Lỗi: " + e.message, "err"); }
   }
 }
 
-$("modalCancel").addEventListener("click", () => {
-  $("modalBackdrop").classList.remove("open");
-  editingUid = null;
-});
-$("modalSave").addEventListener("click", async () => {
-  if (!editingUid) return;
-  const val = parseInt($("modalQuota").value, 10);
-  if (isNaN(val) || val < 0) { toast("Hạn mức không hợp lệ.", "err"); return; }
+// === LOAD USERS ===
+async function loadUsers(){
+  const tbody = $("usersBody");
+  tbody.innerHTML = `<tr><td colspan="7" class="empty">Đang tải...</td></tr>`;
   try {
-    const target = allUsers.find(u => u.uid === editingUid);
-    if (target && val < (target.usedQuota || 0)) {
-      if (!confirm(`Hạn mức mới (${val}) nhỏ hơn số đã dùng (${target.usedQuota}). Tiếp tục?`)) return;
+    const snap = await getDocs(collection(db, "users"));
+    allUsers = [];
+    snap.forEach(d => allUsers.push({ uid: d.id, ...d.data() }));
+    allUsers.sort((a,b) => (a.username||'').localeCompare(b.username||''));
+    renderUsers();
+    renderStats();
+  } catch(e){
+    console.error(e);
+    tbody.innerHTML = `<tr><td colspan="7" class="empty">Lỗi tải users: ${e.message}</td></tr>`;
+  }
+}
+
+function renderUsers(){
+  const tbody = $("usersBody");
+  const s = $("searchUser").value.trim().toLowerCase();
+  const f = $("filterRole").value;
+  let list = allUsers.slice();
+  if (s) list = list.filter(u => (u.username||'').toLowerCase().includes(s));
+  if (f) list = list.filter(u => u.role === f);
+
+  if (list.length === 0){
+    tbody.innerHTML = `<tr><td colspan="7" class="empty">Không có tài khoản phù hợp.</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = list.map(u => {
+    const roleTag = u.role === 'admin'
+      ? `<span class="tag admin">admin</span>`
+      : `<span class="tag agency">agency</span>`;
+    const statusTag = u.status === 'locked'
+      ? `<span class="tag locked">Đã khóa</span>`
+      : `<span class="tag ok">Hoạt động</span>`;
+    const quota = u.role === 'agency'
+      ? `<span class="quota-badge">${u.usedQuota||0} / ${u.maxQuota||0}</span>`
+      : `<span style="opacity:0.4">—</span>`;
+    const created = u.createdAt?.toDate?.();
+    const createdStr = created ? created.toLocaleDateString('vi-VN') : '—';
+
+    const actions = [];
+    if (u.role === 'agency'){
+      actions.push(`<button data-action="editQuota" data-uid="${u.uid}">Sửa quota</button>`);
     }
-    await updateDoc(doc(db, "users", editingUid), { maxQuota: val });
-    toast("Đã cập nhật hạn mức.", "ok");
-    $("modalBackdrop").classList.remove("open");
-    editingUid = null;
-    await loadUsers();
-  } catch (e) { toast("Lỗi: " + e.message, "err"); }
+    if (u.uid !== currentUser.uid){
+      actions.push(`<button data-action="toggleLock" data-uid="${u.uid}">${u.status==='locked'?'Mở khóa':'Khóa'}</button>`);
+      actions.push(`<button class="danger" data-action="deleteUser" data-uid="${u.uid}">Xóa</button>`);
+    }
+
+    return `<tr>
+      <td><b>${u.username || '?'}</b></td>
+      <td>${roleTag}</td>
+      <td>${statusTag}</td>
+      <td>${quota}</td>
+      <td style="opacity:0.7;">${createdStr}</td>
+      <td style="opacity:0.7;">${u.createdBy || '—'}</td>
+      <td><div class="row-actions">${actions.join("")}</div></td>
+    </tr>`;
+  }).join("");
+
+  tbody.querySelectorAll("button[data-action]").forEach(btn => {
+    btn.addEventListener("click", () => handleUserAction(btn.dataset.action, btn.dataset.uid));
+  });
+}
+
+async function handleUserAction(action, uid){
+  const target = allUsers.find(u => u.uid === uid);
+  if (!target) return;
+
+  if (action === 'editQuota'){
+    editingQuotaUid = uid;
+    $("quotaModalDesc").textContent = `Tài khoản: ${target.username} (đã dùng ${target.usedQuota||0})`;
+    $("modalQuota").value = target.maxQuota || 0;
+    $("quotaModalBackdrop").classList.add("open");
+    return;
+  }
+  if (action === 'toggleLock'){
+    const newStatus = target.status === 'locked' ? 'active' : 'locked';
+    if (!confirm(`Chuyển "${target.username}" sang ${newStatus}?`)) return;
+    try {
+      await updateDoc(doc(db, "users", uid), { status: newStatus });
+      toast("Đã cập nhật.", "ok");
+      await loadUsers();
+    } catch(e){ toast("Lỗi: " + e.message, "err"); }
+    return;
+  }
+  if (action === 'deleteUser'){
+    if (!confirm(`XÓA VĨNH VIỄN "${target.username}"?`)) return;
+    try {
+      await deleteDoc(doc(db, "users", uid));
+      toast("Đã xóa user.", "ok");
+      await loadUsers();
+    } catch(e){ toast("Lỗi: " + e.message, "err"); }
+  }
+}
+
+function renderStats(){
+  $("statCodes").textContent = allCodes.length;
+  $("statUnused").textContent = allCodes.filter(c => c.status === 'unused').length;
+  $("statUsed").textContent = allCodes.filter(c => c.status === 'used').length;
+  $("statAgency").textContent = allUsers.filter(u => u.role === 'agency').length;
+  $("statAdmin").textContent = allUsers.filter(u => u.role === 'admin').length;
+}
+
+// === TẠO MÃ CODE (admin: không giới hạn) ===
+$("createCodeForm").addEventListener("submit", async (e) => {
+  e.preventDefault();
+  const btn = $("createCodeBtn");
+  btn.disabled = true;
+  btn.textContent = "Đang tạo...";
+
+  const count = Math.max(1, Math.min(50, parseInt($("codeCount").value, 10) || 1));
+  const prefix = $("codePrefix").value.trim() || 'LG';
+
+  const created = [];
+  let attempts = 0;
+  const maxAttempts = count * 5;
+
+  try {
+    while (created.length < count && attempts < maxAttempts){
+      attempts++;
+      const code = generateCode(prefix);
+      const codeRef = doc(db, 'codes', code);
+      const snap = await getDoc(codeRef);
+      if (snap.exists()) continue; // trùng, thử lại
+      await setDoc(codeRef, {
+        code,
+        createdBy: currentData.username,
+        createdByUid: currentUser.uid,
+        createdByRole: currentData.role,
+        createdAt: new Date(),
+        status: 'unused',
+        usedByUsername: null,
+        usedAt: null,
+        downloadedFilename: null,
+        userAgent: null
+      });
+      created.push(code);
+    }
+
+    if (created.length === 0){
+      toast("Không thể tạo mã (trùng lặp). Thử lại.", "err");
+      return;
+    }
+
+    toast(`Đã tạo ${created.length} mã.`, "ok");
+    $("codeResult").classList.add("show");
+    $("codeResult").innerHTML = `✅ Đã tạo ${created.length} mã:<div class="big-code">${created.join('<br>')}</div>`;
+    $("codeCount").value = 1;
+    await loadCodes();
+  } catch(err){
+    console.error(err);
+    toast("Lỗi tạo mã: " + (err.message||err), "err");
+  } finally {
+    btn.disabled = false;
+    btn.textContent = "Tạo mã";
+  }
 });
 
-// === TẠO TÀI KHOẢN ===
-$("createForm").addEventListener("submit", async (e) => {
+// === TẠO USER (agency/admin) ===
+$("createUserForm").addEventListener("submit", async (e) => {
   e.preventDefault();
-  const btn = $("createBtn");
+  const btn = $("createUserBtn");
   btn.disabled = true;
 
   const username = normalizeUsername($("newUsername").value);
   const password = $("newPassword").value;
   const role = $("newRole").value;
-  const quota = role === "agency" ? Math.max(0, parseInt($("newQuota").value, 10) || 0) : 0;
+  const quota = role === 'agency' ? Math.max(0, parseInt($("newQuota").value,10)||0) : 0;
 
-  if (!/^[a-z0-9_.]{3,32}$/.test(username)) {
+  if (!/^[a-z0-9_.]{3,32}$/.test(username)){
     toast("Username chỉ gồm chữ thường, số, _ hoặc . (3–32 ký tự).", "err");
     btn.disabled = false; return;
   }
-  if (password.length < 6) {
+  if (password.length < 6){
     toast("Mật khẩu tối thiểu 6 ký tự.", "err");
     btn.disabled = false; return;
   }
 
+  let newUid = null;
   try {
-    // Kiểm tra trùng username
     const dupQ = query(collection(db, "users"), where("username", "==", username));
     const dupSnap = await getDocs(dupQ);
-    if (!dupSnap.empty) {
-      toast("Username đã tồn tại.", "err");
+    if (!dupSnap.empty){ toast("Username đã tồn tại.", "err"); btn.disabled = false; return; }
+
+    newUid = await createAuthUserSecondary(username, password);
+
+    const sessionOk = await ensureAdminSession();
+    if (!sessionOk){
+      toast("Phiên admin bị mất. Auth user đã tạo nhưng chưa ghi Firestore. Thử lại.", "err");
       btn.disabled = false; return;
     }
 
-    // Tạo Auth user qua secondary app (không ảnh hưởng phiên admin)
-    const newUid = await createAuthUserSecondary(username, password);
-
-    // Ghi Firestore
     const userData = {
       username,
       role,
       status: "active",
       createdBy: currentData.username,
       createdAt: new Date(),
-      hasDownloadedConfig: false,
-      downloadCount: 0,
-      downloadedAt: null,
-      downloadedFilename: null,
-      profileUsernameUsed: null
+      maxQuota: role === 'agency' ? quota : 0,
+      usedQuota: 0
     };
-    if (role === "agency") {
-      userData.maxQuota = quota;
-      userData.usedQuota = 0;
-    }
-
-    const { setDoc } = await import("https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js");
     await setDoc(doc(db, "users", newUid), userData);
 
-    toast(`Đã tạo tài khoản "${username}" (${role}).`, "ok");
-    $("createForm").reset();
-    $("quotaField").style.display = "none";
+    toast(`Đã tạo ${role} "${username}".`, "ok");
+    $("createUserForm").reset();
+    $("quotaField").style.display = "";
     await loadUsers();
-    btn.disabled = false;
-
-  } catch (err) {
+  } catch(err){
     console.error(err);
     let msg = err.message || String(err);
     if (err.code === "auth/email-already-in-use") msg = "Username đã tồn tại trong Auth.";
     if (err.code === "auth/weak-password") msg = "Mật khẩu quá yếu.";
-    toast("Lỗi tạo tài khoản: " + msg, "err");
+    toast("Lỗi: " + msg, "err");
+  } finally {
     btn.disabled = false;
   }
 });
 
+// Modal quota
+$("quotaModalCancel").addEventListener("click", () => {
+  $("quotaModalBackdrop").classList.remove("open");
+  editingQuotaUid = null;
+});
+$("quotaModalSave").addEventListener("click", async () => {
+  if (!editingQuotaUid) return;
+  const val = parseInt($("modalQuota").value, 10);
+  if (isNaN(val) || val < 0){ toast("Hạn mức không hợp lệ.", "err"); return; }
+  try {
+    const target = allUsers.find(u => u.uid === editingQuotaUid);
+    if (target && val < (target.usedQuota||0)){
+      if (!confirm(`Hạn mức mới (${val}) < đã dùng (${target.usedQuota}). Tiếp tục?`)) return;
+    }
+    await updateDoc(doc(db, "users", editingQuotaUid), { maxQuota: val });
+    toast("Đã cập nhật quota.", "ok");
+    $("quotaModalBackdrop").classList.remove("open");
+    editingQuotaUid = null;
+    await loadUsers();
+  } catch(e){ toast("Lỗi: " + e.message, "err"); }
+});
+
 // Filters
-$("searchInput").addEventListener("input", renderUsers);
+$("searchCode").addEventListener("input", renderCodes);
+$("searchCodeUser").addEventListener("input", renderCodes);
+$("filterCodeStatus").addEventListener("change", renderCodes);
+$("reloadCodesBtn").addEventListener("click", loadCodes);
+$("searchUser").addEventListener("input", renderUsers);
 $("filterRole").addEventListener("change", renderUsers);
-$("filterDownload").addEventListener("change", renderUsers);
-$("reloadBtn").addEventListener("click", loadUsers);
+$("reloadUsersBtn").addEventListener("click", loadUsers);
 
 // Top actions
 $("logoutBtn").addEventListener("click", async () => {
   await signOut(auth);
   window.location.replace("/login/index.html");
 });
-$("viewUserPage").addEventListener("click", () => {
-  window.open("/trangchu/index.html", "_blank");
-});
+$("viewUserPage").addEventListener("click", () => window.open("/index.html", "_blank"));
 
-// === AUTH GUARD: chỉ admin ===
+// === AUTH GUARD ===
 onAuthStateChanged(auth, async (user) => {
-  if (!user) {
-    window.location.replace("/login/index.html");
-    return;
-  }
+  if (!user){ window.location.replace("/login/index.html"); return; }
   currentUser = user;
   try {
     const snap = await getDoc(doc(db, "users", user.uid));
-    if (!snap.exists()) {
-      await signOut(auth);
-      window.location.replace("/login/index.html");
-      return;
-    }
+    if (!snap.exists()){ await signOut(auth); window.location.replace("/login/index.html"); return; }
     const d = snap.data();
-    if (d.status === "locked") {
-      await signOut(auth);
-      window.location.replace("/login/index.html");
-      return;
-    }
-    if (d.role === "agency") {
-      // Agency không được vào admin → chuyển sang trang agency
-      window.location.replace("/agency/index.html");
-      return;
-    }
-    if (d.role !== "admin") {
-      await signOut(auth);
-      window.location.replace("/login/index.html");
-      return;
-    }
+    if (d.status === "locked"){ await signOut(auth); window.location.replace("/login/index.html"); return; }
+    if (d.role === "agency"){ window.location.replace("/agency/index.html"); return; }
+    if (d.role !== "admin"){ await signOut(auth); window.location.replace("/login/index.html"); return; }
     await loadMe();
-    applyRoleUI();
-    await loadUsers();
-  } catch (e) {
+    await Promise.all([loadCodes(), loadUsers()]);
+  } catch(e){
     toast(e.message || "Lỗi truy cập.", "err");
-    setTimeout(async () => {
-      await signOut(auth);
-      window.location.replace("/login/index.html");
-    }, 1500);
+    setTimeout(async () => { await signOut(auth); window.location.replace("/login/index.html"); }, 1500);
   }
 });
 </script>
