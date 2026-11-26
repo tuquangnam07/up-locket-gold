@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#1a1a2e">
+<title>Locket Gold 💛 — Trang chủ</title>
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --gold:#feca57;--coral:#ff6b6b;--pink:#ff9ff3;--cyan:#48dbfb;--mint:#1dd1a1;
+  --bg:#141228;--card:rgba(255,255,255,.06);--border:rgba(255,255,255,.12);
+  --text:#fff;--muted:rgba(255,255,255,.6);
+}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  min-height:100dvh;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
+  color:var(--text);
+  background:linear-gradient(160deg,#141228 0%,#1e1b3a 50%,#141228 100%);
+  -webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+  overflow-x:hidden;
+  line-height:1.6;
+}
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 15% 20%,rgba(255,107,107,.14),transparent 45%),
+    radial-gradient(circle at 85% 80%,rgba(72,219,251,.12),transparent 45%),
+    radial-gradient(circle at 50% 50%,rgba(254,202,87,.08),transparent 50%);
+}
+
+.wrap{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:0 20px}
+
+/* Nav */
+nav{
+  position:sticky;top:0;z-index:10;
+  background:rgba(20,18,40,.85);
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(255,255,255,.06);
+}
+.nav-inner{
+  max-width:960px;margin:0 auto;padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+}
+.nav-brand{font-size:17px;font-weight:800;display:flex;align-items:center;gap:8px;
+  background:linear-gradient(90deg,var(--gold),var(--pink));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.nav-links{display:flex;gap:8px;align-items:center}
+.nav-links a{
+  padding:9px 16px;border-radius:10px;font-size:13.5px;font-weight:700;
+  text-decoration:none;color:var(--text);transition:background .2s;
+}
+.nav-links a.ghost{background:rgba(255,255,255,.06);border:1px solid var(--border)}
+.nav-links a.ghost:hover{background:rgba(255,255,255,.12)}
+.nav-links a.primary{
+  color:#141228;
+  background:linear-gradient(135deg,var(--gold),var(--coral));
+  box-shadow:0 6px 18px rgba(255,107,107,.3);
+}
+.nav-links a.primary:hover{transform:translateY(-1px)}
+
+/* Hero */
+.hero{padding:70px 0 50px;text-align:center}
+.hero .logo{font-size:72px;line-height:1;display:block;margin-bottom:14px}
+.hero h1{
+  font-size:clamp(30px,6vw,46px);font-weight:900;line-height:1.15;margin-bottom:16px;
+  background:linear-gradient(90deg,var(--gold),var(--coral),var(--pink));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.hero p{font-size:clamp(14px,2.5vw,17px);color:var(--muted);max-width:620px;margin:0 auto 28px}
+.cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn{
+  padding:15px 30px;border-radius:14px;font-size:15px;font-weight:800;
+  text-decoration:none;cursor:pointer;border:none;font-family:inherit;
+  display:inline-flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;
+}
+.btn:active{transform:scale(.97)}
+.btn-lg{padding:16px 36px;font-size:16px}
+.btn-primary{
+  color:#141228;background:linear-gradient(135deg,var(--gold),var(--coral));
+  box-shadow:0 10px 28px rgba(255,107,107,.35);
+}
+.btn-primary:hover{transform:translateY(-2px)}
+.btn-ghost{
+  color:var(--text);background:rgba(255,255,255,.06);border:1px solid var(--border);
+}
+.btn-ghost:hover{background:rgba(255,255,255,.12)}
+
+/* Features */
+.features{
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;margin:50px 0;
+}
+.feat{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:18px;padding:24px;
+  backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);
+  transition:transform .2s,border-color .2s;
+}
+.feat:hover{transform:translateY(-3px);border-color:rgba(254,202,87,.35)}
+.feat .ico{
+  width:48px;height:48px;border-radius:14px;font-size:24px;
+  display:flex;align-items:center;justify-content:center;margin-bottom:14px;
+  background:rgba(254,202,87,.12);
+}
+.feat:nth-child(2) .ico{background:rgba(72,219,251,.12)}
+.feat:nth-child(3) .ico{background:rgba(255,159,243,.12)}
+.feat:nth-child(4) .ico{background:rgba(29,209,161,.12)}
+.feat h3{font-size:16px;font-weight:800;margin-bottom:6px}
+.feat p{font-size:13.5px;color:var(--muted);line-height:1.6}
+
+/* Steps section */
+.section{padding:30px 0}
+.section-title{
+  text-align:center;font-size:clamp(22px,4vw,30px);font-weight:900;margin-bottom:10px;
+}
+.section-sub{text-align:center;color:var(--muted);font-size:14.5px;margin-bottom:36px}
+
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.step-card{
+  background:var(--card);border:1px solid var(--border);
+  border-radius:16px;padding:20px;display:flex;gap:14px;
+}
+.step-num{
+  flex-shrink:0;width:34px;height:34px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:900;color:#141228;
+  background:linear-gradient(135deg,var(--gold),var(--coral));
+}
+.step-card:nth-child(2) .step-num{background:linear-gradient(135deg,var(--cyan),#6c5ce7)}
+.step-card:nth-child(3) .step-num{background:linear-gradient(135deg,var(--pink),#6c5ce7)}
+.step-card:nth-child(4) .step-num{background:linear-gradient(135deg,var(--mint),var(--cyan))}
+.step-card:nth-child(5) .step-num{background:linear-gradient(135deg,var(--gold),var(--mint))}
+.step-card:nth-child(6) .step-num{background:linear-gradient(135deg,var(--coral),var(--pink))}
+.step-body{font-size:13.5px;line-height:1.65}
+.step-body strong{color:var(--gold)}
+.path{
+  display:inline-block;background:rgba(255,255,255,.08);
+  padding:1px 7px;border-radius:5px;font-size:.9em;
+  font-family:ui-monospace,Menlo,monospace;
+}
+
+/* Footer */
+footer{
+  margin-top:60px;padding:36px 20px;
+  border-top:1px solid rgba(255,255,255,.08);
+  text-align:center;
+}
+.owner{
+  font-size:20px;font-weight:900;margin-bottom:16px;
+  background:linear-gradient(90deg,var(--gold),var(--pink));
+  -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
+}
+.contact{display:flex;flex-direction:column;gap:8px;max-width:360px;margin:0 auto 20px}
+.contact a{
+  display:flex;align-items:center;gap:10px;
+  padding:11px 14px;border-radius:12px;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  text-decoration:none;color:rgba(255,255,255,.9);transition:background .2s;
+}
+.contact a:hover{background:rgba(255,255,255,.12)}
+.contact .ico{
+  width:34px;height:34px;border-radius:10px;flex-shrink:0;
+  display:flex;align-items:center;justify-content:center;font-size:17px;
+  background:rgba(255,255,255,.08);
+}
+.contact .ico.fb{background:rgba(24,119,242,.2)}
+.contact .ico.zalo{background:rgba(0,168,255,.2)}
+.contact .txt{display:flex;flex-direction:column;gap:1px;line-height:1.3;text-align:left;min-width:0}
+.contact .txt small{font-size:10px;font-weight:700;color:rgba(255,255,255,.45);letter-spacing:.4px;text-transform:uppercase}
+.contact .txt span{font-size:13.5px;font-weight:600}
+.copyright{font-size:12px;color:rgba(255,255,255,.3)}
+
+@media(max-width:600px){
+  .hero{padding:50px 0 30px}
+  .hero .logo{font-size:58px}
+  .nav-links a.ghost{display:none}
+  .features{margin:30px 0}
+  footer{margin-top:40px;padding:28px 16px}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">💛 Locket Gold</div>
+    <div class="nav-links">
+      <a href="#features" class="ghost">Tính năng</a>
+      <a href="#steps" class="ghost">Hướng dẫn</a>
+      <a href="/login/index.html" class="primary">Đăng nhập →</a>
+    </div>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <section class="hero">
+    <span class="logo">💛</span>
+    <h1>Locket Gold<br>Bản quyền vĩnh viễn</h1>
+    <p>Hệ thống cấp phát cấu hình Locket Gold chính thức. Cài đặt nhanh chóng — sử dụng vĩnh viễn — an toàn tuyệt đối.</p>
+    <div class="cta-row">
+      <a href="/login/index.html" class="btn btn-primary btn-lg">🚀 Đăng nhập ngay</a>
+      <a href="#steps" class="btn btn-ghost btn-lg">📖 Xem hướng dẫn</a>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="feat">
+      <div class="ico">⚡</div>
+      <h3>Cài đặt siêu nhanh</h3>
+      <p>Chỉ mất 30 giây để tải và cài đặt cấu hình. Không cần jailbreak, không cần thủ thuật phức tạp.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">♾️</div>
+      <h3>Vĩnh viễn</h3>
+      <p>Cấu hình có hiệu lực vĩnh viễn — không giới hạn thời gian, không cần gia hạn định kỳ.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">🔒</div>
+      <h3>An toàn bảo mật</h3>
+      <p>Dùng chứng chỉ Root CA và DNS mã hoá (DoH). Bảo mật theo tiêu chuẩn của Apple.</p>
+    </div>
+    <div class="feat">
+      <div class="ico">📱</div>
+      <h3>Tương thích iOS</h3>
+      <p>Hỗ trợ toàn bộ thiết bị iOS từ iPhone X trở lên, iOS 15+. Không ảnh hưởng hiệu năng.</p>
+    </div>
+  </section>
+
+  <section class="section" id="steps">
+    <h2 class="section-title">📖 Hướng dẫn cài đặt</h2>
+    <p class="section-sub">6 bước đơn giản để có Locket Gold vĩnh viễn</p>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <div class="step-body">Đăng nhập và nhấn <strong>“Cài đặt cấu hình”</strong>.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <div class="step-body">Chọn <strong>“Cho phép”</strong> khi trình duyệt hỏi tải hồ sơ.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <div class="step-body">Mở <strong>Cài đặt</strong> → <span class="path">Đã tải về</span> → chọn <strong>LocketGold 💛</strong>.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <div class="step-body">Nhấn <strong>“Cài đặt”</strong> → nhập mật khẩu/Face ID → <strong>“Cài đặt”</strong>.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">5</div>
+        <div class="step-body">Vào <strong>Cài đặt</strong> → <span class="path">Cài đặt chung</span> → <span class="path">Giới thiệu</span> → <span class="path">Cài đặt tin cậy chứng nhận</span>.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">6</div>
+        <div class="step-body">Bật tin cậy cho <strong>LocketGold</strong>. Xong! ♾️</div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="owner">👨‍💻 Từ Quang Nam</div>
+  <div class="contact">
+    <a href="https://facebook.com/tuquangnam07" target="_blank" rel="noopener">
+      <span class="ico fb">📘</span>
+      <span class="txt"><small>Facebook</small><span>Từ Quang Nam</span></span>
+    </a>
+    <a href="https://zalo.me/0888385536" target="_blank" rel="noopener">
+      <span class="ico zalo">💬</span>
+      <span class="txt"><small>Zalo</small><span>Từ Quang Nam — 0888385536</span></span>
+    </a>
+  </div>
+  <p class="copyright">© 2026 LocketGold • Từ Quang Nam</p>
+</footer>
+
+</body>
+</html>
