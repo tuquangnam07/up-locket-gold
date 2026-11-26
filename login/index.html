@@ -7,18 +7,14 @@
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   body{
-    min-height:100dvh;
-    display:flex;align-items:center;justify-content:center;
+    min-height:100dvh;display:flex;align-items:center;justify-content:center;
     background:radial-gradient(circle at 25% 15%,#1e2a4a,#080b16 75%);
     font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    color:#e8ecff;padding:20px;
-    -webkit-font-smoothing:antialiased;
+    color:#e8ecff;padding:20px;-webkit-font-smoothing:antialiased;
   }
   .card{
-    width:100%;max-width:400px;
-    background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);
-    border-radius:20px;padding:36px 28px;
+    width:100%;max-width:400px;background:rgba(255,255,255,.04);
+    border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:36px 28px;
     backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
     box-shadow:0 25px 60px rgba(0,0,0,.5);
   }
@@ -34,33 +30,24 @@
   label{display:block;font-size:13px;opacity:.75;margin-bottom:7px}
   .field{margin-bottom:18px;position:relative}
   input{
-    width:100%;padding:13px 15px;
-    background:rgba(0,0,0,.35);
-    border:1px solid rgba(255,255,255,.12);
-    border-radius:12px;color:#fff;font-size:15px;
-    outline:none;transition:border-color .2s;
-    -webkit-appearance:none;
+    width:100%;padding:13px 15px;background:rgba(0,0,0,.35);
+    border:1px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;font-size:15px;
+    outline:none;transition:border-color .2s;-webkit-appearance:none;font-family:inherit;
   }
   input:focus{border-color:#ffb347}
   .toggle-pw{
     position:absolute;right:12px;top:50%;transform:translateY(-50%);
-    background:none;border:none;color:#ffb347;
-    cursor:pointer;font-size:12px;padding:4px;font-weight:700;
+    background:none;border:none;color:#ffb347;cursor:pointer;font-size:12px;
+    padding:4px;font-weight:700;font-family:inherit;
   }
   .btn{
-    width:100%;padding:14px;
-    background:linear-gradient(135deg,#ffb347,#ff7a59);
-    border:none;border-radius:12px;
-    color:#1a1200;font-weight:700;font-size:15px;
-    cursor:pointer;transition:transform .15s,opacity .2s;
-    margin-top:6px;font-family:inherit;
+    width:100%;padding:14px;background:linear-gradient(135deg,#ffb347,#ff7a59);
+    border:none;border-radius:12px;color:#1a1200;font-weight:700;font-size:15px;
+    cursor:pointer;transition:transform .15s,opacity .2s;margin-top:6px;font-family:inherit;
   }
   .btn:hover:not(:disabled){transform:translateY(-1px)}
   .btn:disabled{opacity:.6;cursor:not-allowed}
-  .msg{
-    margin-top:16px;font-size:13px;text-align:center;
-    padding:10px;border-radius:10px;display:none;
-  }
+  .msg{margin-top:16px;font-size:13px;text-align:center;padding:10px;border-radius:10px;display:none}
   .msg.err{display:block;background:rgba(255,80,80,.12);color:#ff8080;border:1px solid rgba(255,80,80,.3)}
   .msg.ok{display:block;background:rgba(80,255,150,.1);color:#6bffa0;border:1px solid rgba(80,255,150,.3)}
   .footer{text-align:center;margin-top:22px;font-size:12px;opacity:.4}
@@ -73,7 +60,7 @@
   <div class="logo">
     <div class="logo-icon">🔒</div>
     <h1>Locket Gold</h1>
-    <p class="subtitle">Đăng nhập để tải cấu hình</p>
+    <p class="subtitle">Đăng nhập hệ thống quản trị</p>
   </div>
 
   <form id="loginForm" autocomplete="on">
@@ -92,7 +79,7 @@
     <div class="msg" id="msg"></div>
   </form>
 
-  <a href="/index.html" class="back">← Về trang chủ</a>
+  <a href="/index.html" class="back">← Về trang kích hoạt mã</a>
   <div class="footer">© Từ Quang Nam — Locket Gold System</div>
 </div>
 
@@ -122,13 +109,15 @@ const db = getFirestore(app);
 const $ = (id) => document.getElementById(id);
 const msgEl = $("msg");
 
-function showMsg(text, type = "err") {
-  msgEl.textContent = text;
-  msgEl.className = "msg " + type;
-}
+function showMsg(text, type = "err") { msgEl.textContent = text; msgEl.className = "msg " + type; }
 function hideMsg() { msgEl.className = "msg"; }
 
-// Auto-redirect nếu đã đăng nhập
+function redirectByRole(role) {
+  if (role === "admin") window.location.replace("/admin/index.html");
+  else if (role === "agency") window.location.replace("/agency/index.html");
+  else window.location.replace("/index.html");
+}
+
 onAuthStateChanged(auth, async (user) => {
   if (!user) return;
   try {
@@ -136,20 +125,13 @@ onAuthStateChanged(auth, async (user) => {
     if (snap.exists()) {
       const d = snap.data();
       if (d.status === "locked") { await signOut(auth); return; }
-      if (d.role === "admin") {
-  window.location.replace("/admin/index.html");
-} else if (d.role === "agency") {
-  window.location.replace("/agency/index.html");
-} else {
-  window.location.replace("/trangchu/index.html");
-}
+      if (d.role === "admin" || d.role === "agency") redirectByRole(d.role);
     }
   } catch (e) {}
 });
 
 $("togglePw").addEventListener("click", () => {
-  const pw = $("password");
-  const btn = $("togglePw");
+  const pw = $("password"), btn = $("togglePw");
   if (pw.type === "password") { pw.type = "text"; btn.textContent = "Ẩn"; }
   else { pw.type = "password"; btn.textContent = "Hiện"; }
 });
@@ -184,15 +166,14 @@ $("loginForm").addEventListener("submit", async (e) => {
       showMsg("Tài khoản đã bị khóa. Vui lòng liên hệ Admin.");
       return;
     }
+    if (d.role !== "admin" && d.role !== "agency") {
+      await signOut(auth);
+      showMsg("Tài khoản không có quyền quản trị.");
+      return;
+    }
 
     showMsg("Đăng nhập thành công! Đang chuyển hướng...", "ok");
-    setTimeout(() => {
-      if (d.role === "admin" || d.role === "agency") {
-        window.location.replace("/admin/index.html");
-      } else {
-        window.location.replace("/trangchu/index.html");
-      }
-    }, 500);
+    setTimeout(() => redirectByRole(d.role), 500);
 
   } catch (err) {
     console.error(err.code, err.message);
