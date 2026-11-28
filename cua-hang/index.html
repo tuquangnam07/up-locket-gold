@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFC21A">
+<meta name="description" content="Mua Locket Gold — tài khoản đại lý và mã kích hoạt, thanh toán QR tự động">
+<title>Mua Locket Gold 💛 — Đại lý &amp; Mã kích hoạt</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💛%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0}
+:root{
+  --gold:#FFC21A;--gold-text:#8A5A00;--ink:#101426;--ink-2:#3A4058;
+  --mist:#EEF1F8;--paper:#fff;--line:#D9DEEC;--focus:#4B3FF0;
+  --ok:#137A52;--danger:#B42318;
+  --display:'Bricolage Grotesque','Be Vietnam Pro',system-ui,sans-serif;
+  --body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --curve:clamp(28px,6vw,56px);
+}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{font:400 1rem/1.65 var(--body);color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100% - 40px,1080px);margin-inline:auto}
+.i{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.h{fill:currentColor;stroke:none}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Hero */
+.hero{background:var(--gold);border-radius:0 0 var(--curve) var(--curve);padding-bottom:clamp(40px,7vw,64px)}
+.nav{display:flex;align-items:center;justify-content:space-between;padding-block:20px 28px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.2rem var(--display);letter-spacing:-.02em;text-decoration:none}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--ink);color:var(--gold);display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px}
+.back{display:inline-flex;align-items:center;gap:4px;font-weight:600;font-size:.95rem;text-decoration:none}
+.back:hover{text-decoration:underline;text-underline-offset:4px}
+h1{font:800 clamp(2.2rem,6vw,3.6rem)/1.04 var(--display);letter-spacing:-.035em;text-wrap:balance}
+.lead{margin-top:14px;max-width:50ch;font-size:1.0625rem}
+
+/* Bố cục */
+.grid{display:grid;gap:24px;align-items:start;padding-block:36px 56px}
+@media(min-width:880px){.grid{grid-template-columns:1fr 420px}.pay{position:sticky;top:16px}}
+.panel{background:var(--paper);border:1px solid var(--line);border-radius:28px;padding:22px 20px}
+@media(min-width:640px){.panel{padding:28px}}
+h2{display:flex;align-items:center;gap:12px;margin-bottom:20px;font:800 1.4rem var(--display);letter-spacing:-.02em}
+h2 .n{width:30px;height:30px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:.9rem;letter-spacing:0}
+
+/* Tab sản phẩm */
+.tabs{display:flex;gap:6px;margin-bottom:20px;padding:5px;border-radius:999px;background:var(--mist)}
+.tabs button{flex:1;min-height:44px;border:0;border-radius:999px;background:transparent;color:var(--ink-2);font:700 .92rem var(--body);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
+.tabs button[aria-selected="true"]{background:var(--paper);color:var(--ink);box-shadow:0 3px 10px rgba(16,20,38,.1)}
+.tabs button:disabled{cursor:not-allowed}
+.tabs button:disabled:not([aria-selected="true"]){opacity:.45}
+.pane-desc{font-size:.95rem;color:var(--ink-2)}
+
+/* Gói đại lý */
+.opts{display:grid;gap:14px;border:0;padding:0;min-width:0}
+.opts[hidden]{display:none}
+.opt{position:relative;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:16px;padding:16px 18px;border:2px solid var(--line);border-radius:18px;background:var(--paper);cursor:pointer;transition:border-color .2s,background .2s,opacity .2s}
+.opt:hover{border-color:#B6BDD6}
+.opt input{position:absolute;width:1px;height:1px;opacity:0}
+.dot{width:26px;height:26px;border-radius:50%;border:2px solid var(--line);display:grid;place-items:center;color:transparent;transition:background .2s,border-color .2s}
+.dot .i{width:14px;height:14px;stroke-width:3}
+.opt input:checked ~ .dot{background:var(--gold);border-color:var(--ink);color:var(--ink)}
+.opt:has(input:checked){border-color:var(--ink);background:linear-gradient(90deg,#FFF6D6,var(--paper) 70%)}
+.opt:has(input:focus-visible){outline:3px solid var(--focus);outline-offset:3px}
+.opts:disabled .opt{cursor:not-allowed}
+.opts:disabled .opt:not(:has(input:checked)){opacity:.45}
+.opt-main{display:flex;align-items:baseline;gap:8px}
+.num{font:800 2.1rem/1 var(--display);letter-spacing:-.04em}
+.opt-main small{font-size:.85rem;color:var(--ink-2)}
+.opt-price{text-align:right;display:grid}
+.opt-price b{font:800 1.2rem var(--display);letter-spacing:-.02em}
+.opt-price small{font-size:.8rem;color:var(--ink-2)}
+.tag{position:absolute;top:-11px;right:16px;padding:1px 10px;border-radius:99px;background:var(--ink);color:var(--gold);font:700 .72rem var(--body)}
+
+/* Mã riêng */
+.retail{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:14px 16px;padding:18px;border:2px solid var(--ink);border-radius:18px;background:linear-gradient(90deg,#FFF6D6,var(--paper) 70%)}
+.retail-ico{width:46px;height:46px;border-radius:14px;background:var(--gold);display:grid;place-items:center}
+.retail-ico svg{width:22px;height:22px}
+.retail .opt-main{display:grid;gap:2px}
+.retail .opt-main b{font:800 1.05rem var(--display)}
+.qty-row{grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:12px;padding-top:14px;border-top:1px solid var(--line);font-weight:600;font-size:.95rem}
+.stepper{display:flex;align-items:center;border:2px solid var(--ink);border-radius:999px;overflow:hidden;background:var(--paper)}
+.stepper button{width:44px;height:44px;border:0;background:transparent;color:var(--ink);font:700 1.3rem var(--body);cursor:pointer}
+.stepper button:hover:not(:disabled){background:var(--mist)}
+.stepper button:disabled{opacity:.35;cursor:not-allowed}
+.stepper input{width:52px;height:44px;border:0;background:transparent;color:var(--ink);text-align:center;font:800 1.1rem var(--display);-moz-appearance:textfield;appearance:textfield}
+.stepper input::-webkit-outer-spin-button,.stepper input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+
+/* Tóm tắt + nút */
+.sum{display:grid;gap:10px;padding:16px 18px;border-radius:16px;background:var(--mist)}
+.sum div{display:flex;justify-content:space-between;align-items:baseline;gap:12px;font-size:.95rem}
+.sum span{color:var(--ink-2);flex:none}
+.sum b{font-weight:700;text-align:right}
+.sum .total{padding-top:10px;border-top:1px solid var(--line)}
+.sum .total b{font:800 1.5rem var(--display);letter-spacing:-.02em}
+.buy{width:100%;min-height:54px;margin-top:16px;padding:0 20px;border-radius:999px;border:2px solid var(--ink);background:var(--gold);color:var(--ink);font:700 1rem var(--body);cursor:pointer;transition:background .2s,transform .15s}
+.buy:hover:not(:disabled){background:#ffd152}
+.buy:active:not(:disabled){transform:scale(.98)}
+.buy:disabled{background:var(--mist);border-color:var(--line);color:#6F7690;cursor:not-allowed}
+.ghost{width:100%;min-height:48px;border-radius:999px;border:2px solid var(--line);background:transparent;color:var(--ink);font:700 .95rem var(--body);cursor:pointer;transition:background .2s,border-color .2s}
+.ghost:hover{background:var(--mist);border-color:var(--ink)}
+.notice{margin-top:16px;padding:13px 16px;border-radius:14px;background:#FDECEA;color:#8F1D13;font-size:.9rem}
+.notice a{font-weight:700}
+
+/* Popup */
+dialog{position:relative;margin:auto;border:0;border-radius:28px;padding:28px 24px 24px;width:min(460px,calc(100vw - 24px));max-height:calc(100dvh - 24px);overflow:auto;background:var(--paper);color:var(--ink);box-shadow:0 30px 80px rgba(16,20,38,.4)}
+dialog[open]{animation:pop .35s cubic-bezier(.2,.9,.25,1.1)}
+dialog::backdrop{background:rgba(16,20,38,.6);backdrop-filter:blur(3px)}
+@keyframes pop{from{opacity:0;transform:scale(.94) translateY(10px)}to{opacity:1;transform:none}}
+.x{position:absolute;top:14px;right:14px;width:40px;height:40px;border:0;border-radius:50%;background:var(--mist);color:var(--ink);display:grid;place-items:center;cursor:pointer}
+.x:hover{background:var(--line)}
+.qr-title{padding-inline:36px;text-align:center;font:800 1.3rem var(--display);letter-spacing:-.02em}
+.pay-for{margin:2px 0 16px;text-align:center;font-size:.9rem;color:var(--ink-2)}
+.qr-img{width:min(210px,100%);aspect-ratio:1;margin:0 auto 18px;padding:10px;background:#fff;border:3px solid var(--gold);border-radius:22px}
+.qr-img img{display:block;width:100%;height:100%;object-fit:contain;border-radius:10px}
+.info{padding:4px 16px;border-radius:16px;background:var(--mist)}
+.info div{display:flex;justify-content:space-between;align-items:center;gap:12px;padding:10px 0;font-size:.9rem}
+.info div + div{border-top:1px solid var(--line)}
+.info dt{color:var(--ink-2);flex:none}
+.info dd{font-weight:700;text-align:right;word-break:break-all}
+.copy{margin-left:10px;padding:4px;min-height:32px;border:0;background:none;color:var(--gold-text);font:600 .8rem var(--body);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.warn{margin-top:14px;font-size:.85rem;color:var(--ink-2)}
+.status{display:flex;align-items:center;gap:10px;margin-top:16px;padding:13px 16px;border-radius:14px;background:#FFF6D6;color:var(--gold-text);font-weight:700;font-size:.9rem}
+.count{margin-left:auto;font:800 1.15rem var(--display);font-variant-numeric:tabular-nums;color:var(--ink)}
+.count.low{color:var(--danger)}
+.spin{width:16px;height:16px;flex:none;border:2px solid rgba(138,90,0,.25);border-top-color:currentColor;border-radius:50%;animation:spin 1s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.clock{height:4px;margin-top:8px;border-radius:99px;background:var(--line);overflow:hidden}
+.clock span{display:block;height:100%;width:100%;background:var(--gold);transition:width 1s linear}
+.cancel{width:100%;min-height:46px;margin-top:16px;border-radius:999px;border:2px solid #F1C0BB;background:transparent;color:var(--danger);font:700 .95rem var(--body);cursor:pointer;transition:background .2s}
+.cancel:hover{background:#FDECEA}
+
+/* Nhận hàng */
+.done-ico{width:64px;height:64px;margin:0 auto 14px;border-radius:50%;background:var(--ok);color:#fff;display:grid;place-items:center}
+.done-ico .i{width:30px;height:30px;stroke-width:3}
+dialog h3{text-align:center;font:800 1.5rem var(--display);letter-spacing:-.02em}
+.done-sub{margin:4px 0 18px;text-align:center;color:var(--ink-2);font-size:.95rem}
+.items{display:grid;gap:10px;margin-bottom:14px}
+.item{display:grid;grid-template-columns:1fr auto;align-items:center;gap:2px 12px;padding:12px 16px;border-radius:14px;background:var(--ink);color:var(--gold)}
+.item span{grid-column:1/-1;font-size:.78rem;color:#C5CBE0}
+.item code{font:800 1.05rem var(--display);letter-spacing:.06em;word-break:break-all;user-select:all}
+.item .copy{color:var(--gold);margin:0}
+.dlg-actions{display:grid;gap:10px;margin-top:16px}
+.dlg-actions .buy{margin-top:0}
+.dlg-actions [hidden]{display:none}
+
+/* Toast (popover để nổi trên cả popup) */
+.toast{position:fixed;inset:auto auto 24px 50%;margin:0;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:13px 22px;border:0;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:.9rem;text-align:center;box-shadow:0 14px 34px rgba(16,20,38,.35)}
+.toast.error{background:var(--danger)}
+
+.foot{padding-bottom:40px;text-align:center;font-size:.85rem;color:var(--ink-2)}
+.foot b{display:block;color:var(--ink)}
+
+@media(max-width:440px){.opt{gap:12px;padding:14px}.num{font-size:1.8rem}.retail{padding:14px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+  <symbol id="x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="key" viewBox="0 0 24 24"><circle cx="8" cy="15" r="4"/><path d="m10.85 12.15 7.15-7.15M15 5l3 3M18 8l2-2"/></symbol>
+</svg>
+
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav" aria-label="Điều hướng">
+      <a class="brand" href="../">
+        <span class="brand-mark"><svg class="h" viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg></span>
+        Locket Gold
+      </a>
+      <a class="back" href="../"><svg class="i" aria-hidden="true"><use href="#left"/></svg>Quay lại bảng giá</a>
+    </nav>
+    <h1>Mua tài khoản đại lý &amp; mã kích hoạt</h1>
+    <p class="lead">Chọn sản phẩm, thanh toán QR trong 10 phút. Nhận hàng tự động ngay sau khi hệ thống nhận được tiền.</p>
+  </div>
+</header>
+
+<main class="wrap grid">
+  <section class="panel" aria-labelledby="h-pick">
+    <h2 id="h-pick"><span class="n">1</span>Chọn sản phẩm</h2>
+
+    <div class="tabs" role="tablist" aria-label="Loại sản phẩm">
+      <button type="button" role="tab" id="tabAgency" aria-selected="true" aria-controls="paneAgency" data-type="agency">Tài khoản đại lý</button>
+      <button type="button" role="tab" id="tabCode" aria-selected="false" aria-controls="paneCode" data-type="code" tabindex="-1">Mã riêng (mua lẻ)</button>
+    </div>
+
+    <fieldset class="opts" id="paneAgency" role="tabpanel" aria-labelledby="tabAgency">
+      <legend class="sr">Chọn gói tài khoản đại lý</legend>
+      <p class="pane-desc">Tài khoản đại lý có quyền tạo mã. Chọn số lượt share bạn cần; gói càng lớn, giá mỗi lượt càng rẻ.</p>
+    </fieldset>
+
+    <fieldset class="opts" id="paneCode" role="tabpanel" aria-labelledby="tabCode" hidden>
+      <legend class="sr">Mua mã riêng</legend>
+      <p class="pane-desc">Mua mã riêng lẻ. Mã được gửi tự động ngay sau khi thanh toán thành công.</p>
+      <div class="retail">
+        <span class="retail-ico"><svg class="i" aria-hidden="true"><use href="#key"/></svg></span>
+        <span class="opt-main"><b>Mã riêng</b><small>Nhận mã tự động</small></span>
+        <span class="opt-price"><b id="unitPrice"></b><small>/ mã</small></span>
+        <div class="qty-row">
+          <label for="qty">Số lượng</label>
+          <div class="stepper">
+            <button type="button" id="qtyDec" aria-label="Giảm số lượng">−</button>
+            <input id="qty" type="number" min="1" value="1" inputmode="numeric">
+            <button type="button" id="qtyInc" aria-label="Tăng số lượng">+</button>
+          </div>
+        </div>
+      </div>
+    </fieldset>
+  </section>
+
+  <aside class="panel pay" aria-labelledby="h-pay">
+    <h2 id="h-pay"><span class="n">2</span>Thanh toán</h2>
+    <div class="sum">
+      <div><span>Sản phẩm</span><b id="sumPack">Chưa chọn</b></div>
+      <div class="total"><span>Tổng thanh toán</span><b id="sumTotal">0đ</b></div>
+    </div>
+    <button type="button" class="buy" id="buyBtn" disabled>Chọn sản phẩm để thanh toán</button>
+    <p class="notice" id="notice" hidden></p>
+  </aside>
+</main>
+
+<footer class="foot">
+  <b>Từ Quang Nam</b>
+  © 2026 LocketGold
+</footer>
+
+<dialog id="dlg" aria-labelledby="payTitle">
+  <!-- Bước thanh toán -->
+  <section id="viewPay">
+    <button type="button" class="x" id="minBtn" aria-label="Thu nhỏ, đơn vẫn được giữ"><svg class="i" aria-hidden="true"><use href="#x"/></svg></button>
+    <p class="qr-title" id="payTitle">Quét QR để thanh toán</p>
+    <p class="pay-for" id="payFor"></p>
+    <div class="qr-img"><img id="qrImg" alt="QR thanh toán"></div>
+    <dl class="info">
+      <div><dt>Ngân hàng</dt><dd>MB Bank</dd></div>
+      <div><dt>Số tài khoản</dt><dd><span id="accNo"></span><button type="button" class="copy" data-copy="accNo">Sao chép</button></dd></div>
+      <div><dt>Chủ tài khoản</dt><dd id="accName"></dd></div>
+      <div><dt>Số tiền</dt><dd id="qrAmount"></dd></div>
+      <div><dt>Nội dung</dt><dd><span id="qrContent"></span><button type="button" class="copy" data-copy="qrContent">Sao chép</button></dd></div>
+    </dl>
+    <p class="warn">Giữ nguyên số tiền và nội dung chuyển khoản để đơn được duyệt tự động. Đơn tự động hủy sau 10 phút.</p>
+    <div class="status" role="status">
+      <span class="spin"></span>
+      <span>Đang chờ thanh toán...</span>
+      <b class="count" id="countdown">10:00</b>
+    </div>
+    <div class="clock" aria-hidden="true"><span id="clockBar"></span></div>
+    <button type="button" class="cancel" id="cancelBtn">Hủy thanh toán</button>
+  </section>
+
+  <!-- Bước nhận hàng -->
+  <section id="viewDone" hidden>
+    <div class="done-ico"><svg class="i" aria-hidden="true"><use href="#check"/></svg></div>
+    <h3 id="doneTitle">Thanh toán thành công</h3>
+    <p class="done-sub" id="doneSub"></p>
+    <div class="items" id="dItems"></div>
+    <dl class="info">
+      <div><dt>Sản phẩm</dt><dd id="dProduct"></dd></div>
+      <div><dt>Nội dung</dt><dd id="dContent"></dd></div>
+      <div><dt>Số tiền</dt><dd id="dAmount"></dd></div>
+      <div><dt>Mã giao dịch</dt><dd id="dRef"></dd></div>
+      <div><dt>Thời gian</dt><dd id="dTime"></dd></div>
+    </dl>
+    <div class="dlg-actions">
+      <button type="button" class="buy" id="copyAll" hidden>Sao chép tất cả</button>
+      <button type="button" class="ghost" id="dlBtn" hidden>Tải file .txt</button>
+      <button type="button" class="ghost" id="doneClose">Đóng</button>
+    </div>
+  </section>
+</dialog>
+
+<div class="toast" id="toast" popover="manual" role="status"></div>
+
+<script>
+const WORKER_URL = 'https://webhooks-locketgold.tuquangnamht2007.workers.dev';
+const BANK_ID = 'MBBANK';
+const ACCOUNT_NO = '0888385536';
+const ACCOUNT_NAME = 'TỪ QUANG NAM';
+
+const ORDER_TTL = 10 * 60 * 1000;    // thời gian chờ mỗi đơn
+const POLL_MS = 5000;
+const STORE_KEY = 'lg_pending_order';
+const CODE_PREFIX = 'LKG';
+const CODE_RANDOM_LEN = 13;          // LKG + 13 ký tự
+const CODE_CHARS = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+
+// Giá sản phẩm: phải khớp với bảng giá trong Worker
+const AGENCY_PACKS = [
+  { qty: 5,  price: 129000 },
+  { qty: 10, price: 199000 },
+  { qty: 20, price: 299000 },
+  { qty: 50, price: 599000 },
+];
+const CODE_UNIT_PRICE = 25000;
+const CODE_MAX_QTY = 10;
+
+let tab = 'agency', agencyQty = null, codeQty = 1;
+let order = null, pollTimer = null, tickTimer = null, toastTimer = null;
+let showingDone = false, lastDelivery = null;
+
+const $ = id => document.getElementById(id);
+const vnd = n => Number(n).toLocaleString('vi-VN') + 'đ';
+const dlg = $('dlg');
+const tabs = [$('tabAgency'), $('tabCode')];
+const panes = { agency: $('paneAgency'), code: $('paneCode') };
+
+$('accNo').textContent = ACCOUNT_NO;
+$('accName').textContent = ACCOUNT_NAME;
+$('unitPrice').textContent = vnd(CODE_UNIT_PRICE);
+$('qty').max = CODE_MAX_QTY;
+
+/* ---------- Gói đại lý (vẽ từ cấu hình giá) ---------- */
+const perLot = p => p.price / p.qty;
+const bestPer = Math.min(...AGENCY_PACKS.map(perLot));
+panes.agency.insertAdjacentHTML('beforeend', AGENCY_PACKS.map(p => `
+  <label class="opt">
+    ${perLot(p) === bestPer ? '<span class="tag">Rẻ nhất mỗi lượt</span>' : ''}
+    <input type="radio" name="agency" value="${p.qty}">
+    <span class="dot"><svg class="i" aria-hidden="true"><use href="#check"/></svg></span>
+    <span class="opt-main"><b class="num">${p.qty}</b><small>lượt share</small></span>
+    <span class="opt-price"><b>${vnd(p.price)}</b><small>${vnd(perLot(p))} / lượt</small></span>
+  </label>`).join(''));
+
+panes.agency.addEventListener('change', e => {
+  if (e.target.name === 'agency') { agencyQty = parseInt(e.target.value); $('notice').hidden = true; renderForm(); }
+});
+
+/* ---------- Tab ---------- */
+function setTab(t) {
+  tab = t;
+  tabs.forEach(b => {
+    const on = b.dataset.type === t;
+    b.setAttribute('aria-selected', String(on));
+    b.tabIndex = on ? 0 : -1;
+  });
+  panes.agency.hidden = t !== 'agency';
+  panes.code.hidden = t !== 'code';
+  $('notice').hidden = true;
+  renderForm();
+}
+tabs.forEach((b, i) => {
+  b.addEventListener('click', () => { if (!order) setTab(b.dataset.type); });
+  b.addEventListener('keydown', e => {
+    if (order || !['ArrowLeft', 'ArrowRight'].includes(e.key)) return;
+    const next = tabs[(i + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length];
+    setTab(next.dataset.type); next.focus();
+  });
+});
+
+/* ---------- Số lượng mã ---------- */
+function setQty(n) {
+  codeQty = Math.min(CODE_MAX_QTY, Math.max(1, parseInt(n) || 1));
+  $('qty').value = codeQty;
+  $('qtyDec').disabled = codeQty <= 1;
+  $('qtyInc').disabled = codeQty >= CODE_MAX_QTY;
+  renderForm();
+}
+$('qtyDec').addEventListener('click', () => setQty(codeQty - 1));
+$('qtyInc').addEventListener('click', () => setQty(codeQty + 1));
+$('qty').addEventListener('change', e => setQty(e.target.value));
+
+/* ---------- Lựa chọn hiện tại + vẽ form ---------- */
+function selection() {
+  if (tab === 'agency') {
+    const p = AGENCY_PACKS.find(x => x.qty === agencyQty);
+    return p && { type: 'agency', qty: p.qty, price: p.price, name: `Tài khoản đại lý (${p.qty} lượt share)` };
+  }
+  return { type: 'code', qty: codeQty, price: codeQty * CODE_UNIT_PRICE, name: `${codeQty} mã riêng` };
+}
+
+function renderForm() {
+  const locked = !!order;
+  panes.agency.disabled = panes.code.disabled = locked;
+  tabs.forEach(b => b.disabled = locked);
+  const s = order ? order.product : selection();
+  $('sumPack').textContent = s ? s.name : 'Chưa chọn';
+  $('sumTotal').textContent = vnd(s ? s.price : 0);
+  const btn = $('buyBtn');
+  btn.disabled = !locked && !s;
+  btn.textContent = locked ? 'Xem mã QR thanh toán' : s ? `Thanh toán ${vnd(s.price)}` : 'Chọn sản phẩm để thanh toán';
+}
+
+function clearSelection() {
+  agencyQty = null;
+  document.querySelectorAll('input[name="agency"]').forEach(r => r.checked = false);
+  setQty(1);
+}
+
+/* ---------- Mã đơn ---------- */
+function genCode() {
+  const bytes = crypto.getRandomValues(new Uint8Array(CODE_RANDOM_LEN));
+  return CODE_PREFIX + Array.from(bytes, b => CODE_CHARS[b & 31]).join('');
+}
+
+/* ---------- Popup: chuyển bước ---------- */
+function showView(v) {
+  $('viewPay').hidden = v !== 'pay';
+  $('viewDone').hidden = v !== 'done';
+  dlg.setAttribute('aria-labelledby', v === 'pay' ? 'payTitle' : 'doneTitle');
+}
+
+/* ---------- Bắt đầu đơn (đơn mới hoặc khôi phục sau khi tải lại trang) ---------- */
+function beginOrder(o, resumed) {
+  order = o;
+  try { localStorage.setItem(STORE_KEY, JSON.stringify(o)); } catch (e) {}
+
+  $('qrImg').src = `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT_NO}-compact.png?amount=${o.amount}&addInfo=${encodeURIComponent(o.code)}&accountName=${encodeURIComponent(ACCOUNT_NAME)}`;
+  $('qrAmount').textContent = vnd(o.amount);
+  $('qrContent').textContent = o.code;
+  $('payFor').textContent = o.product.name;
+  $('notice').hidden = true;
+
+  showView('pay');
+  renderForm();
+  tick();
+  if (!order) return;                      // đã hết hạn ngay khi khôi phục
+  tickTimer = setInterval(tick, 1000);
+  schedulePoll(resumed ? 0 : POLL_MS);
+  if (!dlg.open) dlg.showModal();
+}
+
+$('buyBtn').addEventListener('click', () => {
+  if (order) { if (!dlg.open) dlg.showModal(); return; }
+  const s = selection();
+  if (!s) return;
+  const now = Date.now();
+  beginOrder({ code: genCode(), amount: s.price, startedAt: now, expiresAt: now + ORDER_TTL, product: s }, false);
+});
+
+/* ---------- Đếm ngược ---------- */
+function tick() {
+  if (!order) return;
+  const left = order.expiresAt - Date.now();
+  if (left <= 0) return expire();
+  const s = Math.ceil(left / 1000);
+  const cd = $('countdown');
+  cd.textContent = String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0');
+  cd.classList.toggle('low', s <= 60);
+  $('clockBar').style.width = (left / ORDER_TTL * 100) + '%';
+}
+
+function endOrder() {
+  clearTimeout(pollTimer);
+  clearInterval(tickTimer);
+  order = null;
+  try { localStorage.removeItem(STORE_KEY); } catch (e) {}
+  renderForm();
+}
+
+function expire() {
+  const code = order.code;
+  endOrder();
+  dlg.close();
+  const n = $('notice');
+  n.innerHTML = `Đơn đã hết hạn sau 10 phút và tự động hủy. Nếu bạn đã chuyển khoản, hãy <a href="https://zalo.me/0888385536" target="_blank" rel="noopener">nhắn Zalo</a> kèm nội dung <b>${code}</b> để được hỗ trợ.`;
+  n.hidden = false;
+  showToast('Đơn đã hết hạn và bị hủy.', true);
+}
+
+$('cancelBtn').addEventListener('click', () => {
+  if (!order) return;
+  endOrder();
+  dlg.close();
+  showToast('Đã hủy thanh toán.');
+});
+
+$('minBtn').addEventListener('click', () => dlg.close());
+
+dlg.addEventListener('close', () => {
+  if (showingDone) { showingDone = false; clearSelection(); }
+  else if (order) showToast('Đơn vẫn đang chờ thanh toán. Bấm "Xem mã QR thanh toán" để mở lại.');
+  renderForm();
+});
+
+/* ---------- Kiểm tra thanh toán (chỉ trong 10 phút kể từ lúc đặt đơn) ---------- */
+function schedulePoll(delay) {
+  clearTimeout(pollTimer);
+  pollTimer = setTimeout(poll, delay);
+}
+
+async function poll() {
+  const cur = order;
+  if (!cur) return;
+  try {
+    const age = Math.floor((Date.now() - cur.startedAt) / 1000);
+    const q = `code=${encodeURIComponent(cur.code)}&amount=${cur.amount}&age=${age}&type=${cur.product.type}&qty=${cur.product.qty}`;
+    const res = await fetch(`${WORKER_URL}/check-payment?${q}`);
+    const data = await res.json();
+    if (order !== cur) return;
+    if (data.paid) return onPaid(cur, data);
+  } catch (e) { /* lỗi mạng, thử lại */ }
+  if (order === cur) schedulePoll(POLL_MS);
+}
+
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden && order) { tick(); if (order) schedulePoll(0); }
+});
+
+/* ---------- Thanh toán thành công: hiển thị hàng do Worker trả về ---------- */
+function fmtTime(str) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})[ T](\d{2}):(\d{2}):(\d{2})/.exec(str || '');
+  if (m) return `${m[4]}:${m[5]}:${m[6]} ${m[3]}/${m[2]}/${m[1]}`;
+  return new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh', hour12: false });
+}
+
+function onPaid(cur, d) {
+  endOrder();
+  showingDone = true;
+
+  const items = (Array.isArray(d.items) ? d.items : []).filter(i => i && i.value);
+  const amount = d.transferAmount ?? cur.amount;
+  const ref = d.referenceCode || '—';
+  const time = fmtTime(d.transactionDate);
+  lastDelivery = { items, cur, amount, ref, time };
+
+  $('dProduct').textContent = cur.product.name;
+  $('dContent').textContent = d.content || cur.code;
+  $('dAmount').textContent = vnd(amount);
+  $('dRef').textContent = ref;
+  $('dTime').textContent = time;
+  $('doneSub').textContent = items.length
+    ? 'Thông tin nhận hàng ở bên dưới. Hãy lưu lại ngay.'
+    : 'Đơn đã được ghi nhận. Nếu chưa thấy thông tin nhận hàng, hãy nhắn Zalo kèm mã giao dịch.';
+
+  $('dItems').replaceChildren(...items.map(i => {
+    const row = document.createElement('div'); row.className = 'item';
+    const label = document.createElement('span'); label.textContent = i.label || 'Mã';
+    const code = document.createElement('code'); code.textContent = i.value;
+    const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'copy'; btn.textContent = 'Sao chép';
+    btn.addEventListener('click', () => copyText(i.value));
+    row.append(label, code, btn);
+    return row;
+  }));
+  $('copyAll').hidden = $('dlBtn').hidden = !items.length;
+
+  showView('done');
+  if (!dlg.open) dlg.showModal();
+}
+
+$('copyAll').addEventListener('click', () => {
+  if (!lastDelivery) return;
+  const { items, cur } = lastDelivery;
+  copyText(cur.product.type === 'code' ? items.map(i => i.value).join('\n') : items.map(i => `${i.label}: ${i.value}`).join('\n'), 'Đã sao chép tất cả.');
+});
+
+$('dlBtn').addEventListener('click', () => {
+  if (!lastDelivery) return;
+  const { items, cur, amount, ref, time } = lastDelivery;
+  const lines = [`Locket Gold — ${cur.product.name}`, `Số tiền: ${vnd(amount)}`, `Mã giao dịch: ${ref}`, `Thời gian: ${time}`, '', ...items.map(i => `${i.label}: ${i.value}`)];
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(new Blob([lines.join('\n')], { type: 'text/plain;charset=utf-8' }));
+  a.download = `locket-gold-${cur.code}.txt`;
+  a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+});
+
+$('doneClose').addEventListener('click', () => dlg.close());
+
+/* ---------- Sao chép + toast ---------- */
+async function copyText(text, msg) {
+  try { await navigator.clipboard.writeText(text); showToast(msg || 'Đã sao chép: ' + text); }
+  catch (e) { showToast('Không sao chép được, hãy chép thủ công.', true); }
+}
+document.querySelectorAll('[data-copy]').forEach(b =>
+  b.addEventListener('click', () => copyText($(b.dataset.copy).textContent.trim())));
+
+function showToast(msg, isError = false) {
+  const t = $('toast');
+  t.textContent = msg;
+  t.classList.toggle('error', isError);
+  if (!t.showPopover) return;
+  if (t.matches(':popover-open')) t.hidePopover();
+  t.showPopover();                       // popover nằm trên cùng, hiện được cả khi popup đang mở
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.hidePopover(), 3200);
+}
+
+/* ---------- Khôi phục đơn đang chờ sau khi tải lại trang ---------- */
+function restore() {
+  try {
+    const o = JSON.parse(localStorage.getItem(STORE_KEY) || 'null');
+    if (!o || !o.code || !o.product || o.expiresAt <= Date.now()) { localStorage.removeItem(STORE_KEY); return; }
+    setTab(o.product.type);
+    if (o.product.type === 'agency') {
+      agencyQty = o.product.qty;
+      const r = document.querySelector(`input[name="agency"][value="${o.product.qty}"]`);
+      if (r) r.checked = true;
+    } else setQty(o.product.qty);
+    beginOrder(o, true);
+  } catch (e) {}
+}
+
+setQty(1);
+restore();
+</script>
+
+</body>
+</html>
