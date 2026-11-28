@@ -2,85 +2,149 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFC21A">
+<meta name="robots" content="noindex">
 <title>Đăng nhập — Locket Gold</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💛%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{
-    min-height:100dvh;display:flex;align-items:center;justify-content:center;
-    background:radial-gradient(circle at 25% 15%,#1e2a4a,#080b16 75%);
-    font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;
-    color:#e8ecff;padding:20px;-webkit-font-smoothing:antialiased;
-  }
-  .card{
-    width:100%;max-width:400px;background:rgba(255,255,255,.04);
-    border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:36px 28px;
-    backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
-    box-shadow:0 25px 60px rgba(0,0,0,.5);
-  }
-  .logo{text-align:center;margin-bottom:28px}
-  .logo-icon{
-    width:60px;height:60px;margin:0 auto 14px;
-    background:linear-gradient(135deg,#ffb347,#ff7a59);
-    border-radius:18px;display:flex;align-items:center;justify-content:center;
-    font-size:28px;box-shadow:0 8px 24px rgba(255,122,89,.35);
-  }
-  h1{font-size:22px;text-align:center;font-weight:700}
-  .subtitle{text-align:center;font-size:13px;opacity:.55;margin-top:6px;margin-bottom:26px}
-  label{display:block;font-size:13px;opacity:.75;margin-bottom:7px}
-  .field{margin-bottom:18px;position:relative}
-  input{
-    width:100%;padding:13px 15px;background:rgba(0,0,0,.35);
-    border:1px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;font-size:15px;
-    outline:none;transition:border-color .2s;-webkit-appearance:none;font-family:inherit;
-  }
-  input:focus{border-color:#ffb347}
-  .toggle-pw{
-    position:absolute;right:12px;top:50%;transform:translateY(-50%);
-    background:none;border:none;color:#ffb347;cursor:pointer;font-size:12px;
-    padding:4px;font-weight:700;font-family:inherit;
-  }
-  .btn{
-    width:100%;padding:14px;background:linear-gradient(135deg,#ffb347,#ff7a59);
-    border:none;border-radius:12px;color:#1a1200;font-weight:700;font-size:15px;
-    cursor:pointer;transition:transform .15s,opacity .2s;margin-top:6px;font-family:inherit;
-  }
-  .btn:hover:not(:disabled){transform:translateY(-1px)}
-  .btn:disabled{opacity:.6;cursor:not-allowed}
-  .msg{margin-top:16px;font-size:13px;text-align:center;padding:10px;border-radius:10px;display:none}
-  .msg.err{display:block;background:rgba(255,80,80,.12);color:#ff8080;border:1px solid rgba(255,80,80,.3)}
-  .msg.ok{display:block;background:rgba(80,255,150,.1);color:#6bffa0;border:1px solid rgba(80,255,150,.3)}
-  .footer{text-align:center;margin-top:22px;font-size:12px;opacity:.4}
-  .back{display:block;text-align:center;margin-top:14px;font-size:12px;color:#ffb347;text-decoration:none;opacity:.7}
-  .back:hover{opacity:1}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+:root{
+  --gold:#FFC21A;--gold-text:#8A5A00;--ink:#101426;--ink-2:#3A4058;
+  --mist:#EEF1F8;--paper:#fff;--line:#D9DEEC;--focus:#4B3FF0;
+  --ok:#137A52;--ok-soft:#E3F5EC;
+  --display:'Bricolage Grotesque','Be Vietnam Pro',system-ui,sans-serif;
+  --body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --curve:clamp(28px,6vw,56px);
+}
+html{-webkit-text-size-adjust:100%}
+body{font:400 1rem/1.65 var(--body);color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.i{width:1.15em;height:1.15em;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.h{fill:currentColor;stroke:none}
+
+/* Bố cục chia đôi */
+.page{min-height:100dvh;display:grid;grid-template-rows:auto 1fr}
+@media(min-width:900px){.page{grid-template-columns:1fr 1fr;grid-template-rows:none}}
+
+/* Bên vàng: thương hiệu */
+.brandside{display:flex;flex-direction:column;gap:24px;padding:20px 20px 40px;background:var(--gold);border-radius:0 0 var(--curve) var(--curve)}
+@media(min-width:900px){.brandside{justify-content:space-between;padding:36px 48px 56px;border-radius:0 var(--curve) var(--curve) 0;overflow:hidden}}
+.brand{display:flex;align-items:center;gap:10px;width:fit-content;font:800 1.2rem var(--display);letter-spacing:-.02em;text-decoration:none}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--ink);color:var(--gold);display:grid;place-items:center}
+.brand-mark svg{width:18px;height:18px}
+h1{font:800 clamp(2rem,5vw,3.4rem)/1.04 var(--display);letter-spacing:-.035em;text-wrap:balance}
+.lead{margin-top:12px;max-width:40ch;font-size:1.0625rem}
+
+/* Widget Locket */
+.stage{--s:clamp(190px,22vw,270px);position:relative;display:none;width:calc(var(--s)*1.3);height:calc(var(--s)*1.3);margin-inline:auto}
+@media(min-width:900px){.stage{display:block}}
+.stage::before{content:"";position:absolute;inset:-14%;border-radius:50%;background:repeating-radial-gradient(circle,transparent 0 34px,rgba(16,20,38,.07) 34px 36px)}
+.w{position:absolute;inset:0;margin:auto;width:var(--s);height:var(--s);border-radius:calc(var(--s)*.3)}
+.w-b1{background:rgba(255,255,255,.55);transform:rotate(-10deg) translate(-14%,6%)}
+.w-b2{background:rgba(16,20,38,.14);transform:rotate(8deg) translate(12%,-4%)}
+.w-f{padding:7px;background:conic-gradient(from 200deg,#fff,#FFE08A 25%,#D98A00 55%,#FFE08A 80%,#fff);box-shadow:0 26px 50px -14px rgba(16,20,38,.5);animation:settle .9s cubic-bezier(.2,.9,.25,1.1) both}
+.w-in{width:100%;height:100%;border-radius:calc(var(--s)*.3 - 7px);background:radial-gradient(circle at 50% 38%,#232a52,var(--ink) 72%);display:grid;place-content:center;justify-items:center;gap:10px;color:#fff}
+.w-in svg{width:36%;color:var(--gold);filter:drop-shadow(0 8px 22px rgba(255,194,26,.55))}
+.w-in span{font:700 1rem var(--display)}
+@keyframes settle{from{transform:rotate(-14deg) scale(.82);opacity:0}to{transform:none;opacity:1}}
+
+/* Bên form */
+.formside{display:grid;place-items:center;padding:32px 20px 40px}
+.card{width:100%;max-width:420px}
+.panel{padding:28px 24px;background:var(--paper);border:1px solid var(--line);border-radius:28px}
+@media(min-width:640px){.panel{padding:36px 32px}}
+h2{font:800 1.7rem var(--display);letter-spacing:-.025em}
+.sub{margin:4px 0 26px;font-size:.95rem;color:var(--ink-2)}
+.field{margin-bottom:18px}
+label{display:block;margin-bottom:7px;font-size:.9rem;font-weight:600}
+.control{position:relative}
+input{width:100%;height:52px;padding:0 16px;border:2px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);font:500 1rem var(--body);transition:border-color .2s;-webkit-appearance:none;appearance:none}
+input::placeholder{color:#8A91A8}
+input:hover{border-color:#B6BDD6}
+input:focus{outline:none;border-color:var(--ink)}
+input:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+#password{padding-right:76px}
+.toggle-pw{position:absolute;right:6px;top:50%;transform:translateY(-50%);min-width:56px;height:40px;border:0;border-radius:10px;background:none;color:var(--gold-text);font:700 .85rem var(--body);cursor:pointer}
+.toggle-pw:hover{background:var(--mist)}
+.btn{width:100%;min-height:54px;margin-top:6px;border-radius:999px;border:2px solid var(--ink);background:var(--gold);color:var(--ink);font:700 1rem var(--body);cursor:pointer;transition:background .2s,transform .15s}
+.btn:hover:not(:disabled){background:#ffd152}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn:disabled{background:var(--mist);border-color:var(--line);color:#6F7690;cursor:not-allowed}
+.msg{display:none;margin-top:16px;padding:12px 14px;border-radius:14px;font-size:.9rem;font-weight:600;text-align:center}
+.msg.err{display:block;background:#FDECEA;color:#8F1D13}
+.msg.ok{display:block;background:var(--ok-soft);color:var(--ok)}
+.back{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:22px;font-size:.9rem;font-weight:600;color:var(--ink-2);text-decoration:none}
+.back:hover{color:var(--ink);text-decoration:underline;text-underline-offset:4px}
+.foot{margin-top:18px;text-align:center;font-size:.82rem;color:var(--ink-2)}
+
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div class="card">
-  <div class="logo">
-    <div class="logo-icon">🔒</div>
-    <h1>Locket Gold</h1>
-    <p class="subtitle">Đăng nhập hệ thống quản trị</p>
-  </div>
 
-  <form id="loginForm" autocomplete="on">
-    <div class="field">
-      <label for="username">Tên đăng nhập</label>
-      <input id="username" name="username" type="text" required autocomplete="username"
-             placeholder="Nhập username..." autocapitalize="off" spellcheck="false">
-    </div>
-    <div class="field">
-      <label for="password">Mật khẩu</label>
-      <input id="password" name="password" type="password" required autocomplete="current-password"
-             placeholder="Nhập mật khẩu...">
-      <button type="button" class="toggle-pw" id="togglePw">Hiện</button>
-    </div>
-    <button type="submit" class="btn" id="submitBtn">Đăng nhập</button>
-    <div class="msg" id="msg"></div>
-  </form>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="heart" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></symbol>
+  <symbol id="left" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></symbol>
+</svg>
 
-  <a href="/index.html" class="back">← Về trang kích hoạt mã</a>
-  <div class="footer">© Từ Quang Nam — Locket Gold System</div>
+<div class="page">
+  <header class="brandside">
+    <a class="brand" href="/index.html">
+      <span class="brand-mark"><svg class="h" viewBox="0 0 24 24" aria-hidden="true"><use href="#heart"/></svg></span>
+      Locket Gold
+    </a>
+
+    <div class="stage" aria-hidden="true">
+      <div class="w w-b2"></div>
+      <div class="w w-b1"></div>
+      <div class="w w-f">
+        <div class="w-in">
+          <svg class="h" viewBox="0 0 24 24"><use href="#heart"/></svg>
+          <span>Locket Gold</span>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h1>Hệ thống quản trị</h1>
+      <p class="lead">Dành cho Admin và Đại lý. Đăng nhập bằng tài khoản được cấp để vào khu vực quản lý.</p>
+    </div>
+  </header>
+
+  <main class="formside">
+    <div class="card">
+      <div class="panel">
+        <h2>Đăng nhập</h2>
+        <p class="sub">Đăng nhập hệ thống quản trị</p>
+
+        <form id="loginForm" autocomplete="on">
+          <div class="field">
+            <label for="username">Tên đăng nhập</label>
+            <input id="username" name="username" type="text" required autocomplete="username"
+                   placeholder="Nhập username..." autocapitalize="off" spellcheck="false">
+          </div>
+          <div class="field">
+            <label for="password">Mật khẩu</label>
+            <div class="control">
+              <input id="password" name="password" type="password" required autocomplete="current-password"
+                     placeholder="Nhập mật khẩu...">
+              <button type="button" class="toggle-pw" id="togglePw" aria-controls="password" aria-pressed="false">Hiện</button>
+            </div>
+          </div>
+          <button type="submit" class="btn" id="submitBtn">Đăng nhập</button>
+          <div class="msg" id="msg" role="alert"></div>
+        </form>
+
+        <a href="/index.html" class="back"><svg class="i" aria-hidden="true"><use href="#left"/></svg>Về trang kích hoạt mã</a>
+      </div>
+      <p class="foot">© Từ Quang Nam — Locket Gold System</p>
+    </div>
+  </main>
 </div>
 
 <script type="module">
@@ -132,8 +196,10 @@ onAuthStateChanged(auth, async (user) => {
 
 $("togglePw").addEventListener("click", () => {
   const pw = $("password"), btn = $("togglePw");
-  if (pw.type === "password") { pw.type = "text"; btn.textContent = "Ẩn"; }
-  else { pw.type = "password"; btn.textContent = "Hiện"; }
+  const show = pw.type === "password";
+  pw.type = show ? "text" : "password";
+  btn.textContent = show ? "Ẩn" : "Hiện";
+  btn.setAttribute("aria-pressed", String(show));
 });
 
 $("loginForm").addEventListener("submit", async (e) => {
