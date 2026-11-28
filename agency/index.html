@@ -2,232 +2,250 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFC21A">
+<meta name="robots" content="noindex">
 <title>Đại lý — Locket Gold</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💛%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    min-height: 100vh; background: radial-gradient(circle at 20% 10%, #1a2238, #07090f 70%);
-    font-family: 'Segoe UI', system-ui, sans-serif; color: #e8ecff; padding: 18px 14px 60px;
-  }
-  .topbar {
-    max-width: 1100px; margin: 0 auto 22px;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-  }
-  .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size: 18px; }
-  .brand-icon {
-    width:38px; height:38px; border-radius:10px;
-    background: linear-gradient(135deg, #48dbfb, #6c5ce7);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .top-actions { display:flex; gap:10px; flex-wrap: wrap; }
-  .btn-sm {
-    padding: 9px 16px; border-radius: 10px; font-size: 13px; cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06);
-    color: #e8ecff; transition: background 0.2s; font-family: inherit;
-  }
-  .btn-sm:hover { background: rgba(255,255,255,0.12); }
-  .btn-sm.danger:hover { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.4); }
+*,*::before,*::after{box-sizing:border-box;margin:0}
+:root{
+  --gold:#FFC21A;--gold-text:#8A5A00;--ink:#101426;--ink-2:#3A4058;
+  --mist:#EEF1F8;--paper:#fff;--line:#D9DEEC;--focus:#4B3FF0;
+  --ok:#137A52;--ok-soft:#E3F5EC;--danger:#B42318;--danger-soft:#FDECEA;
+  --display:'Bricolage Grotesque','Be Vietnam Pro',system-ui,sans-serif;
+  --body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --curve:clamp(24px,5vw,44px);
+}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{font:400 1rem/1.6 var(--body);color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100% - 32px,1100px);margin-inline:auto}
+.h{width:18px;height:18px;fill:currentColor}
 
-  .container { max-width: 1100px; margin: 0 auto; }
+/* Header */
+.hero{background:var(--gold);border-radius:0 0 var(--curve) var(--curve);padding-bottom:32px}
+.nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-block:18px 22px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.2rem var(--display);letter-spacing:-.02em}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--ink);color:var(--gold);display:grid;place-items:center}
+.brand small{padding:2px 10px;border-radius:99px;background:var(--ink);color:var(--gold);font:700 .72rem var(--body);letter-spacing:0}
+.nav-act{display:flex;gap:10px;flex-wrap:wrap}
+h1{font:800 clamp(1.9rem,5vw,2.8rem)/1.05 var(--display);letter-spacing:-.03em}
+.lead{margin-top:6px;font-size:.98rem}
 
-  .quota-banner {
-    background: linear-gradient(135deg, rgba(72,219,251,0.1), rgba(108,92,231,0.1));
-    border: 1px solid rgba(72,219,251,0.3);
-    border-radius: 16px; padding: 22px; margin-bottom: 22px;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;
-  }
-  .quota-info h3 { font-size: 14px; opacity: 0.7; margin-bottom: 6px; letter-spacing: 0.4px; }
-  .quota-info .big {
-    font-size: 32px; font-weight: 800;
-    background: linear-gradient(90deg, #48dbfb, #6c5ce7);
-    -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
-  }
-  .quota-info .sub { font-size: 13px; opacity: 0.6; margin-top: 4px; }
-  .quota-bar-wrap { flex: 1; min-width: 200px; max-width: 340px; }
-  .quota-bar { height: 12px; background: rgba(255,255,255,0.08); border-radius: 6px; overflow: hidden; }
-  .quota-fill { height: 100%; background: linear-gradient(90deg, #48dbfb, #6c5ce7); transition: width 0.4s ease; }
-  .quota-bar-label { font-size: 12px; opacity: 0.6; margin-top: 6px; text-align: right; }
+/* Nút */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;border:2px solid var(--ink);font:700 .95rem var(--body);text-decoration:none;cursor:pointer;transition:background .2s,color .2s,transform .15s}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-sm{min-height:38px;padding:0 16px;font-size:.85rem}
+.btn-solid{background:var(--ink);color:#fff}
+.btn-solid:hover{background:#242a4a}
+.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover:not(:disabled){background:var(--ink);color:#fff}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover:not(:disabled){background:#ffd152}
+.btn-gold:disabled{background:var(--mist);border-color:var(--line);color:#6F7690}
+.btn-bad{background:var(--danger);border-color:var(--danger);color:#fff}
 
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-    gap: 14px; margin-bottom: 22px;
-  }
-  .stat-card {
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px; padding: 18px;
-  }
-  .stat-label { font-size: 12px; opacity: 0.6; margin-bottom: 8px; letter-spacing: 0.4px; }
-  .stat-value { font-size: 28px; font-weight: 700; color: #48dbfb; }
+.main{padding-block:24px 56px}
+.panel{margin-bottom:20px;padding:22px 20px;background:var(--paper);border:1px solid var(--line);border-radius:24px}
+@media(min-width:640px){.panel{padding:26px 28px}}
+h2{font:800 1.25rem var(--display);letter-spacing:-.02em}
+.sub{margin:2px 0 18px;font-size:.88rem;color:var(--ink-2)}
 
-  .panel {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 16px; padding: 22px; margin-bottom: 22px;
-  }
-  .panel h2 { font-size: 16px; margin-bottom: 16px; }
-  .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-  .form-row .field { flex: 1; min-width: 160px; }
-  label { display: block; font-size: 12px; opacity: 0.7; margin-bottom: 6px; }
-  input, select {
-    width: 100%; padding: 11px 13px; background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
-    color: #fff; font-size: 14px; outline: none; font-family: inherit;
-  }
-  input:focus, select:focus { border-color: #48dbfb; }
-  select option { background: #1a2238; }
+/* Hạn mức */
+.quota{display:grid;gap:20px;align-items:center}
+@media(min-width:760px){.quota{grid-template-columns:1fr 1fr;gap:40px}}
+.quota .k{font-size:.88rem;font-weight:600;color:var(--ink-2)}
+.big{display:block;font:800 clamp(2.2rem,6vw,3.2rem)/1.1 var(--display);letter-spacing:-.03em}
+.quota-sub{margin-top:4px;font-size:.92rem;color:var(--ink-2)}
+.quota-sub.warn{color:var(--danger);font-weight:600}
+.qtrack{height:14px;border-radius:99px;background:var(--mist);overflow:hidden}
+.qtrack i{display:block;height:100%;width:0;background:var(--gold);border-radius:99px;transition:width .5s ease}
+.qtrack.full i{background:var(--danger)}
+.qpct{margin-top:8px;text-align:right;font-size:.82rem;color:var(--ink-2)}
 
-  .btn-primary {
-    padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
-    border: none; cursor: pointer; color: #0a1628;
-    background: linear-gradient(135deg, #48dbfb, #6c5ce7);
-    transition: transform 0.15s, opacity 0.2s; font-family: inherit;
-  }
-  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
-  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+/* Thống kê */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:20px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.stats div{padding:16px 20px;background:var(--paper)}
+.stats span{display:block;font-size:.82rem;color:var(--ink-2)}
+.stats b{font:800 1.9rem/1.25 var(--display);letter-spacing:-.02em}
+@media(max-width:520px){.stats div{padding:14px 12px}.stats b{font-size:1.5rem}}
 
-  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
-  .toolbar input, .toolbar select { max-width: 220px; }
+/* Form */
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;align-items:end}
+.field label{display:block;margin-bottom:6px;font-size:.85rem;font-weight:600}
+input,select{width:100%;height:46px;padding:0 14px;border:2px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);font:500 .95rem var(--body);transition:border-color .2s}
+input::placeholder{color:#8A91A8}
+input:hover,select:hover{border-color:#B6BDD6}
+input:focus,select:focus{outline:none;border-color:var(--ink)}
+input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.result{margin-top:18px;padding:16px;border-radius:16px;background:var(--ok-soft);color:var(--ok)}
+.result b{display:block;margin-bottom:8px}
+.codes-box{max-height:180px;overflow:auto;padding:12px 14px;border-radius:12px;background:var(--ink);color:var(--gold);font:700 .95rem/1.8 ui-monospace,Menlo,monospace;letter-spacing:.05em;user-select:all}
+.result .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th, td { padding: 11px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.07); }
-  th { font-size: 12px; opacity: 0.6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
-  tr:hover td { background: rgba(255,255,255,0.03); }
-  .tag { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600; }
-  .tag.unused { background: rgba(80,255,150,0.12); color: #7dffab; }
-  .tag.used { background: rgba(255,80,80,0.12); color: #ff9a9a; }
-  .code-cell { font-family: ui-monospace, Menlo, monospace; font-weight: 700; color: #48dbfb; letter-spacing: 0.5px; }
+/* Bảng */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.toolbar input,.toolbar select{width:auto;min-width:150px;height:40px;font-size:.88rem;border-radius:999px}
+.toolbar input{flex:1 1 200px;max-width:300px}
+.grow{flex:1}
+.info{margin-bottom:8px;font-size:.82rem;color:var(--ink-2)}
+.table-wrap{overflow-x:auto;margin-inline:-6px}
+table{width:100%;min-width:620px;border-collapse:collapse;font-size:.88rem}
+th{padding:10px 12px;text-align:left;font-size:.78rem;font-weight:700;color:var(--ink-2);white-space:nowrap;border-bottom:2px solid var(--ink)}
+td{padding:12px;vertical-align:middle;border-bottom:1px solid var(--line)}
+tbody tr:hover td{background:#F7F8FC}
+.dim{color:var(--ink-2);font-size:.82rem}
+.mono{font:700 .92rem ui-monospace,Menlo,monospace;letter-spacing:.04em}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.74rem;font-weight:700;white-space:nowrap}
+.t-ok{background:var(--ok-soft);color:var(--ok)}
+.t-used{background:var(--mist);color:var(--ink-2)}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.rb{min-height:32px;padding:0 12px;border:1.5px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);font:600 .78rem var(--body);cursor:pointer;white-space:nowrap}
+.rb:hover{border-color:var(--ink)}
+.rb.bad{color:var(--danger)}
+.rb.bad:hover{border-color:var(--danger);background:var(--danger-soft)}
+.empty{padding:32px 12px;text-align:center;color:var(--ink-2)}
+.more{display:flex;margin:14px auto 0}
 
-  .row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-  .row-actions button {
-    padding: 5px 10px; border-radius: 7px; font-size: 11px; cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: #e8ecff;
-    font-family: inherit;
-  }
-  .row-actions button:hover { background: rgba(255,255,255,0.12); }
-  .row-actions .danger { color: #ff9a9a; border-color: rgba(255,80,80,0.3); }
-  .row-actions .danger:hover { background: rgba(255,80,80,0.15); }
+/* Popup */
+dialog{margin:auto;border:0;border-radius:24px;padding:26px 24px 22px;width:min(420px,calc(100vw - 24px));background:var(--paper);color:var(--ink);box-shadow:0 30px 80px rgba(16,20,38,.4)}
+dialog[open]{animation:pop .3s cubic-bezier(.2,.9,.25,1.1)}
+dialog::backdrop{background:rgba(16,20,38,.6);backdrop-filter:blur(3px)}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(8px)}to{opacity:1;transform:none}}
+dialog h3{font:800 1.25rem var(--display);letter-spacing:-.02em}
+dialog p{margin:6px 0 16px;font-size:.92rem;color:var(--ink-2)}
+dialog .field{margin-bottom:14px}
+.msg{margin-bottom:14px;padding:11px 14px;border-radius:12px;background:var(--danger-soft);color:#8F1D13;font-size:.88rem;font-weight:600}
+.dlg-act{display:flex;gap:10px;justify-content:flex-end}
 
-  .empty { text-align: center; padding: 30px; opacity: 0.5; font-size: 14px; }
+/* Toast */
+.toast{position:fixed;inset:auto auto 24px 50%;margin:0;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:13px 22px;border:0;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:.9rem;text-align:center;box-shadow:0 14px 34px rgba(16,20,38,.35)}
+.toast.err{background:var(--danger)}
 
-  .toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
-    background: rgba(30,40,70,0.95); border: 1px solid rgba(255,255,255,0.12);
-    padding: 13px 22px; border-radius: 12px; font-size: 14px;
-    transition: transform 0.3s; z-index: 99; max-width: 90vw;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-  .toast.err { border-color: rgba(255,80,80,0.4); color: #ff9a9a; }
-  .toast.ok { border-color: rgba(80,255,150,0.4); color: #9affc0; }
-
-  .code-result {
-    margin-top: 14px; padding: 14px; border-radius: 12px;
-    background: rgba(80,255,150,0.08); border: 1px solid rgba(80,255,150,0.3);
-    font-size: 13px; line-height: 1.6; display: none;
-  }
-  .code-result.show { display: block; }
-  .code-result .big-code {
-    font-family: ui-monospace, Menlo, monospace; font-size: 20px; font-weight: 800;
-    color: #7dffab; letter-spacing: 1px; margin: 8px 0; word-break: break-all;
-  }
-
-  @media (max-width: 600px) {
-    .quota-info .big { font-size: 24px; }
-    .stat-value { font-size: 22px; }
-  }
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand"><div class="brand-icon">🏪</div><span>Locket Gold — Đại lý</span></div>
-  <div class="top-actions">
-    <button class="btn-sm" id="viewUserPage">Trang kích hoạt mã</button>
-    <button class="btn-sm danger" id="logoutBtn">Đăng xuất</button>
-  </div>
-</div>
-
-<div class="container">
-
-  <div class="quota-banner">
-    <div class="quota-info">
-      <h3>HẠN MỨC TẠO MÃ</h3>
-      <div class="big" id="quotaText">— / —</div>
-      <div class="sub" id="quotaSub">Đang tải...</div>
-    </div>
-    <div class="quota-bar-wrap">
-      <div class="quota-bar"><div class="quota-fill" id="quotaFill" style="width:0%"></div></div>
-      <div class="quota-bar-label" id="quotaPercent">0%</div>
-    </div>
-  </div>
-
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-label">Tổng mã đã tạo</div><div class="stat-value" id="statTotal">—</div></div>
-    <div class="stat-card"><div class="stat-label">Chưa dùng</div><div class="stat-value" id="statUnused">—</div></div>
-    <div class="stat-card"><div class="stat-label">Đã dùng</div><div class="stat-value" id="statUsed">—</div></div>
-  </div>
-
-  <div class="panel">
-    <h2>➕ Tạo mã code</h2>
-    <form id="createCodeForm">
-      <div class="form-row">
-        <div class="field">
-          <label for="codeCount">Số lượng mã</label>
-          <input id="codeCount" type="number" min="1" max="20" value="1">
-        </div>
-        <div class="field">
-          <label for="codePrefix">Tiền tố (tùy chọn)</label>
-          <input id="codePrefix" type="text" maxlength="6" placeholder="VD: DL" value="DL">
-        </div>
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav" aria-label="Điều hướng">
+      <div class="brand">
+        <span class="brand-mark"><svg class="h" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+        Locket Gold <small>Đại lý</small>
       </div>
-      <button type="submit" class="btn-primary" id="createCodeBtn">Tạo mã</button>
-      <div class="code-result" id="codeResult"></div>
-    </form>
+      <div class="nav-act">
+        <button type="button" class="btn btn-line btn-sm" id="pwdBtn">Đổi mật khẩu</button>
+        <a class="btn btn-line btn-sm" href="/index.html" target="_blank" rel="noopener">Trang kích hoạt mã</a>
+        <button type="button" class="btn btn-solid btn-sm" id="logoutBtn">Đăng xuất</button>
+      </div>
+    </nav>
+    <h1>Bảng đại lý</h1>
+    <p class="lead" id="who">Đang tải...</p>
   </div>
+</header>
 
-  <div class="panel">
-    <h2>📋 Mã code của bạn</h2>
-    <div class="toolbar">
-      <input type="text" id="searchCode" placeholder="Tìm theo mã...">
-      <select id="filterCodeStatus">
-        <option value="">Mọi trạng thái</option>
-        <option value="unused">Chưa dùng</option>
-        <option value="used">Đã dùng</option>
-      </select>
-      <button class="btn-sm" id="reloadCodesBtn">Làm mới</button>
+<main class="wrap main">
+  <section class="panel quota" aria-label="Hạn mức tạo mã">
+    <div>
+      <p class="k">Hạn mức tạo mã (đã dùng / tổng)</p>
+      <b class="big" id="quotaText">— / —</b>
+      <p class="quota-sub" id="quotaSub">Đang tải...</p>
     </div>
+    <div>
+      <div class="qtrack" id="qTrack" role="progressbar" aria-label="Hạn mức đã dùng" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><i id="quotaFill"></i></div>
+      <p class="qpct" id="quotaPercent">0%</p>
+    </div>
+  </section>
+
+  <section class="stats" aria-label="Thống kê mã">
+    <div><span>Tổng mã đã tạo</span><b id="statTotal">—</b></div>
+    <div><span>Chưa dùng</span><b id="statUnused">—</b></div>
+    <div><span>Đã dùng</span><b id="statUsed">—</b></div>
+  </section>
+
+  <section class="panel">
+    <h2>Tạo mã code</h2>
+    <p class="sub">Mỗi mã tạo ra tốn 1 lượt hạn mức. Mã đã xóa sẽ không được hoàn lại lượt.</p>
+    <form id="createCodeForm" class="form">
+      <div class="field"><label for="codeCount">Số lượng mã (tối đa 20)</label><input id="codeCount" type="number" min="1" max="20" value="1"></div>
+      <div class="field"><label for="codePrefix">Tiền tố (tùy chọn)</label><input id="codePrefix" type="text" maxlength="6" placeholder="VD: DL" value="DL" autocomplete="off"></div>
+      <button type="submit" class="btn btn-gold" id="createCodeBtn">Tạo mã</button>
+    </form>
+    <div class="result" id="codeResult" hidden>
+      <b id="codeResultTitle"></b>
+      <div class="codes-box" id="codeResultList"></div>
+      <div class="row">
+        <button type="button" class="btn btn-solid btn-sm" id="batchCopy">Sao chép tất cả</button>
+        <button type="button" class="btn btn-line btn-sm" id="batchDl">Tải file .txt</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel">
+    <h2>Mã code của bạn</h2>
+    <p class="sub">Hiển thị 10 mã mới nhất, bấm "Xem thêm" để mở rộng. Tìm kiếm áp dụng cho toàn bộ mã của bạn.</p>
+    <div class="toolbar">
+      <input id="searchCode" type="search" placeholder="Tìm theo mã..." autocomplete="off">
+      <select id="filterCodeStatus" aria-label="Lọc trạng thái"><option value="">Mọi trạng thái</option><option value="unused">Chưa dùng</option><option value="used">Đã dùng</option></select>
+      <span class="grow"></span>
+      <button type="button" class="btn btn-line btn-sm" id="reloadCodesBtn">Làm mới</button>
+      <button type="button" class="btn btn-line btn-sm" id="csvBtn">Xuất CSV</button>
+    </div>
+    <p class="info" id="codesInfo"></p>
     <div class="table-wrap">
       <table>
-        <thead>
-          <tr>
-            <th>Mã code</th>
-            <th>Tạo lúc</th>
-            <th>Trạng thái</th>
-            <th>Người dùng</th>
-            <th>Dùng lúc</th>
-            <th>Thao tác</th>
-          </tr>
-        </thead>
-        <tbody id="codesBody">
-          <tr><td colspan="6" class="empty">Đang tải...</td></tr>
-        </tbody>
+        <thead><tr><th>Mã code</th><th>Tạo lúc</th><th>Trạng thái</th><th>Người dùng</th><th>Dùng lúc</th><th>Thao tác</th></tr></thead>
+        <tbody id="codesBody"><tr><td colspan="6" class="empty">Đang tải...</td></tr></tbody>
       </table>
     </div>
-  </div>
+    <button type="button" class="btn btn-line btn-sm more" id="moreBtn" hidden>Xem thêm 10</button>
+  </section>
+</main>
 
-</div>
+<!-- Xác nhận -->
+<dialog id="dlgConfirm" aria-labelledby="cfTitle">
+  <form method="dialog">
+    <h3 id="cfTitle"></h3>
+    <p id="cfText"></p>
+    <div class="dlg-act">
+      <button class="btn btn-line btn-sm" value="cancel">Hủy</button>
+      <button class="btn btn-sm btn-bad" id="cfOk" value="ok">Xác nhận</button>
+    </div>
+  </form>
+</dialog>
 
-<div class="toast" id="toast"></div>
+<!-- Đổi mật khẩu -->
+<dialog id="dlgPwd" aria-labelledby="pwdTitle">
+  <form id="pwdForm">
+    <h3 id="pwdTitle">Đổi mật khẩu</h3>
+    <p>Nhập mật khẩu hiện tại để xác nhận, sau đó đặt mật khẩu mới.</p>
+    <div class="field"><label for="curPwd">Mật khẩu hiện tại</label><input id="curPwd" type="password" required autocomplete="current-password"></div>
+    <div class="field"><label for="newPwd">Mật khẩu mới</label><input id="newPwd" type="password" required minlength="6" autocomplete="new-password" placeholder="Tối thiểu 6 ký tự"></div>
+    <div class="field"><label for="newPwd2">Nhập lại mật khẩu mới</label><input id="newPwd2" type="password" required minlength="6" autocomplete="new-password"></div>
+    <div class="msg" id="pwdMsg" role="alert" hidden></div>
+    <div class="dlg-act">
+      <button type="button" class="btn btn-line btn-sm" id="pwdCancel">Hủy</button>
+      <button type="submit" class="btn btn-gold btn-sm" id="pwdSave">Đổi mật khẩu</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" popover="manual" role="status"></div>
 
 <script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getAuth, onAuthStateChanged, signOut
+  getAuth, onAuthStateChanged, signOut, updatePassword, reauthenticateWithCredential, EmailAuthProvider
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
-  getFirestore, doc, getDoc, setDoc, deleteDoc, updateDoc,
-  collection, query, where, getDocs, runTransaction
+  getFirestore, doc, getDoc, deleteDoc, collection, query, where, getDocs, runTransaction
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -244,28 +262,52 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const $ = (id) => document.getElementById(id);
-const toastEl = $("toast");
-let toastTimer = null;
-function toast(text, type="ok"){
-  toastEl.textContent = text;
-  toastEl.className = "toast show " + type;
+const PAGE = 10;
+const LOGIN_URL = "/login/index.html";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = t => { const d = t?.toDate?.(); return d ? d.toLocaleString("vi-VN", { hour12: false }) : "—"; };
+
+let currentUser = null, currentData = null, allCodes = [], shown = PAGE, lastBatch = [], toastTimer = null;
+
+/* ---------- Toast / sao chép / tải file ---------- */
+function toast(text, type = "ok") {
+  const t = $("toast");
+  t.textContent = text;
+  t.classList.toggle("err", type === "err");
+  if (!t.showPopover) return;
+  if (t.matches(":popover-open")) t.hidePopover();
+  t.showPopover();
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>{ toastEl.className = "toast " + type; }, 4000);
+  toastTimer = setTimeout(() => t.hidePopover(), 3500);
+}
+async function copy(text, msg) {
+  try { await navigator.clipboard.writeText(text); toast(msg || "Đã sao chép: " + text); }
+  catch (e) { toast("Không sao chép được, hãy chép thủ công.", "err"); }
+}
+function saveFile(name, text, type = "text/plain") {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: type + ";charset=utf-8" }));
+  a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+function ask({ title, text, ok = "Xác nhận" }) {
+  return new Promise(res => {
+    const d = $("dlgConfirm");
+    $("cfTitle").textContent = title; $("cfText").textContent = text; $("cfOk").textContent = ok;
+    d.returnValue = ""; d.showModal();
+    d.addEventListener("close", () => res(d.returnValue === "ok"), { once: true });
+  });
 }
 
-let currentUser = null;
-let currentData = null;
-let allCodes = [];
+/* ---------- Mã code (sinh bằng bộ ngẫu nhiên an toàn, đúng định dạng rules yêu cầu) ---------- */
+const CH = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => CH[b & 31]).join("");
+const cleanPrefix = p => (p || "DL").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6) || "DL";
+const genCode = p => `${p}-${rnd(4)}-${rnd(4)}`;
 
-function generateCode(prefix){
-  const p = (prefix || 'DL').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6) || 'DL';
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
-  const part = (n) => Array.from({length:n},()=>chars[Math.random()*chars.length|0]).join('');
-  return `${p}-${part(4)}-${part(4)}`;
-}
-
-async function loadMe(){
+/* ---------- Hồ sơ + hạn mức ---------- */
+async function loadMe() {
   const snap = await getDoc(doc(db, "users", currentUser.uid));
   if (!snap.exists()) throw new Error("Không tìm thấy dữ liệu đại lý.");
   currentData = snap.data();
@@ -274,146 +316,136 @@ async function loadMe(){
   renderQuota();
 }
 
-function renderQuota(){
+function renderQuota() {
   if (!currentData) return;
-  const used = currentData.usedQuota || 0;
-  const max = currentData.maxQuota || 0;
+  const used = currentData.usedQuota || 0, max = currentData.maxQuota || 0;
   const remaining = Math.max(0, max - used);
-  const percent = max > 0 ? Math.min(100, Math.round((used / max) * 100)) : 0;
+  const percent = max > 0 ? Math.min(100, Math.round(used / max * 100)) : 0;
+  const out = max === 0 || used >= max;
 
+  $("who").textContent = `Xin chào ${currentData.username}`;
   $("quotaText").textContent = `${used} / ${max}`;
-  $("quotaSub").textContent = max === 0
-    ? "Chưa được cấp hạn mức — liên hệ Admin"
-    : (remaining === 0
-        ? "Đã hết hạn mức — liên hệ Admin"
-        : `Còn lại ${remaining} lượt tạo mã`);
+  const sub = $("quotaSub");
+  sub.textContent = max === 0 ? "Chưa được cấp hạn mức. Liên hệ Admin."
+    : remaining === 0 ? "Đã hết hạn mức. Liên hệ Admin để được cấp thêm."
+    : percent >= 80 ? `Sắp hết hạn mức, còn lại ${remaining} lượt tạo mã.`
+    : `Còn lại ${remaining} lượt tạo mã.`;
+  sub.classList.toggle("warn", out || percent >= 80);
   $("quotaFill").style.width = percent + "%";
+  $("qTrack").classList.toggle("full", out && max > 0);
+  $("qTrack").setAttribute("aria-valuenow", percent);
   $("quotaPercent").textContent = percent + "%";
 
-  const out = max === 0 || used >= max;
   $("createCodeBtn").disabled = out;
-  $("createCodeBtn").textContent = out ? "🔒 Đã hết hạn mức" : "Tạo mã";
+  $("createCodeBtn").textContent = out ? "Đã hết hạn mức" : "Tạo mã";
+  $("codeCount").max = Math.max(1, Math.min(20, remaining));
 }
 
-async function loadCodes(){
-  const tbody = $("codesBody");
-  tbody.innerHTML = `<tr><td colspan="6" class="empty">Đang tải...</td></tr>`;
+/* ---------- Danh sách mã: tải toàn bộ mã của đại lý (bị chặn bởi hạn mức), hiển thị 10 mã/lần ---------- */
+async function loadCodes() {
+  $("codesBody").innerHTML = `<tr><td colspan="6" class="empty">Đang tải...</td></tr>`;
   try {
-    const q = query(collection(db, "codes"), where("createdByUid", "==", currentUser.uid));
-    const snap = await getDocs(q);
+    const snap = await getDocs(query(collection(db, "codes"), where("createdByUid", "==", currentUser.uid)));
     allCodes = [];
     snap.forEach(d => allCodes.push({ id: d.id, ...d.data() }));
-    allCodes.sort((a,b) => {
-      const ta = a.createdAt?.toMillis?.() || 0;
-      const tb = b.createdAt?.toMillis?.() || 0;
-      return tb - ta;
-    });
+    allCodes.sort((a, b) => (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0));
+    shown = PAGE;
     renderCodes();
     renderStats();
-  } catch(e){
+  } catch (e) {
     console.error(e);
-    tbody.innerHTML = `<tr><td colspan="6" class="empty">Lỗi tải mã: ${e.message}</td></tr>`;
+    $("codesBody").innerHTML = `<tr><td colspan="6" class="empty">Lỗi tải mã: ${esc(e.message)}</td></tr>`;
   }
 }
 
-function renderCodes(){
-  const tbody = $("codesBody");
-  const s = $("searchCode").value.trim().toUpperCase();
-  const f = $("filterCodeStatus").value;
-  let list = allCodes.slice();
-  if (s) list = list.filter(c => (c.id||'').toUpperCase().includes(s));
-  if (f) list = list.filter(c => c.status === f);
-
-  if (list.length === 0){
-    tbody.innerHTML = `<tr><td colspan="6" class="empty">Không có mã phù hợp.</td></tr>`;
-    return;
-  }
-
-  tbody.innerHTML = list.map(c => {
-    const statusTag = c.status === 'used'
-      ? `<span class="tag used">Đã dùng</span>`
-      : `<span class="tag unused">Chưa dùng</span>`;
-    const created = c.createdAt?.toDate?.();
-    const usedAt = c.usedAt?.toDate?.();
-    const createdStr = created ? created.toLocaleString('vi-VN') : '—';
-    const usedAtStr = usedAt ? usedAt.toLocaleString('vi-VN') : '—';
-
-    const actions = [];
-    if (c.status === 'unused'){
-      actions.push(`<button class="danger" data-action="deleteCode" data-id="${c.id}">Xóa</button>`);
-    }
-
-    return `<tr>
-      <td class="code-cell">${c.id}</td>
-      <td style="opacity:0.7;">${createdStr}</td>
-      <td>${statusTag}</td>
-      <td>${c.usedByUsername || '<span style="opacity:0.4">—</span>'}</td>
-      <td style="opacity:0.7;">${usedAtStr}</td>
-      <td><div class="row-actions">${actions.join("") || '<span style="opacity:0.4">—</span>'}</div></td>
-    </tr>`;
-  }).join("");
-
-  tbody.querySelectorAll("button[data-action]").forEach(btn => {
-    btn.addEventListener("click", () => handleCodeAction(btn.dataset.action, btn.dataset.id));
-  });
+function filtered() {
+  const s = $("searchCode").value.trim().toUpperCase(), f = $("filterCodeStatus").value;
+  return allCodes.filter(c => (!s || (c.id || "").toUpperCase().includes(s)) && (!f || c.status === f));
 }
 
-async function handleCodeAction(action, id){
-  if (action === 'deleteCode'){
-    if (!confirm(`Xóa mã "${id}"? Lượt quota đã dùng sẽ KHÔNG được hoàn lại.`)) return;
-    try {
-      await deleteDoc(doc(db, 'codes', id));
-      toast("Đã xóa mã.", "ok");
-      await loadCodes();
-    } catch(e){ toast("Lỗi: " + e.message, "err"); }
-  }
+function renderCodes() {
+  const list = filtered(), part = list.slice(0, shown);
+  $("codesBody").innerHTML = part.length ? part.map(c => `<tr>
+    <td><span class="mono">${esc(c.id)}</span></td>
+    <td class="dim">${fmt(c.createdAt)}</td>
+    <td>${c.status === "used" ? '<span class="tag t-used">Đã dùng</span>' : '<span class="tag t-ok">Chưa dùng</span>'}</td>
+    <td>${c.usedByUsername ? esc(c.usedByUsername) : '<span class="dim">—</span>'}</td>
+    <td class="dim">${fmt(c.usedAt)}</td>
+    <td><div class="acts">
+      <button class="rb" data-act="copy" data-id="${esc(c.id)}">Sao chép</button>
+      ${c.status === "unused" ? `<button class="rb bad" data-act="delete" data-id="${esc(c.id)}">Xóa</button>` : ""}
+    </div></td></tr>`).join("")
+    : `<tr><td colspan="6" class="empty">${allCodes.length ? "Không có mã phù hợp." : "Bạn chưa tạo mã nào."}</td></tr>`;
+  $("moreBtn").hidden = list.length <= shown;
+  $("codesInfo").textContent = list.length ? `Đang hiển thị ${part.length} / ${list.length} mã` : "";
 }
 
-function renderStats(){
+function renderStats() {
   $("statTotal").textContent = allCodes.length;
-  $("statUnused").textContent = allCodes.filter(c => c.status === 'unused').length;
-  $("statUsed").textContent = allCodes.filter(c => c.status === 'used').length;
+  $("statUnused").textContent = allCodes.filter(c => c.status === "unused").length;
+  $("statUsed").textContent = allCodes.filter(c => c.status === "used").length;
 }
 
-// === TẠO MÃ CODE (có quota) ===
-$("createCodeForm").addEventListener("submit", async (e) => {
+$("codesBody").addEventListener("click", async e => {
+  const b = e.target.closest("button[data-act]");
+  if (!b) return;
+  const id = b.dataset.id;
+  if (b.dataset.act === "copy") return copy(id);
+  if (!await ask({ title: "Xóa mã", text: `Xóa mã ${id}? Lượt hạn mức đã dùng sẽ KHÔNG được hoàn lại.`, ok: "Xóa" })) return;
+  try { await deleteDoc(doc(db, "codes", id)); toast("Đã xóa mã."); await loadCodes(); }
+  catch (err) { toast("Lỗi: " + err.message, "err"); }
+});
+
+$("searchCode").addEventListener("input", () => { shown = PAGE; renderCodes(); });
+$("filterCodeStatus").addEventListener("change", () => { shown = PAGE; renderCodes(); });
+$("moreBtn").addEventListener("click", () => { shown += PAGE; renderCodes(); });
+$("reloadCodesBtn").addEventListener("click", () => Promise.all([loadMe(), loadCodes()]).catch(e => toast(e.message, "err")));
+
+/* ---------- Xuất CSV ---------- */
+const cell = v => { let t = String(v ?? ""); if (/^[=+\-@]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
+$("csvBtn").addEventListener("click", () => {
+  if (!allCodes.length) return toast("Chưa có mã để xuất.", "err");
+  const head = ["Mã", "Tạo lúc", "Trạng thái", "Người dùng", "Dùng lúc"];
+  const rows = allCodes.map(c => [c.id, fmt(c.createdAt), c.status, c.usedByUsername, fmt(c.usedAt)]);
+  saveFile(`ma-code-${currentData.username}-${new Date().toISOString().slice(0, 10)}.csv`,
+    "\ufeff" + [head, ...rows].map(r => r.map(cell).join(",")).join("\r\n"), "text/csv");
+});
+
+/* ---------- Tạo mã (kiểm tra + trừ hạn mức + tạo mã trong 1 transaction) ---------- */
+$("createCodeForm").addEventListener("submit", async e => {
   e.preventDefault();
   const btn = $("createCodeBtn");
   btn.disabled = true;
-  btn.textContent = "Đang tạo...";
 
   const count = Math.max(1, Math.min(20, parseInt($("codeCount").value, 10) || 1));
-  const prefix = $("codePrefix").value.trim() || 'DL';
-
+  const prefix = cleanPrefix($("codePrefix").value);
   const remaining = (currentData.maxQuota || 0) - (currentData.usedQuota || 0);
-  if (count > remaining){
+  if (count > remaining) {
     toast(`Chỉ còn ${remaining} lượt tạo mã. Không thể tạo ${count}.`, "err");
-    btn.disabled = false; btn.textContent = "Tạo mã";
+    renderQuota();
     return;
   }
 
   const agencyRef = doc(db, "users", currentUser.uid);
   const created = [];
-  let attempts = 0;
+  let attempts = 0, lastErr = null;
   const maxAttempts = count * 5;
 
   try {
-    while (created.length < count && attempts < maxAttempts){
+    while (created.length < count && attempts < maxAttempts) {
       attempts++;
-      const code = generateCode(prefix);
-      const codeRef = doc(db, 'codes', code);
-      const snap = await getDoc(codeRef);
-      if (snap.exists()) continue;
+      btn.textContent = `Đang tạo ${created.length + 1}/${count}...`;
+      const code = genCode(prefix);
+      const codeRef = doc(db, "codes", code);
+      if ((await getDoc(codeRef)).exists()) continue;
 
-      // Transaction: kiểm tra quota + tăng quota + tạo mã
       try {
-        await runTransaction(db, async (tx) => {
+        await runTransaction(db, async tx => {
           const aSnap = await tx.get(agencyRef);
           if (!aSnap.exists()) throw new Error("Không tìm thấy đại lý.");
           const a = aSnap.data();
           if (a.status === "locked") throw new Error("Tài khoản đã bị khóa.");
-          const used = a.usedQuota || 0;
-          const max = a.maxQuota || 0;
+          const used = a.usedQuota || 0, max = a.maxQuota || 0;
           if (used >= max) throw new Error("Đã hết hạn mức tạo mã.");
 
           tx.update(agencyRef, { usedQuota: used + 1 });
@@ -421,9 +453,9 @@ $("createCodeForm").addEventListener("submit", async (e) => {
             code,
             createdBy: currentData.username,
             createdByUid: currentUser.uid,
-            createdByRole: 'agency',
+            createdByRole: "agency",
             createdAt: new Date(),
-            status: 'unused',
+            status: "unused",
             usedByUsername: null,
             usedAt: null,
             downloadedFilename: null,
@@ -431,64 +463,95 @@ $("createCodeForm").addEventListener("submit", async (e) => {
           });
         });
         created.push(code);
-      } catch(txErr){
-        if (String(txErr.message||'').includes('hạn mức') || String(txErr.message||'').includes('khóa')){
-          throw txErr;
-        }
-        // lỗi khác (trùng code) → thử tiếp
+      } catch (txErr) {
+        const m = String(txErr.message || "");
+        if (m.includes("hạn mức") || m.includes("khóa")) throw txErr;
+        lastErr = txErr;                       // lỗi khác (vd trùng mã): thử mã mới
       }
     }
 
-    if (created.length === 0){
-      toast("Không thể tạo mã. Thử lại.", "err");
+    if (!created.length) {
+      toast("Không thể tạo mã" + (lastErr ? ": " + (lastErr.code || lastErr.message) : ". Thử lại."), "err");
       return;
     }
 
-    toast(`Đã tạo ${created.length} mã.`, "ok");
-    $("codeResult").classList.add("show");
-    $("codeResult").innerHTML = `✅ Đã tạo ${created.length} mã:<div class="big-code">${created.join('<br>')}</div>`;
+    lastBatch = created;
+    $("codeResultTitle").textContent = `Đã tạo ${created.length} mã`;
+    $("codeResultList").innerHTML = created.map(esc).join("<br>");
+    $("codeResult").hidden = false;
     $("codeCount").value = 1;
-
-    await loadMe();
-    await loadCodes();
-  } catch(err){
+    toast(`Đã tạo ${created.length} mã.`);
+  } catch (err) {
     console.error(err);
-    toast("Lỗi tạo mã: " + (err.message||err), "err");
-    await loadMe().catch(()=>{});
+    toast("Lỗi tạo mã: " + (err.message || err), "err");
   } finally {
-    btn.disabled = false;
-    btn.textContent = (currentData.maxQuota||0) <= (currentData.usedQuota||0) ? "🔒 Đã hết hạn mức" : "Tạo mã";
+    await loadMe().catch(() => {});
+    await loadCodes();
+    btn.textContent = "Tạo mã";
+    renderQuota();
+  }
+});
+$("batchCopy").addEventListener("click", () => copy(lastBatch.join("\n"), "Đã sao chép tất cả mã."));
+$("batchDl").addEventListener("click", () => saveFile(`ma-code-${new Date().toISOString().slice(0, 10)}.txt`, lastBatch.join("\r\n")));
+
+/* ---------- Đổi mật khẩu (xác thực lại bằng mật khẩu hiện tại) ---------- */
+$("pwdBtn").addEventListener("click", () => {
+  $("pwdForm").reset(); $("pwdMsg").hidden = true;
+  $("dlgPwd").showModal();
+});
+$("pwdCancel").addEventListener("click", () => $("dlgPwd").close());
+
+$("pwdForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const msg = $("pwdMsg");
+  msg.hidden = true;
+  const fail = t => { msg.textContent = t; msg.hidden = false; };
+  const cur = $("curPwd").value, next = $("newPwd").value, next2 = $("newPwd2").value;
+  if (next.length < 6) return fail("Mật khẩu mới tối thiểu 6 ký tự.");
+  if (next !== next2) return fail("Mật khẩu nhập lại không khớp.");
+  if (next === cur) return fail("Mật khẩu mới phải khác mật khẩu hiện tại.");
+
+  const btn = $("pwdSave");
+  btn.disabled = true; btn.textContent = "Đang xử lý...";
+  try {
+    const u = auth.currentUser;
+    await reauthenticateWithCredential(u, EmailAuthProvider.credential(u.email, cur));
+    await updatePassword(u, next);
+    $("dlgPwd").close();
+    toast("Đã đổi mật khẩu thành công.");
+  } catch (err) {
+    const map = {
+      "auth/wrong-password": "Mật khẩu hiện tại không đúng.",
+      "auth/invalid-credential": "Mật khẩu hiện tại không đúng.",
+      "auth/weak-password": "Mật khẩu mới quá yếu.",
+      "auth/too-many-requests": "Quá nhiều lần thử. Vui lòng đợi vài phút.",
+      "auth/network-request-failed": "Lỗi mạng. Kiểm tra kết nối.",
+      "auth/requires-recent-login": "Phiên đăng nhập đã cũ. Hãy đăng xuất và đăng nhập lại."
+    };
+    fail(map[err.code] || ("Không đổi được mật khẩu: " + err.message));
+  } finally {
+    btn.disabled = false; btn.textContent = "Đổi mật khẩu";
   }
 });
 
-// Filters
-$("searchCode").addEventListener("input", renderCodes);
-$("filterCodeStatus").addEventListener("change", renderCodes);
-$("reloadCodesBtn").addEventListener("click", loadCodes);
+$("logoutBtn").addEventListener("click", async () => { await signOut(auth); window.location.replace(LOGIN_URL); });
 
-// Top actions
-$("logoutBtn").addEventListener("click", async () => {
-  await signOut(auth);
-  window.location.replace("/login/index.html");
-});
-$("viewUserPage").addEventListener("click", () => window.open("/index.html", "_blank"));
-
-// === AUTH GUARD ===
-onAuthStateChanged(auth, async (user) => {
-  if (!user){ window.location.replace("/login/index.html"); return; }
+/* ---------- Kiểm soát truy cập ---------- */
+onAuthStateChanged(auth, async user => {
+  if (!user) { window.location.replace(LOGIN_URL); return; }
   currentUser = user;
   try {
     const snap = await getDoc(doc(db, "users", user.uid));
-    if (!snap.exists()){ await signOut(auth); window.location.replace("/login/index.html"); return; }
+    if (!snap.exists()) { await signOut(auth); window.location.replace(LOGIN_URL); return; }
     const d = snap.data();
-    if (d.status === "locked"){ await signOut(auth); window.location.replace("/login/index.html"); return; }
-    if (d.role === "admin"){ window.location.replace("/admin/index.html"); return; }
-    if (d.role !== "agency"){ await signOut(auth); window.location.replace("/login/index.html"); return; }
+    if (d.status === "locked") { await signOut(auth); window.location.replace(LOGIN_URL); return; }
+    if (d.role === "admin") { window.location.replace("/admin/index.html"); return; }
+    if (d.role !== "agency") { await signOut(auth); window.location.replace(LOGIN_URL); return; }
     await loadMe();
     await loadCodes();
-  } catch(e){
+  } catch (e) {
     toast(e.message || "Lỗi truy cập.", "err");
-    setTimeout(async () => { await signOut(auth); window.location.replace("/login/index.html"); }, 1500);
+    setTimeout(async () => { await signOut(auth); window.location.replace(LOGIN_URL); }, 1500);
   }
 });
 </script>
