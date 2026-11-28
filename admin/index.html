@@ -2,339 +2,310 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#FFC21A">
+<meta name="robots" content="noindex">
 <title>Admin — Locket Gold</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💛%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700&family=Bricolage+Grotesque:opsz,wght@12..96,600..800&display=swap" rel="stylesheet">
 <style>
-  * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    min-height: 100vh; background: radial-gradient(circle at 20% 10%, #1a2238, #07090f 70%);
-    font-family: 'Segoe UI', system-ui, sans-serif; color: #e8ecff; padding: 18px 14px 60px;
-  }
-  .topbar {
-    max-width: 1200px; margin: 0 auto 22px;
-    display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
-  }
-  .brand { display:flex; align-items:center; gap:10px; font-weight:700; font-size: 18px; }
-  .brand-icon {
-    width:38px; height:38px; border-radius:10px;
-    background: linear-gradient(135deg, #ffb347, #ff7a59);
-    display:flex; align-items:center; justify-content:center;
-  }
-  .top-actions { display:flex; gap:10px; flex-wrap: wrap; }
-  .btn-sm {
-    padding: 9px 16px; border-radius: 10px; font-size: 13px; cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06);
-    color: #e8ecff; transition: background 0.2s; font-family: inherit;
-  }
-  .btn-sm:hover { background: rgba(255,255,255,0.12); }
-  .btn-sm.danger:hover { background: rgba(255,80,80,0.15); border-color: rgba(255,80,80,0.4); }
+*,*::before,*::after{box-sizing:border-box;margin:0}
+:root{
+  --gold:#FFC21A;--gold-text:#8A5A00;--ink:#101426;--ink-2:#3A4058;
+  --mist:#EEF1F8;--paper:#fff;--line:#D9DEEC;--focus:#4B3FF0;
+  --ok:#137A52;--ok-soft:#E3F5EC;--danger:#B42318;--danger-soft:#FDECEA;
+  --display:'Bricolage Grotesque','Be Vietnam Pro',system-ui,sans-serif;
+  --body:'Be Vietnam Pro',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --curve:clamp(24px,5vw,44px);
+}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{font:400 1rem/1.6 var(--body);color:var(--ink);background:var(--mist);-webkit-font-smoothing:antialiased;-webkit-tap-highlight-color:transparent}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--focus);outline-offset:3px;border-radius:6px}
+.wrap{width:min(100% - 32px,1200px);margin-inline:auto}
+.h{width:18px;height:18px;fill:currentColor}
 
-  .container { max-width: 1200px; margin: 0 auto; }
+/* Header */
+.hero{background:var(--gold);border-radius:0 0 var(--curve) var(--curve);padding-bottom:32px}
+.nav{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-block:18px 22px}
+.brand{display:flex;align-items:center;gap:10px;font:800 1.2rem var(--display);letter-spacing:-.02em}
+.brand-mark{width:34px;height:34px;border-radius:11px;background:var(--ink);color:var(--gold);display:grid;place-items:center}
+.brand small{padding:2px 10px;border-radius:99px;background:var(--ink);color:var(--gold);font:700 .72rem var(--body);letter-spacing:0}
+.nav-act{display:flex;gap:10px;flex-wrap:wrap}
+h1{font:800 clamp(1.9rem,5vw,2.8rem)/1.05 var(--display);letter-spacing:-.03em}
+.lead{margin-top:6px;font-size:.98rem}
 
-  .stats-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 14px; margin-bottom: 22px;
-  }
-  .stat-card {
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    border-radius: 16px; padding: 18px;
-  }
-  .stat-label { font-size: 12px; opacity: 0.6; margin-bottom: 8px; letter-spacing: 0.4px; }
-  .stat-value { font-size: 26px; font-weight: 700; color: #ffb347; }
+/* Nút */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:0 22px;border-radius:999px;border:2px solid var(--ink);font:700 .95rem var(--body);text-decoration:none;cursor:pointer;transition:background .2s,color .2s,transform .15s}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-sm{min-height:38px;padding:0 16px;font-size:.85rem}
+.btn-solid{background:var(--ink);color:#fff}
+.btn-solid:hover{background:#242a4a}
+.btn-line{background:transparent;color:var(--ink)}
+.btn-line:hover:not(:disabled){background:var(--ink);color:#fff}
+.btn-gold{background:var(--gold);color:var(--ink)}
+.btn-gold:hover:not(:disabled){background:#ffd152}
+.btn-bad{background:var(--danger);border-color:var(--danger);color:#fff}
 
-  .tabs { display: flex; gap: 6px; margin-bottom: 18px; flex-wrap: wrap; }
-  .tab {
-    padding: 10px 18px; border-radius: 10px; font-size: 13px; font-weight: 600;
-    background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
-    color: #e8ecff; cursor: pointer; font-family: inherit;
-  }
-  .tab.active {
-    background: linear-gradient(135deg, #ffb347, #ff7a59);
-    color: #1a1200; border-color: transparent;
-  }
+/* Thống kê */
+.main{padding-block:24px 56px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:1px;margin-bottom:24px;background:var(--line);border:1px solid var(--line);border-radius:24px;overflow:hidden}
+.stats div{padding:16px 20px;background:var(--paper)}
+.stats span{display:block;font-size:.82rem;color:var(--ink-2)}
+.stats b{font:800 1.9rem/1.25 var(--display);letter-spacing:-.02em}
 
-  .panel {
-    background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.07);
-    border-radius: 16px; padding: 22px; margin-bottom: 22px; display: none;
-  }
-  .panel.active { display: block; }
-  .panel h2 { font-size: 16px; margin-bottom: 16px; }
-  .form-row { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 12px; }
-  .form-row .field { flex: 1; min-width: 160px; }
-  label { display: block; font-size: 12px; opacity: 0.7; margin-bottom: 6px; }
-  input, select {
-    width: 100%; padding: 11px 13px; background: rgba(0,0,0,0.35);
-    border: 1px solid rgba(255,255,255,0.12); border-radius: 10px;
-    color: #fff; font-size: 14px; outline: none; font-family: inherit;
-  }
-  input:focus, select:focus { border-color: #ffb347; }
-  select option { background: #1a2238; }
+/* Tab */
+.tabs{display:inline-flex;gap:4px;max-width:100%;overflow-x:auto;margin-bottom:20px;padding:5px;border-radius:999px;background:var(--paper);border:1px solid var(--line)}
+.tabs button{min-height:42px;padding:0 20px;border:0;border-radius:999px;background:transparent;color:var(--ink-2);font:700 .9rem var(--body);white-space:nowrap;cursor:pointer;transition:background .2s,color .2s}
+.tabs button[aria-selected="true"]{background:var(--ink);color:#fff}
 
-  .btn-primary {
-    padding: 12px 22px; border-radius: 10px; font-size: 14px; font-weight: 600;
-    border: none; cursor: pointer; color: #1a1200;
-    background: linear-gradient(135deg, #ffb347, #ff7a59);
-    transition: transform 0.15s, opacity 0.2s; font-family: inherit;
-  }
-  .btn-primary:hover:not(:disabled) { transform: translateY(-1px); }
-  .btn-primary:disabled { opacity: 0.55; cursor: not-allowed; }
+/* Panel + form */
+.panel{margin-bottom:20px;padding:22px 20px;background:var(--paper);border:1px solid var(--line);border-radius:24px}
+@media(min-width:640px){.panel{padding:26px 28px}}
+h2{font:800 1.25rem var(--display);letter-spacing:-.02em}
+.sub{margin:2px 0 18px;font-size:.88rem;color:var(--ink-2)}
+.form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;align-items:end}
+.field label{display:block;margin-bottom:6px;font-size:.85rem;font-weight:600}
+input,select{width:100%;height:46px;padding:0 14px;border:2px solid var(--line);border-radius:14px;background:var(--paper);color:var(--ink);font:500 .95rem var(--body);transition:border-color .2s}
+input::placeholder{color:#8A91A8}
+input:hover,select:hover{border-color:#B6BDD6}
+input:focus,select:focus{outline:none;border-color:var(--ink)}
+input:focus-visible,select:focus-visible{outline:3px solid var(--focus);outline-offset:2px}
+.result{margin-top:18px;padding:16px;border-radius:16px;background:var(--ok-soft);color:var(--ok)}
+.result b{display:block;margin-bottom:8px}
+.codes-box{max-height:180px;overflow:auto;padding:12px 14px;border-radius:12px;background:var(--ink);color:var(--gold);font:700 .95rem/1.8 ui-monospace,Menlo,monospace;letter-spacing:.05em;user-select:all}
+.result .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:12px}
 
-  .toolbar { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 14px; align-items: center; }
-  .toolbar input, .toolbar select { max-width: 220px; }
+/* Bảng */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+.toolbar input,.toolbar select{width:auto;min-width:150px;height:40px;font-size:.88rem;border-radius:999px}
+.toolbar input{flex:1 1 200px;max-width:300px}
+.grow{flex:1}
+.info{margin-bottom:8px;font-size:.82rem;color:var(--ink-2)}
+.table-wrap{overflow-x:auto;margin-inline:-6px}
+table{width:100%;min-width:760px;border-collapse:collapse;font-size:.88rem}
+th{padding:10px 12px;text-align:left;font-size:.78rem;font-weight:700;color:var(--ink-2);white-space:nowrap;border-bottom:2px solid var(--ink)}
+td{padding:12px;vertical-align:middle;border-bottom:1px solid var(--line)}
+tbody tr:hover td{background:#F7F8FC}
+.dim{color:var(--ink-2);font-size:.82rem}
+.mono{font:700 .92rem ui-monospace,Menlo,monospace;letter-spacing:.04em}
+.note{display:block;max-width:260px;font-size:.78rem;color:var(--ink-2);overflow-wrap:anywhere}
+.tag{display:inline-block;padding:2px 10px;border-radius:99px;font-size:.74rem;font-weight:700;white-space:nowrap}
+.t-admin{background:var(--ink);color:var(--gold)}
+.t-agency{background:#FFF1C7;color:var(--gold-text)}
+.t-ok{background:var(--ok-soft);color:var(--ok)}
+.t-bad{background:var(--danger-soft);color:var(--danger)}
+.t-used{background:var(--mist);color:var(--ink-2)}
+.acts{display:flex;gap:6px;flex-wrap:wrap}
+.rb{min-height:32px;padding:0 12px;border:1.5px solid var(--line);border-radius:999px;background:var(--paper);color:var(--ink);font:600 .78rem var(--body);cursor:pointer;white-space:nowrap}
+.rb:hover{border-color:var(--ink)}
+.rb.bad{color:var(--danger)}
+.rb.bad:hover{border-color:var(--danger);background:var(--danger-soft)}
+.empty{padding:32px 12px;text-align:center;color:var(--ink-2)}
+.qbar{display:block;width:90px;height:6px;margin-top:5px;border-radius:99px;background:var(--mist);overflow:hidden}
+.qbar i{display:block;height:100%;background:var(--gold)}
+.more{display:flex;margin:14px auto 0}
 
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 13px; }
-  th, td { padding: 11px 10px; text-align: left; border-bottom: 1px solid rgba(255,255,255,0.07); }
-  th { font-size: 12px; opacity: 0.6; font-weight: 600; text-transform: uppercase; letter-spacing: 0.4px; }
-  tr:hover td { background: rgba(255,255,255,0.03); }
-  .tag {
-    display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 600;
-  }
-  .tag.agency { background: rgba(255,179,71,0.15); color: #ffcf8a; }
-  .tag.admin { background: rgba(255,80,80,0.15); color: #ff8a8a; }
-  .tag.unused { background: rgba(80,255,150,0.12); color: #7dffab; }
-  .tag.used { background: rgba(255,80,80,0.12); color: #ff9a9a; }
-  .tag.locked { background: rgba(255,80,80,0.12); color: #ff9a9a; }
-  .tag.ok { background: rgba(80,255,150,0.12); color: #7dffab; }
-  .code-cell { font-family: ui-monospace, Menlo, monospace; font-weight: 700; color: #ffb347; letter-spacing: 0.5px; }
+/* Popup */
+dialog{margin:auto;border:0;border-radius:24px;padding:26px 24px 22px;width:min(420px,calc(100vw - 24px));background:var(--paper);color:var(--ink);box-shadow:0 30px 80px rgba(16,20,38,.4)}
+dialog[open]{animation:pop .3s cubic-bezier(.2,.9,.25,1.1)}
+dialog::backdrop{background:rgba(16,20,38,.6);backdrop-filter:blur(3px)}
+@keyframes pop{from{opacity:0;transform:scale(.95) translateY(8px)}to{opacity:1;transform:none}}
+dialog h3{font:800 1.25rem var(--display);letter-spacing:-.02em}
+dialog p{margin:6px 0 16px;font-size:.92rem;color:var(--ink-2)}
+dialog .field{margin-bottom:16px}
+.dlg-act{display:flex;gap:10px;justify-content:flex-end}
 
-  .row-actions { display: flex; gap: 6px; flex-wrap: wrap; }
-  .row-actions button {
-    padding: 5px 10px; border-radius: 7px; font-size: 11px; cursor: pointer;
-    border: 1px solid rgba(255,255,255,0.12); background: rgba(255,255,255,0.06); color: #e8ecff;
-    font-family: inherit;
-  }
-  .row-actions button:hover { background: rgba(255,255,255,0.12); }
-  .row-actions .danger { color: #ff9a9a; border-color: rgba(255,80,80,0.3); }
-  .row-actions .danger:hover { background: rgba(255,80,80,0.15); }
+/* Toast (popover nổi trên popup) */
+.toast{position:fixed;inset:auto auto 24px 50%;margin:0;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:13px 22px;border:0;border-radius:999px;background:var(--ink);color:#fff;font-weight:600;font-size:.9rem;text-align:center;box-shadow:0 14px 34px rgba(16,20,38,.35)}
+.toast.err{background:var(--danger)}
 
-  .empty { text-align: center; padding: 30px; opacity: 0.5; font-size: 14px; }
-
-  .toast {
-    position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(120%);
-    background: rgba(30,40,70,0.95); border: 1px solid rgba(255,255,255,0.12);
-    padding: 13px 22px; border-radius: 12px; font-size: 14px;
-    transition: transform 0.3s; z-index: 99; max-width: 90vw;
-    box-shadow: 0 12px 30px rgba(0,0,0,0.5);
-  }
-  .toast.show { transform: translateX(-50%) translateY(0); }
-  .toast.err { border-color: rgba(255,80,80,0.4); color: #ff9a9a; }
-  .toast.ok { border-color: rgba(80,255,150,0.4); color: #9affc0; }
-
-  .modal-backdrop {
-    position: fixed; inset: 0; background: rgba(0,0,0,0.6);
-    display: none; align-items: center; justify-content: center; z-index: 100; padding: 20px;
-  }
-  .modal-backdrop.open { display: flex; }
-  .modal {
-    background: #111726; border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 16px; padding: 24px; width: 100%; max-width: 420px;
-  }
-  .modal h3 { font-size: 16px; margin-bottom: 8px; }
-  .modal p { font-size: 13px; opacity: 0.6; margin-bottom: 16px; line-height: 1.5; }
-  .modal .field { margin-bottom: 14px; }
-  .modal-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 6px; }
-
-  .code-result {
-    margin-top: 14px; padding: 14px; border-radius: 12px;
-    background: rgba(80,255,150,0.08); border: 1px solid rgba(80,255,150,0.3);
-    font-size: 13px; line-height: 1.6; display: none;
-  }
-  .code-result.show { display: block; }
-  .code-result .big-code {
-    font-family: ui-monospace, Menlo, monospace; font-size: 20px; font-weight: 800;
-    color: #7dffab; letter-spacing: 1px; margin: 8px 0; word-break: break-all;
-  }
-  .quota-badge {
-    display: inline-block; padding: 2px 8px; border-radius: 6px;
-    background: rgba(255,179,71,0.15); color: #ffcf8a; font-size: 11px; font-weight: 700;
-  }
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
 
-<div class="topbar">
-  <div class="brand"><div class="brand-icon">⚙️</div><span>Locket Gold — Quản trị</span></div>
-  <div class="top-actions">
-    <button class="btn-sm" id="viewUserPage">Trang kích hoạt mã</button>
-    <button class="btn-sm danger" id="logoutBtn">Đăng xuất</button>
+<header class="hero">
+  <div class="wrap">
+    <nav class="nav" aria-label="Điều hướng">
+      <div class="brand">
+        <span class="brand-mark"><svg class="h" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg></span>
+        Locket Gold <small>Quản trị</small>
+      </div>
+      <div class="nav-act">
+        <a class="btn btn-line btn-sm" href="/index.html" target="_blank" rel="noopener">Trang kích hoạt mã</a>
+        <button type="button" class="btn btn-solid btn-sm" id="logoutBtn">Đăng xuất</button>
+      </div>
+    </nav>
+    <h1>Bảng quản trị</h1>
+    <p class="lead" id="who">Đang tải...</p>
   </div>
-</div>
+</header>
 
-<div class="container">
+<main class="wrap main">
+  <section class="stats" aria-label="Thống kê">
+    <div><span>Tổng mã code</span><b id="stTotal">—</b></div>
+    <div><span>Chưa dùng</span><b id="stUnused">—</b></div>
+    <div><span>Đã dùng</span><b id="stUsed">—</b></div>
+    <div><span>Đại lý</span><b id="stAgency">—</b></div>
+    <div><span>Admin</span><b id="stAdmin">—</b></div>
+  </section>
 
-  <div class="stats-grid">
-    <div class="stat-card"><div class="stat-label">Tổng mã code</div><div class="stat-value" id="statCodes">—</div></div>
-    <div class="stat-card"><div class="stat-label">Chưa dùng</div><div class="stat-value" id="statUnused">—</div></div>
-    <div class="stat-card"><div class="stat-label">Đã dùng</div><div class="stat-value" id="statUsed">—</div></div>
-    <div class="stat-card"><div class="stat-label">Đại lý</div><div class="stat-value" id="statAgency">—</div></div>
-    <div class="stat-card"><div class="stat-label">Admin</div><div class="stat-value" id="statAdmin">—</div></div>
+  <div class="tabs" role="tablist" aria-label="Khu vực quản trị">
+    <button type="button" role="tab" aria-selected="true" data-tab="codes">Mã code</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="users" tabindex="-1">Tài khoản</button>
+    <button type="button" role="tab" aria-selected="false" data-tab="logs" tabindex="-1">Nhật ký</button>
   </div>
 
-  <div class="tabs">
-    <button class="tab active" data-tab="codes">🎫 Mã code</button>
-    <button class="tab" data-tab="users">👥 Tài khoản</button>
-  </div>
-
-  <!-- TAB CODES -->
-  <div class="panel active" id="panel-codes">
-    <h2>➕ Tạo mã code</h2>
-    <form id="createCodeForm">
-      <div class="form-row">
-        <div class="field">
-          <label for="codeCount">Số lượng mã cần tạo</label>
-          <input id="codeCount" type="number" min="1" max="50" value="1">
-        </div>
-        <div class="field">
-          <label for="codePrefix">Tiền tố (tùy chọn)</label>
-          <input id="codePrefix" type="text" maxlength="6" placeholder="VD: LG" value="LG">
+  <!-- MÃ CODE -->
+  <section id="pane-codes" role="tabpanel">
+    <div class="panel">
+      <h2>Tạo mã code</h2>
+      <p class="sub">Mã được tạo bằng bộ sinh ngẫu nhiên của trình duyệt và ghi kèm người tạo, ghi chú, lô tạo.</p>
+      <form id="codeForm" class="form">
+        <div class="field"><label for="codeCount">Số lượng (tối đa 50)</label><input id="codeCount" type="number" min="1" max="50" value="1"></div>
+        <div class="field"><label for="codePrefix">Tiền tố</label><input id="codePrefix" type="text" maxlength="6" value="LG" autocomplete="off"></div>
+        <div class="field"><label for="codeNote">Ghi chú (tùy chọn)</label><input id="codeNote" type="text" maxlength="120" placeholder="VD: lô tặng khách tháng 12" autocomplete="off"></div>
+        <button type="submit" class="btn btn-gold" id="codeBtn">Tạo mã</button>
+      </form>
+      <div class="result" id="codeResult" hidden>
+        <b id="codeResultTitle"></b>
+        <div class="codes-box" id="codeResultList"></div>
+        <div class="row">
+          <button type="button" class="btn btn-solid btn-sm" id="batchCopy">Sao chép tất cả</button>
+          <button type="button" class="btn btn-line btn-sm" id="batchDl">Tải file .txt</button>
         </div>
       </div>
-      <button type="submit" class="btn-primary" id="createCodeBtn">Tạo mã</button>
-      <div class="code-result" id="codeResult"></div>
-    </form>
-  </div>
+    </div>
 
-  <!-- TAB USERS -->
-  <div class="panel" id="panel-users">
-    <h2>➕ Tạo tài khoản đại lý / admin</h2>
-    <form id="createUserForm">
-      <div class="form-row">
-        <div class="field">
-          <label for="newUsername">Username</label>
-          <input id="newUsername" type="text" required maxlength="32" placeholder="vd: daily01">
-        </div>
-        <div class="field">
-          <label for="newPassword">Mật khẩu</label>
-          <input id="newPassword" type="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
-        </div>
-        <div class="field">
-          <label for="newRole">Vai trò</label>
-          <select id="newRole">
-            <option value="agency">agency</option>
-            <option value="admin">admin</option>
-          </select>
-        </div>
-        <div class="field" id="quotaField">
-          <label for="newQuota">Hạn mức tạo mã</label>
-          <input id="newQuota" type="number" min="0" value="10">
-        </div>
+    <div class="panel">
+      <h2>Mã code mới nhất</h2>
+      <p class="sub">Mặc định hiển thị 10 mã gần nhất. Dùng ô tìm kiếm để tìm các mã cũ hơn.</p>
+      <div class="toolbar">
+        <select id="qCodeBy" aria-label="Tìm theo"><option value="code">Tìm theo mã</option><option value="by">Tìm theo người tạo</option></select>
+        <input id="qCode" type="search" placeholder="Nhập để tìm..." autocomplete="off">
+        <select id="fStatus" aria-label="Lọc trạng thái"><option value="">Mọi trạng thái</option><option value="unused">Chưa dùng</option><option value="used">Đã dùng</option></select>
+        <span class="grow"></span>
+        <button type="button" class="btn btn-line btn-sm" id="codesReload">Làm mới</button>
+        <button type="button" class="btn btn-line btn-sm" id="codesCsv">Xuất CSV</button>
       </div>
-      <button type="submit" class="btn-primary" id="createUserBtn">Tạo tài khoản</button>
-    </form>
-  </div>
+      <p class="info" id="codesInfo"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Mã code</th><th>Người tạo</th><th>Tạo lúc</th><th>Trạng thái</th><th>Người dùng</th><th>Dùng lúc</th><th>Thao tác</th></tr></thead>
+          <tbody id="codesBody"><tr><td colspan="7" class="empty">Đang tải...</td></tr></tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-line btn-sm more" id="codesMore" hidden>Xem thêm 10</button>
+    </div>
+  </section>
 
-  <!-- BẢNG MÃ CODE -->
-  <div class="panel active" id="codesTablePanel">
-    <h2>📋 Danh sách mã code</h2>
-    <div class="toolbar">
-      <input type="text" id="searchCode" placeholder="Tìm theo mã...">
-      <select id="filterCodeStatus">
-        <option value="">Mọi trạng thái</option>
-        <option value="unused">Chưa dùng</option>
-        <option value="used">Đã dùng</option>
-      </select>
-      <input type="text" id="searchCodeUser" placeholder="Tìm theo người tạo...">
-      <button class="btn-sm" id="reloadCodesBtn">Làm mới</button>
+  <!-- TÀI KHOẢN -->
+  <section id="pane-users" role="tabpanel" hidden>
+    <div class="panel">
+      <h2>Tạo tài khoản đại lý / admin</h2>
+      <p class="sub">Hồ sơ được ghi kèm người tạo, thời gian tạo, hạn mức và ghi chú.</p>
+      <form id="userForm" class="form">
+        <div class="field"><label for="newUsername">Username</label><input id="newUsername" type="text" required maxlength="32" placeholder="vd: daily01" autocomplete="off" autocapitalize="off" spellcheck="false"></div>
+        <div class="field"><label for="newPassword">Mật khẩu</label><input id="newPassword" type="password" required minlength="6" placeholder="Tối thiểu 6 ký tự" autocomplete="new-password"></div>
+        <div class="field"><label for="newRole">Vai trò</label><select id="newRole"><option value="agency">agency</option><option value="admin">admin</option></select></div>
+        <div class="field" id="quotaField"><label for="newQuota">Hạn mức tạo mã</label><input id="newQuota" type="number" min="0" value="10"></div>
+        <div class="field"><label for="newNote">Ghi chú (tùy chọn)</label><input id="newNote" type="text" maxlength="120" placeholder="VD: Zalo, tên đại lý" autocomplete="off"></div>
+        <button type="submit" class="btn btn-gold" id="userBtn">Tạo tài khoản</button>
+      </form>
     </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Mã code</th>
-            <th>Người tạo</th>
-            <th>Vai trò</th>
-            <th>Tạo lúc</th>
-            <th>Trạng thái</th>
-            <th>Người dùng</th>
-            <th>Dùng lúc</th>
-            <th>Thao tác</th>
-          </tr>
-        </thead>
-        <tbody id="codesBody">
-          <tr><td colspan="8" class="empty">Đang tải...</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 
-  <!-- BẢNG USERS -->
-  <div class="panel" id="usersTablePanel">
-    <h2>👥 Danh sách tài khoản</h2>
-    <div class="toolbar">
-      <input type="text" id="searchUser" placeholder="Tìm theo username...">
-      <select id="filterRole">
-        <option value="">Tất cả vai trò</option>
-        <option value="admin">admin</option>
-        <option value="agency">agency</option>
-      </select>
-      <button class="btn-sm" id="reloadUsersBtn">Làm mới</button>
+    <div class="panel">
+      <h2>Tài khoản mới nhất</h2>
+      <p class="sub">Mặc định hiển thị 10 tài khoản gần nhất. Dùng ô tìm kiếm để tìm tài khoản cũ hơn.</p>
+      <div class="toolbar">
+        <input id="qUser" type="search" placeholder="Tìm theo username..." autocomplete="off">
+        <select id="fRole" aria-label="Lọc vai trò"><option value="">Tất cả vai trò</option><option value="admin">admin</option><option value="agency">agency</option></select>
+        <span class="grow"></span>
+        <button type="button" class="btn btn-line btn-sm" id="usersReload">Làm mới</button>
+        <button type="button" class="btn btn-line btn-sm" id="usersCsv">Xuất CSV</button>
+      </div>
+      <p class="info" id="usersInfo"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Username</th><th>Vai trò</th><th>Trạng thái</th><th>Hạn mức</th><th>Ngày tạo</th><th>Người tạo</th><th>Thao tác</th></tr></thead>
+          <tbody id="usersBody"><tr><td colspan="7" class="empty">Đang tải...</td></tr></tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-line btn-sm more" id="usersMore" hidden>Xem thêm 10</button>
     </div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Vai trò</th>
-            <th>Trạng thái</th>
-            <th>Hạn mức</th>
-            <th>Ngày tạo</th>
-            <th>Người tạo</th>
-            <th>Thao tác</th>
-          </tr>
-        </thead>
-        <tbody id="usersBody">
-          <tr><td colspan="7" class="empty">Đang tải...</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+  </section>
 
-</div>
+  <!-- NHẬT KÝ -->
+  <section id="pane-logs" role="tabpanel" hidden>
+    <div class="panel">
+      <h2>Nhật ký hoạt động</h2>
+      <p class="sub">Mọi thao tác tạo, xóa, reset, khóa và sửa hạn mức đều được ghi lại.</p>
+      <div class="toolbar"><span class="grow"></span><button type="button" class="btn btn-line btn-sm" id="logsReload">Làm mới</button></div>
+      <p class="info" id="logsInfo"></p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Thời gian</th><th>Người thực hiện</th><th>Hành động</th><th>Đối tượng</th><th>Chi tiết</th></tr></thead>
+          <tbody id="logsBody"><tr><td colspan="5" class="empty">Đang tải...</td></tr></tbody>
+        </table>
+      </div>
+      <button type="button" class="btn btn-line btn-sm more" id="logsMore" hidden>Xem thêm 10</button>
+    </div>
+  </section>
+</main>
 
-<!-- MODAL SỬA QUOTA -->
-<div class="modal-backdrop" id="quotaModalBackdrop">
-  <div class="modal">
-    <h3>Sửa hạn mức</h3>
-    <p id="quotaModalDesc">—</p>
-    <div class="field">
-      <label for="modalQuota">Hạn mức tạo mã (maxQuota)</label>
-      <input id="modalQuota" type="number" min="0">
+<!-- Xác nhận -->
+<dialog id="dlgConfirm" aria-labelledby="cfTitle">
+  <form method="dialog">
+    <h3 id="cfTitle"></h3>
+    <p id="cfText"></p>
+    <div class="dlg-act">
+      <button class="btn btn-line btn-sm" value="cancel">Hủy</button>
+      <button class="btn btn-gold btn-sm" id="cfOk" value="ok">Xác nhận</button>
     </div>
-    <div class="modal-actions">
-      <button class="btn-sm" id="quotaModalCancel">Hủy</button>
-      <button class="btn-primary" id="quotaModalSave">Lưu</button>
-    </div>
-  </div>
-</div>
+  </form>
+</dialog>
 
-<!-- MODAL XÁC NHẬN LẠI MẬT KHẨU ADMIN -->
-<div class="modal-backdrop" id="pwdModalBackdrop">
-  <div class="modal">
-    <h3>🔐 Xác nhận mật khẩu admin</h3>
-    <p>Phiên đăng nhập vừa bị thay đổi do tạo tài khoản. Vui lòng nhập lại mật khẩu admin để tiếp tục.</p>
-    <div class="field">
-      <label for="adminPassword">Mật khẩu admin</label>
-      <input id="adminPassword" type="password" placeholder="Nhập mật khẩu...">
+<!-- Sửa hạn mức -->
+<dialog id="dlgQuota" aria-labelledby="quotaTitle">
+  <form method="dialog">
+    <h3 id="quotaTitle">Sửa hạn mức</h3>
+    <p id="quotaDesc"></p>
+    <div class="field"><label for="quotaInput">Hạn mức tạo mã (maxQuota)</label><input id="quotaInput" type="number" min="0" required></div>
+    <div class="dlg-act">
+      <button class="btn btn-line btn-sm" value="cancel" formnovalidate>Hủy</button>
+      <button class="btn btn-gold btn-sm" value="save">Lưu</button>
     </div>
-    <div class="modal-actions">
-      <button class="btn-sm" id="pwdModalCancel">Hủy</button>
-      <button class="btn-primary" id="pwdModalConfirm">Xác nhận</button>
-    </div>
-  </div>
-</div>
+  </form>
+</dialog>
 
-<div class="toast" id="toast"></div>
+<!-- Nhập lại mật khẩu admin -->
+<dialog id="dlgPwd" aria-labelledby="pwdTitle">
+  <form method="dialog">
+    <h3 id="pwdTitle">Xác nhận mật khẩu admin</h3>
+    <p>Phiên đăng nhập bị thay đổi khi tạo tài khoản. Nhập lại mật khẩu admin để tiếp tục.</p>
+    <div class="field"><label for="pwdInput">Mật khẩu admin</label><input id="pwdInput" type="password" required autocomplete="current-password"></div>
+    <div class="dlg-act">
+      <button class="btn btn-line btn-sm" value="cancel" formnovalidate>Hủy</button>
+      <button class="btn btn-gold btn-sm" value="ok">Xác nhận</button>
+    </div>
+  </form>
+</dialog>
+
+<div class="toast" id="toast" popover="manual" role="status"></div>
 
 <script type="module">
 import { initializeApp, deleteApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
 import {
-  getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword,
-  signInWithEmailAndPassword
+  getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 import {
-  getFirestore, doc, getDoc, updateDoc, deleteDoc, setDoc, addDoc,
-  collection, query, where, getDocs, onSnapshot, orderBy, limit
+  getFirestore, doc, getDoc, getDocs, collection, query, where, orderBy, limit, startAfter,
+  documentId, writeBatch, serverTimestamp, increment, getCountFromServer
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
 const firebaseConfig = {
@@ -351,473 +322,426 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
 
-const $ = (id) => document.getElementById(id);
-const toastEl = $("toast");
-let toastTimer = null;
-function toast(text, type="ok"){
-  toastEl.textContent = text;
-  toastEl.className = "toast show " + type;
+const PAGE = 10;
+const LOGIN_URL = "/login/index.html";
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+const fmt = t => { const d = t?.toDate?.(); return d ? d.toLocaleString("vi-VN", { hour12: false }) : "—"; };
+const num = n => typeof n === "number" ? n.toLocaleString("vi-VN") : n;
+const normalizeUsername = u => String(u).trim().toLowerCase();
+const emailOf = u => `${normalizeUsername(u)}@locketgold.local`;
+
+let currentUser = null, currentData = null, lastBatch = [], toastTimer = null, quotaUid = null;
+const mk = () => ({ rows: [], last: null, end: false, search: false });
+const S = { codes: mk(), users: mk(), logs: mk() };
+const loaded = { codes: true, users: false, logs: false };
+
+/* ---------- Toast / sao chép / tải file ---------- */
+function toast(text, type = "ok") {
+  const t = $("toast");
+  t.textContent = text;
+  t.classList.toggle("err", type === "err");
+  if (!t.showPopover) return;
+  if (t.matches(":popover-open")) t.hidePopover();
+  t.showPopover();
   clearTimeout(toastTimer);
-  toastTimer = setTimeout(()=>{ toastEl.className = "toast " + type; }, 4000);
+  toastTimer = setTimeout(() => t.hidePopover(), 3500);
+}
+async function copy(text, msg) {
+  try { await navigator.clipboard.writeText(text); toast(msg || "Đã sao chép: " + text); }
+  catch (e) { toast("Không sao chép được, hãy chép thủ công.", "err"); }
+}
+function saveFile(name, text, type = "text/plain") {
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type: type + ";charset=utf-8" }));
+  a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
-let currentUser = null;
-let currentData = null;
-let allCodes = [];
-let allUsers = [];
-let editingQuotaUid = null;
-
-function normalizeUsername(u){ return String(u).trim().toLowerCase(); }
-function emailOf(username){ return `${normalizeUsername(username)}@locketgold.local`; }
-
-// === SINH MÃ CODE ===
-function generateCode(prefix){
-  const p = (prefix || 'LG').toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6) || 'LG';
-  const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'; // bỏ I,O,0,1 dễ nhầm
-  const part = (n) => Array.from({length:n},()=>chars[Math.random()*chars.length|0]).join('');
-  return `${p}-${part(4)}-${part(4)}`;
+/* ---------- Hộp thoại ---------- */
+function ask({ title, text, ok = "Xác nhận", danger = false }) {
+  return new Promise(res => {
+    const d = $("dlgConfirm");
+    $("cfTitle").textContent = title; $("cfText").textContent = text;
+    const b = $("cfOk"); b.textContent = ok; b.className = "btn btn-sm " + (danger ? "btn-bad" : "btn-gold");
+    d.returnValue = ""; d.showModal();
+    d.addEventListener("close", () => res(d.returnValue === "ok"), { once: true });
+  });
+}
+function askPassword() {
+  return new Promise(res => {
+    const d = $("dlgPwd"); $("pwdInput").value = ""; d.returnValue = ""; d.showModal();
+    d.addEventListener("close", () => res(d.returnValue === "ok" ? $("pwdInput").value : null), { once: true });
+  });
+}
+async function ensureAdminSession() {
+  if (auth.currentUser && auth.currentUser.uid === currentUser.uid) return true;
+  for (;;) {
+    const pwd = await askPassword();
+    if (pwd === null) return false;
+    try { await signInWithEmailAndPassword(auth, emailOf(currentData.username), pwd); return true; }
+    catch (e) { toast("Sai mật khẩu admin.", "err"); }
+  }
 }
 
-// === TẠO AUTH USER QUA SECONDARY APP ===
-async function createAuthUserSecondary(username, password){
-  const appName = "secondary-" + Date.now() + "-" + Math.random().toString(36).slice(2);
-  const secondaryApp = initializeApp(firebaseConfig, appName);
-  const secondaryAuth = getAuth(secondaryApp);
+/* ---------- Ghi dữ liệu kèm nhật ký (cùng một batch) ---------- */
+async function commitWithLog(build, entry) {
+  const b = writeBatch(db);
+  build(b);
+  b.set(doc(collection(db, "logs")), {
+    ...entry,
+    by: currentData.username, byUid: currentUser.uid, byRole: currentData.role,
+    createdAt: serverTimestamp(), userAgent: navigator.userAgent.slice(0, 200)
+  });
+  await b.commit();
+}
+const stamp = () => ({ updatedAt: serverTimestamp(), updatedBy: currentData.username });
+
+/* ---------- Mã code ---------- */
+const CH = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789"; // bỏ I, O, 0, 1 dễ nhầm
+const rnd = n => Array.from(crypto.getRandomValues(new Uint8Array(n)), b => CH[b & 31]).join("");
+const cleanPrefix = p => (p || "LG").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 6) || "LG";
+const genCode = p => `${p}-${rnd(4)}-${rnd(4)}`;
+
+/* ---------- Thống kê (đếm trên server, không phụ thuộc 10 mục đang hiển thị) ---------- */
+async function loadStats() {
+  const cnt = async q => { try { return (await getCountFromServer(q)).data().count; } catch (e) { return "—"; } };
+  const C = collection(db, "codes"), U = collection(db, "users");
+  const r = await Promise.all([
+    cnt(C), cnt(query(C, where("status", "==", "unused"))), cnt(query(C, where("status", "==", "used"))),
+    cnt(query(U, where("role", "==", "agency"))), cnt(query(U, where("role", "==", "admin")))
+  ]);
+  ["stTotal", "stUnused", "stUsed", "stAgency", "stAdmin"].forEach((id, i) => $(id).textContent = num(r[i]));
+}
+
+/* ---------- Danh sách: 10 mục mới nhất + xem thêm ---------- */
+const codeRow = c => `<tr>
+  <td><span class="mono">${esc(c.id)}</span>${c.note ? `<small class="note">${esc(c.note)}</small>` : ""}</td>
+  <td>${esc(c.createdBy || "—")} <span class="tag ${c.createdByRole === "admin" ? "t-admin" : "t-agency"}">${esc(c.createdByRole || "agency")}</span></td>
+  <td class="dim">${fmt(c.createdAt)}</td>
+  <td>${c.status === "used" ? '<span class="tag t-used">Đã dùng</span>' : '<span class="tag t-ok">Chưa dùng</span>'}</td>
+  <td>${c.usedByUsername ? esc(c.usedByUsername) : '<span class="dim">—</span>'}</td>
+  <td class="dim">${fmt(c.usedAt)}</td>
+  <td><div class="acts">
+    <button class="rb" data-act="copyCode" data-id="${esc(c.id)}">Sao chép</button>
+    ${c.status === "used"
+      ? `<button class="rb" data-act="resetCode" data-id="${esc(c.id)}">Reset</button>`
+      : `<button class="rb bad" data-act="deleteCode" data-id="${esc(c.id)}">Xóa</button>`}
+  </div></td></tr>`;
+
+const userRow = u => {
+  const used = u.usedQuota || 0, max = u.maxQuota || 0, pct = max ? Math.min(100, used / max * 100) : 0;
+  return `<tr>
+  <td><b>${esc(u.username || "?")}</b>${u.note ? `<small class="note">${esc(u.note)}</small>` : ""}</td>
+  <td><span class="tag ${u.role === "admin" ? "t-admin" : "t-agency"}">${esc(u.role)}</span></td>
+  <td>${u.status === "locked" ? '<span class="tag t-bad">Đã khóa</span>' : '<span class="tag t-ok">Hoạt động</span>'}</td>
+  <td>${u.role === "agency" ? `${used} / ${max}<span class="qbar"><i style="width:${pct}%"></i></span>` : '<span class="dim">—</span>'}</td>
+  <td class="dim">${fmt(u.createdAt)}</td>
+  <td class="dim">${esc(u.createdBy || "—")}</td>
+  <td><div class="acts">
+    ${u.role === "agency" ? `<button class="rb" data-act="editQuota" data-id="${esc(u.id)}">Sửa hạn mức</button>` : ""}
+    ${u.id !== currentUser.uid ? `<button class="rb" data-act="toggleLock" data-id="${esc(u.id)}">${u.status === "locked" ? "Mở khóa" : "Khóa"}</button>
+    <button class="rb bad" data-act="deleteUser" data-id="${esc(u.id)}">Xóa</button>` : ""}
+  </div></td></tr>`;
+};
+
+const ACTION = { create_codes: "Tạo mã", delete_code: "Xóa mã", reset_code: "Reset mã", create_user: "Tạo tài khoản", lock_user: "Khóa tài khoản", unlock_user: "Mở khóa", delete_user: "Xóa tài khoản", edit_quota: "Sửa hạn mức" };
+const logRow = l => `<tr>
+  <td class="dim">${fmt(l.createdAt)}</td>
+  <td>${esc(l.by || "—")} <span class="tag ${l.byRole === "admin" ? "t-admin" : "t-agency"}">${esc(l.byRole || "")}</span></td>
+  <td><b>${esc(ACTION[l.action] || l.action)}</b></td>
+  <td>${esc(l.target || "—")}</td>
+  <td class="dim">${esc(l.detail || "")}</td></tr>`;
+
+const L = {
+  codes: { col: "codes", body: "codesBody", cols: 7, row: codeRow, empty: "Chưa có mã nào." },
+  users: { col: "users", body: "usersBody", cols: 7, row: userRow, empty: "Chưa có tài khoản nào." },
+  logs:  { col: "logs",  body: "logsBody",  cols: 5, row: logRow,  empty: "Chưa có hoạt động nào." }
+};
+
+function render(kind) {
+  const s = S[kind], c = L[kind];
+  let rows = s.rows;
+  if (kind === "codes" && $("fStatus").value) rows = rows.filter(r => r.status === $("fStatus").value);
+  if (kind === "users" && $("fRole").value) rows = rows.filter(r => r.role === $("fRole").value);
+  $(c.body).innerHTML = rows.length
+    ? rows.map(c.row).join("")
+    : `<tr><td colspan="${c.cols}" class="empty">${s.search ? "Không tìm thấy kết quả." : c.empty}</td></tr>`;
+  $(kind + "More").hidden = s.end || s.search;
+  $(kind + "Info").textContent = s.search ? `Kết quả tìm kiếm: ${s.rows.length} mục` : `Đang hiển thị ${s.rows.length} mục mới nhất`;
+}
+
+async function loadList(kind, more = false) {
+  const s = S[kind], c = L[kind];
+  if (!more) {
+    Object.assign(s, mk());
+    $(c.body).innerHTML = `<tr><td colspan="${c.cols}" class="empty">Đang tải...</td></tr>`;
+  }
   try {
-    const cred = await createUserWithEmailAndPassword(secondaryAuth, emailOf(username), password);
+    const q = query(collection(db, c.col), orderBy("createdAt", "desc"), ...(more && s.last ? [startAfter(s.last)] : []), limit(PAGE));
+    const snap = await getDocs(q);
+    snap.forEach(d => s.rows.push({ id: d.id, ...d.data() }));
+    if (snap.docs.length) s.last = snap.docs[snap.docs.length - 1];
+    s.end = snap.size < PAGE;
+  } catch (e) {
+    console.error(e);
+    $(c.body).innerHTML = `<tr><td colspan="${c.cols}" class="empty">Lỗi tải dữ liệu: ${esc(e.message)}</td></tr>`;
+    return;
+  }
+  render(kind);
+}
+const refresh = kind => Promise.all([loadList(kind), loadStats()]);
+
+/* ---------- Tìm kiếm (truy vấn thẳng Firestore, không chỉ trong 10 mục đã tải) ---------- */
+async function search(kind) {
+  const val = $(kind === "codes" ? "qCode" : "qUser").value.trim();
+  if (!val) return loadList(kind);
+  const s = S[kind];
+  Object.assign(s, mk(), { search: true, end: true });
+  try {
+    let q;
+    if (kind === "codes") {
+      if ($("qCodeBy").value === "code") {
+        const v = val.toUpperCase();
+        q = query(collection(db, "codes"), where(documentId(), ">=", v), where(documentId(), "<=", v + "\uf8ff"), limit(20));
+      } else q = query(collection(db, "codes"), where("createdBy", "==", val.toLowerCase()), limit(50));
+    } else {
+      const v = val.toLowerCase();
+      q = query(collection(db, "users"), where("username", ">=", v), where("username", "<=", v + "\uf8ff"), limit(20));
+    }
+    (await getDocs(q)).forEach(d => s.rows.push({ id: d.id, ...d.data() }));
+    s.rows.sort((a, b) => (b.createdAt?.toMillis?.() || 0) - (a.createdAt?.toMillis?.() || 0));
+  } catch (e) { toast("Lỗi tìm kiếm: " + e.message, "err"); }
+  render(kind);
+}
+let searchTimer;
+const debounced = kind => () => { clearTimeout(searchTimer); searchTimer = setTimeout(() => search(kind), 400); };
+$("qCode").addEventListener("input", debounced("codes"));
+$("qCodeBy").addEventListener("change", () => search("codes"));
+$("qUser").addEventListener("input", debounced("users"));
+$("fStatus").addEventListener("change", () => render("codes"));
+$("fRole").addEventListener("change", () => render("users"));
+
+["codes", "users", "logs"].forEach(k => {
+  $(k + "Reload").addEventListener("click", () => { if (k === "codes") $("qCode").value = ""; if (k === "users") $("qUser").value = ""; refresh(k); });
+  $(k + "More").addEventListener("click", () => loadList(k, true));
+});
+
+/* ---------- Xuất CSV (danh sách đang hiển thị) ---------- */
+const CSV = {
+  codes: [["Mã", r => r.id], ["Người tạo", r => r.createdBy], ["Vai trò", r => r.createdByRole], ["Ghi chú", r => r.note], ["Tạo lúc", r => fmt(r.createdAt)], ["Trạng thái", r => r.status], ["Người dùng", r => r.usedByUsername], ["Dùng lúc", r => fmt(r.usedAt)]],
+  users: [["Username", r => r.username], ["Vai trò", r => r.role], ["Trạng thái", r => r.status], ["Hạn mức", r => r.maxQuota], ["Đã dùng", r => r.usedQuota], ["Ghi chú", r => r.note], ["Ngày tạo", r => fmt(r.createdAt)], ["Người tạo", r => r.createdBy]]
+};
+const cell = v => { let t = String(v ?? ""); if (/^[=+\-@]/.test(t)) t = "'" + t; return `"${t.replace(/"/g, '""')}"`; };
+function exportCsv(kind) {
+  const rows = S[kind].rows;
+  if (!rows.length) return toast("Không có dữ liệu để xuất.", "err");
+  const cols = CSV[kind];
+  const text = "\ufeff" + [cols.map(c => cell(c[0])).join(","), ...rows.map(r => cols.map(c => cell(c[1](r))).join(","))].join("\r\n");
+  saveFile(`locket-gold-${kind}-${new Date().toISOString().slice(0, 10)}.csv`, text, "text/csv");
+}
+$("codesCsv").addEventListener("click", () => exportCsv("codes"));
+$("usersCsv").addEventListener("click", () => exportCsv("users"));
+
+/* ---------- Thao tác trên mã ---------- */
+$("codesBody").addEventListener("click", e => {
+  const b = e.target.closest("button[data-act]");
+  if (b) codeAct(b.dataset.act, b.dataset.id);
+});
+async function codeAct(act, id) {
+  const c = S.codes.rows.find(r => r.id === id);
+  if (!c) return;
+  if (act === "copyCode") return copy(id);
+  try {
+    if (act === "deleteCode") {
+      if (!await ask({ title: "Xóa mã", text: `Xóa mã ${id}? Hành động này không thể hoàn tác.`, ok: "Xóa", danger: true })) return;
+      await commitWithLog(b => b.delete(doc(db, "codes", id)), { action: "delete_code", target: id, detail: `Xóa mã chưa dùng (tạo bởi ${c.createdBy || "?"})` });
+      toast("Đã xóa mã.");
+    } else if (act === "resetCode") {
+      if (!await ask({ title: "Reset mã", text: `Đưa mã ${id} về trạng thái chưa dùng?`, ok: "Reset" })) return;
+      await commitWithLog(b => b.update(doc(db, "codes", id), {
+        status: "unused", usedByUsername: null, usedAt: null, downloadedFilename: null, userAgent: null,
+        resetCount: increment(1), lastResetAt: serverTimestamp(), lastResetBy: currentData.username, ...stamp()
+      }), { action: "reset_code", target: id, detail: `Trước đó được dùng bởi ${c.usedByUsername || "?"}` });
+      toast("Đã reset mã.");
+    }
+    await refresh("codes");
+  } catch (e) { toast("Lỗi: " + e.message, "err"); }
+}
+
+/* ---------- Thao tác trên tài khoản ---------- */
+$("usersBody").addEventListener("click", e => {
+  const b = e.target.closest("button[data-act]");
+  if (b) userAct(b.dataset.act, b.dataset.id);
+});
+async function userAct(act, uid) {
+  const u = S.users.rows.find(r => r.id === uid);
+  if (!u) return;
+  if (act === "editQuota") {
+    quotaUid = uid;
+    $("quotaDesc").textContent = `Tài khoản ${u.username} (đã dùng ${u.usedQuota || 0})`;
+    $("quotaInput").value = u.maxQuota || 0;
+    $("dlgQuota").returnValue = ""; $("dlgQuota").showModal();
+    return;
+  }
+  try {
+    if (act === "toggleLock") {
+      const next = u.status === "locked" ? "active" : "locked";
+      if (!await ask({ title: next === "locked" ? "Khóa tài khoản" : "Mở khóa tài khoản", text: `Chuyển "${u.username}" sang trạng thái ${next === "locked" ? "bị khóa" : "hoạt động"}?`, ok: next === "locked" ? "Khóa" : "Mở khóa", danger: next === "locked" })) return;
+      await commitWithLog(b => b.update(doc(db, "users", uid), { status: next, statusUpdatedAt: serverTimestamp(), statusUpdatedBy: currentData.username, ...stamp() }),
+        { action: next === "locked" ? "lock_user" : "unlock_user", target: u.username, detail: `Vai trò ${u.role}` });
+      toast("Đã cập nhật trạng thái.");
+    } else if (act === "deleteUser") {
+      if (!await ask({ title: "Xóa tài khoản", text: `Xóa hồ sơ "${u.username}"? Chỉ dữ liệu Firestore bị xóa, tài khoản đăng nhập vẫn còn trong Firebase Auth. Nếu chỉ muốn chặn truy cập, hãy dùng Khóa.`, ok: "Xóa", danger: true })) return;
+      await commitWithLog(b => b.delete(doc(db, "users", uid)), { action: "delete_user", target: u.username, detail: `Vai trò ${u.role}, đã dùng ${u.usedQuota || 0}/${u.maxQuota || 0}` });
+      toast("Đã xóa hồ sơ tài khoản.");
+    }
+    await refresh("users");
+  } catch (e) { toast("Lỗi: " + e.message, "err"); }
+}
+
+$("dlgQuota").addEventListener("close", async () => {
+  if ($("dlgQuota").returnValue !== "save" || !quotaUid) return;
+  const u = S.users.rows.find(r => r.id === quotaUid), v = parseInt($("quotaInput").value, 10);
+  if (!u || isNaN(v) || v < 0) return toast("Hạn mức không hợp lệ.", "err");
+  if (v < (u.usedQuota || 0) && !await ask({ title: "Hạn mức thấp hơn đã dùng", text: `Hạn mức mới (${v}) nhỏ hơn số đã dùng (${u.usedQuota}). Vẫn tiếp tục?`, ok: "Tiếp tục" })) return;
+  try {
+    await commitWithLog(b => b.update(doc(db, "users", quotaUid), { maxQuota: v, ...stamp() }),
+      { action: "edit_quota", target: u.username, detail: `Hạn mức ${u.maxQuota || 0} → ${v}` });
+    toast("Đã cập nhật hạn mức.");
+    await refresh("users");
+  } catch (e) { toast("Lỗi: " + e.message, "err"); }
+  quotaUid = null;
+});
+
+/* ---------- Tạo mã code ---------- */
+$("codeForm").addEventListener("submit", async e => {
+  e.preventDefault();
+  const btn = $("codeBtn");
+  btn.disabled = true; btn.textContent = "Đang tạo...";
+  const count = Math.max(1, Math.min(50, parseInt($("codeCount").value, 10) || 1));
+  const prefix = cleanPrefix($("codePrefix").value);
+  const note = $("codeNote").value.trim().slice(0, 120);
+  try {
+    const set = new Set();
+    while (set.size < count) set.add(genCode(prefix));
+    const list = [...set];
+    const exist = await Promise.all(list.map(c => getDoc(doc(db, "codes", c))));
+    if (exist.some(s => s.exists())) throw new Error("Trùng mã, vui lòng bấm Tạo mã lại.");
+
+    const batchId = rnd(10);
+    await commitWithLog(b => list.forEach(code => b.set(doc(db, "codes", code), {
+      code, prefix, note, batchId, batchSize: count,
+      createdBy: currentData.username, createdByUid: currentUser.uid, createdByRole: currentData.role,
+      createdAt: serverTimestamp(), updatedAt: serverTimestamp(),
+      status: "unused", usedByUsername: null, usedAt: null, downloadedFilename: null, userAgent: null, resetCount: 0
+    })), { action: "create_codes", target: `${count} mã (${prefix})`, detail: `Lô ${batchId}${note ? ", ghi chú: " + note : ""}`, batchId, codes: list });
+
+    lastBatch = list;
+    $("codeResultTitle").textContent = `Đã tạo ${list.length} mã`;
+    $("codeResultList").innerHTML = list.map(esc).join("<br>");
+    $("codeResult").hidden = false;
+    $("codeCount").value = 1;
+    toast(`Đã tạo ${list.length} mã.`);
+    await refresh("codes");
+  } catch (err) {
+    console.error(err);
+    toast("Lỗi tạo mã: " + (err.message || err), "err");
+  } finally {
+    btn.disabled = false; btn.textContent = "Tạo mã";
+  }
+});
+$("batchCopy").addEventListener("click", () => copy(lastBatch.join("\n"), "Đã sao chép tất cả mã."));
+$("batchDl").addEventListener("click", () => saveFile(`ma-code-${new Date().toISOString().slice(0, 10)}.txt`, lastBatch.join("\r\n")));
+
+/* ---------- Tạo tài khoản (Auth qua app phụ để không mất phiên admin) ---------- */
+async function createAuthUserSecondary(username, password) {
+  const secondary = initializeApp(firebaseConfig, "secondary-" + Date.now() + "-" + Math.random().toString(36).slice(2));
+  const sAuth = getAuth(secondary);
+  try {
+    const cred = await createUserWithEmailAndPassword(sAuth, emailOf(username), password);
     const uid = cred.user.uid;
-    await signOut(secondaryAuth);
+    await signOut(sAuth);
     await new Promise(r => setTimeout(r, 300));
     return uid;
-  } finally {
-    try { await deleteApp(secondaryApp); } catch(e){ console.warn("deleteApp:", e); }
-  }
+  } finally { try { await deleteApp(secondary); } catch (e) { console.warn("deleteApp:", e); } }
 }
 
-// === XÁC NHẬN LẠI PHIÊN ADMIN ===
-async function ensureAdminSession(){
-  if (auth.currentUser && auth.currentUser.uid === currentUser.uid) return true;
-  return new Promise((resolve) => {
-    $("pwdModalBackdrop").classList.add("open");
-    $("adminPassword").focus();
-    $("pwdModalConfirm").onclick = async () => {
-      const pwd = $("adminPassword").value;
-      if (!pwd){ toast("Vui lòng nhập mật khẩu.", "err"); return; }
-      try {
-        await signInWithEmailAndPassword(auth, emailOf(currentData.username), pwd);
-        $("pwdModalBackdrop").classList.remove("open");
-        $("adminPassword").value = "";
-        resolve(true);
-      } catch(e){ toast("Sai mật khẩu admin: " + e.message, "err"); }
-    };
-    $("pwdModalCancel").onclick = () => {
-      $("pwdModalBackdrop").classList.remove("open");
-      resolve(false);
-    };
-  });
-}
+$("newRole").addEventListener("change", () => { $("quotaField").hidden = $("newRole").value !== "agency"; });
 
-async function loadMe(){
-  const snap = await getDoc(doc(db, "users", currentUser.uid));
-  if (!snap.exists()) throw new Error("Không tìm thấy dữ liệu quản trị.");
-  currentData = snap.data();
-  if (currentData.role !== "admin") throw new Error("Chỉ admin mới được truy cập trang này.");
-  if (currentData.status === "locked") throw new Error("Tài khoản đã bị khóa.");
-}
-
-// === TABS ===
-document.querySelectorAll(".tab").forEach(tab => {
-  tab.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(t => t.classList.remove("active"));
-    tab.classList.add("active");
-    const target = tab.dataset.tab;
-    $("panel-codes").classList.toggle("active", target === "codes");
-    $("codesTablePanel").classList.toggle("active", target === "codes");
-    $("panel-users").classList.toggle("active", target === "users");
-    $("usersTablePanel").classList.toggle("active", target === "users");
-  });
-});
-
-// Role change → show/hide quota
-$("newRole").addEventListener("change", () => {
-  $("quotaField").style.display = $("newRole").value === "agency" ? "" : "none";
-});
-
-// === LOAD CODES ===
-async function loadCodes(){
-  const tbody = $("codesBody");
-  tbody.innerHTML = `<tr><td colspan="8" class="empty">Đang tải...</td></tr>`;
-  try {
-    const snap = await getDocs(collection(db, "codes"));
-    allCodes = [];
-    snap.forEach(d => allCodes.push({ id: d.id, ...d.data() }));
-    allCodes.sort((a,b) => {
-      const ta = a.createdAt?.toMillis?.() || 0;
-      const tb = b.createdAt?.toMillis?.() || 0;
-      return tb - ta;
-    });
-    renderCodes();
-    renderStats();
-  } catch(e){
-    console.error(e);
-    tbody.innerHTML = `<tr><td colspan="8" class="empty">Lỗi tải mã: ${e.message}</td></tr>`;
-  }
-}
-
-function renderCodes(){
-  const tbody = $("codesBody");
-  const s = $("searchCode").value.trim().toUpperCase();
-  const su = $("searchCodeUser").value.trim().toLowerCase();
-  const f = $("filterCodeStatus").value;
-
-  let list = allCodes.slice();
-  if (s) list = list.filter(c => (c.id||'').toUpperCase().includes(s));
-  if (su) list = list.filter(c => (c.createdBy||'').toLowerCase().includes(su));
-  if (f) list = list.filter(c => c.status === f);
-
-  if (list.length === 0){
-    tbody.innerHTML = `<tr><td colspan="8" class="empty">Không có mã phù hợp.</td></tr>`;
-    return;
-  }
-
-  tbody.innerHTML = list.map(c => {
-    const statusTag = c.status === 'used'
-      ? `<span class="tag used">Đã dùng</span>`
-      : `<span class="tag unused">Chưa dùng</span>`;
-    const roleTag = c.createdByRole === 'admin'
-      ? `<span class="tag admin">admin</span>`
-      : `<span class="tag agency">agency</span>`;
-    const created = c.createdAt?.toDate?.();
-    const usedAt = c.usedAt?.toDate?.();
-    const createdStr = created ? created.toLocaleString('vi-VN') : '—';
-    const usedAtStr = usedAt ? usedAt.toLocaleString('vi-VN') : '—';
-
-    const actions = [];
-    if (c.status === 'unused'){
-      actions.push(`<button class="danger" data-action="deleteCode" data-id="${c.id}">Xóa</button>`);
-    } else {
-      actions.push(`<button data-action="resetCode" data-id="${c.id}">Reset</button>`);
-    }
-
-    return `<tr>
-      <td class="code-cell">${c.id}</td>
-      <td>${c.createdBy || '—'}</td>
-      <td>${roleTag}</td>
-      <td style="opacity:0.7;">${createdStr}</td>
-      <td>${statusTag}</td>
-      <td>${c.usedByUsername || '<span style="opacity:0.4">—</span>'}</td>
-      <td style="opacity:0.7;">${usedAtStr}</td>
-      <td><div class="row-actions">${actions.join("")}</div></td>
-    </tr>`;
-  }).join("");
-
-  tbody.querySelectorAll("button[data-action]").forEach(btn => {
-    btn.addEventListener("click", () => handleCodeAction(btn.dataset.action, btn.dataset.id));
-  });
-}
-
-async function handleCodeAction(action, id){
-  if (action === 'deleteCode'){
-    if (!confirm(`Xóa mã "${id}"?`)) return;
-    try {
-      await deleteDoc(doc(db, 'codes', id));
-      toast("Đã xóa mã.", "ok");
-      await loadCodes();
-    } catch(e){ toast("Lỗi: " + e.message, "err"); }
-    return;
-  }
-  if (action === 'resetCode'){
-    if (!confirm(`Reset mã "${id}" về trạng thái chưa dùng?`)) return;
-    try {
-      await updateDoc(doc(db, 'codes', id), {
-        status: 'unused',
-        usedByUsername: null,
-        usedAt: null,
-        downloadedFilename: null,
-        userAgent: null
-      });
-      toast("Đã reset mã.", "ok");
-      await loadCodes();
-    } catch(e){ toast("Lỗi: " + e.message, "err"); }
-  }
-}
-
-// === LOAD USERS ===
-async function loadUsers(){
-  const tbody = $("usersBody");
-  tbody.innerHTML = `<tr><td colspan="7" class="empty">Đang tải...</td></tr>`;
-  try {
-    const snap = await getDocs(collection(db, "users"));
-    allUsers = [];
-    snap.forEach(d => allUsers.push({ uid: d.id, ...d.data() }));
-    allUsers.sort((a,b) => (a.username||'').localeCompare(b.username||''));
-    renderUsers();
-    renderStats();
-  } catch(e){
-    console.error(e);
-    tbody.innerHTML = `<tr><td colspan="7" class="empty">Lỗi tải users: ${e.message}</td></tr>`;
-  }
-}
-
-function renderUsers(){
-  const tbody = $("usersBody");
-  const s = $("searchUser").value.trim().toLowerCase();
-  const f = $("filterRole").value;
-  let list = allUsers.slice();
-  if (s) list = list.filter(u => (u.username||'').toLowerCase().includes(s));
-  if (f) list = list.filter(u => u.role === f);
-
-  if (list.length === 0){
-    tbody.innerHTML = `<tr><td colspan="7" class="empty">Không có tài khoản phù hợp.</td></tr>`;
-    return;
-  }
-
-  tbody.innerHTML = list.map(u => {
-    const roleTag = u.role === 'admin'
-      ? `<span class="tag admin">admin</span>`
-      : `<span class="tag agency">agency</span>`;
-    const statusTag = u.status === 'locked'
-      ? `<span class="tag locked">Đã khóa</span>`
-      : `<span class="tag ok">Hoạt động</span>`;
-    const quota = u.role === 'agency'
-      ? `<span class="quota-badge">${u.usedQuota||0} / ${u.maxQuota||0}</span>`
-      : `<span style="opacity:0.4">—</span>`;
-    const created = u.createdAt?.toDate?.();
-    const createdStr = created ? created.toLocaleDateString('vi-VN') : '—';
-
-    const actions = [];
-    if (u.role === 'agency'){
-      actions.push(`<button data-action="editQuota" data-uid="${u.uid}">Sửa quota</button>`);
-    }
-    if (u.uid !== currentUser.uid){
-      actions.push(`<button data-action="toggleLock" data-uid="${u.uid}">${u.status==='locked'?'Mở khóa':'Khóa'}</button>`);
-      actions.push(`<button class="danger" data-action="deleteUser" data-uid="${u.uid}">Xóa</button>`);
-    }
-
-    return `<tr>
-      <td><b>${u.username || '?'}</b></td>
-      <td>${roleTag}</td>
-      <td>${statusTag}</td>
-      <td>${quota}</td>
-      <td style="opacity:0.7;">${createdStr}</td>
-      <td style="opacity:0.7;">${u.createdBy || '—'}</td>
-      <td><div class="row-actions">${actions.join("")}</div></td>
-    </tr>`;
-  }).join("");
-
-  tbody.querySelectorAll("button[data-action]").forEach(btn => {
-    btn.addEventListener("click", () => handleUserAction(btn.dataset.action, btn.dataset.uid));
-  });
-}
-
-async function handleUserAction(action, uid){
-  const target = allUsers.find(u => u.uid === uid);
-  if (!target) return;
-
-  if (action === 'editQuota'){
-    editingQuotaUid = uid;
-    $("quotaModalDesc").textContent = `Tài khoản: ${target.username} (đã dùng ${target.usedQuota||0})`;
-    $("modalQuota").value = target.maxQuota || 0;
-    $("quotaModalBackdrop").classList.add("open");
-    return;
-  }
-  if (action === 'toggleLock'){
-    const newStatus = target.status === 'locked' ? 'active' : 'locked';
-    if (!confirm(`Chuyển "${target.username}" sang ${newStatus}?`)) return;
-    try {
-      await updateDoc(doc(db, "users", uid), { status: newStatus });
-      toast("Đã cập nhật.", "ok");
-      await loadUsers();
-    } catch(e){ toast("Lỗi: " + e.message, "err"); }
-    return;
-  }
-  if (action === 'deleteUser'){
-    if (!confirm(`XÓA VĨNH VIỄN "${target.username}"?`)) return;
-    try {
-      await deleteDoc(doc(db, "users", uid));
-      toast("Đã xóa user.", "ok");
-      await loadUsers();
-    } catch(e){ toast("Lỗi: " + e.message, "err"); }
-  }
-}
-
-function renderStats(){
-  $("statCodes").textContent = allCodes.length;
-  $("statUnused").textContent = allCodes.filter(c => c.status === 'unused').length;
-  $("statUsed").textContent = allCodes.filter(c => c.status === 'used').length;
-  $("statAgency").textContent = allUsers.filter(u => u.role === 'agency').length;
-  $("statAdmin").textContent = allUsers.filter(u => u.role === 'admin').length;
-}
-
-// === TẠO MÃ CODE (admin: không giới hạn) ===
-$("createCodeForm").addEventListener("submit", async (e) => {
+$("userForm").addEventListener("submit", async e => {
   e.preventDefault();
-  const btn = $("createCodeBtn");
+  const btn = $("userBtn");
   btn.disabled = true;
-  btn.textContent = "Đang tạo...";
-
-  const count = Math.max(1, Math.min(50, parseInt($("codeCount").value, 10) || 1));
-  const prefix = $("codePrefix").value.trim() || 'LG';
-
-  const created = [];
-  let attempts = 0;
-  const maxAttempts = count * 5;
-
-  try {
-    while (created.length < count && attempts < maxAttempts){
-      attempts++;
-      const code = generateCode(prefix);
-      const codeRef = doc(db, 'codes', code);
-      const snap = await getDoc(codeRef);
-      if (snap.exists()) continue; // trùng, thử lại
-      await setDoc(codeRef, {
-        code,
-        createdBy: currentData.username,
-        createdByUid: currentUser.uid,
-        createdByRole: currentData.role,
-        createdAt: new Date(),
-        status: 'unused',
-        usedByUsername: null,
-        usedAt: null,
-        downloadedFilename: null,
-        userAgent: null
-      });
-      created.push(code);
-    }
-
-    if (created.length === 0){
-      toast("Không thể tạo mã (trùng lặp). Thử lại.", "err");
-      return;
-    }
-
-    toast(`Đã tạo ${created.length} mã.`, "ok");
-    $("codeResult").classList.add("show");
-    $("codeResult").innerHTML = `✅ Đã tạo ${created.length} mã:<div class="big-code">${created.join('<br>')}</div>`;
-    $("codeCount").value = 1;
-    await loadCodes();
-  } catch(err){
-    console.error(err);
-    toast("Lỗi tạo mã: " + (err.message||err), "err");
-  } finally {
-    btn.disabled = false;
-    btn.textContent = "Tạo mã";
-  }
-});
-
-// === TẠO USER (agency/admin) ===
-$("createUserForm").addEventListener("submit", async (e) => {
-  e.preventDefault();
-  const btn = $("createUserBtn");
-  btn.disabled = true;
-
   const username = normalizeUsername($("newUsername").value);
   const password = $("newPassword").value;
   const role = $("newRole").value;
-  const quota = role === 'agency' ? Math.max(0, parseInt($("newQuota").value,10)||0) : 0;
-
-  if (!/^[a-z0-9_.]{3,32}$/.test(username)){
-    toast("Username chỉ gồm chữ thường, số, _ hoặc . (3–32 ký tự).", "err");
-    btn.disabled = false; return;
-  }
-  if (password.length < 6){
-    toast("Mật khẩu tối thiểu 6 ký tự.", "err");
-    btn.disabled = false; return;
-  }
-
-  let newUid = null;
+  const quota = role === "agency" ? Math.max(0, parseInt($("newQuota").value, 10) || 0) : 0;
+  const note = $("newNote").value.trim().slice(0, 120);
   try {
-    const dupQ = query(collection(db, "users"), where("username", "==", username));
-    const dupSnap = await getDocs(dupQ);
-    if (!dupSnap.empty){ toast("Username đã tồn tại.", "err"); btn.disabled = false; return; }
+    if (!/^[a-z0-9_.]{3,32}$/.test(username)) throw new Error("Username chỉ gồm chữ thường, số, _ hoặc . (3–32 ký tự).");
+    if (password.length < 6) throw new Error("Mật khẩu tối thiểu 6 ký tự.");
+    const dup = await getDocs(query(collection(db, "users"), where("username", "==", username), limit(1)));
+    if (!dup.empty) throw new Error("Username đã tồn tại.");
 
-    newUid = await createAuthUserSecondary(username, password);
+    const newUid = await createAuthUserSecondary(username, password);
+    if (!await ensureAdminSession()) throw new Error("Phiên admin bị mất. Tài khoản Auth đã tạo nhưng chưa ghi Firestore, hãy thử lại.");
 
-    const sessionOk = await ensureAdminSession();
-    if (!sessionOk){
-      toast("Phiên admin bị mất. Auth user đã tạo nhưng chưa ghi Firestore. Thử lại.", "err");
-      btn.disabled = false; return;
-    }
+    await commitWithLog(b => b.set(doc(db, "users", newUid), {
+      username, email: emailOf(username), role, status: "active", note,
+      maxQuota: quota, usedQuota: 0,
+      createdBy: currentData.username, createdByUid: currentUser.uid, createdByRole: currentData.role,
+      createdAt: serverTimestamp(), updatedAt: serverTimestamp()
+    }), { action: "create_user", target: username, detail: `Vai trò ${role}${role === "agency" ? `, hạn mức ${quota}` : ""}${note ? ", ghi chú: " + note : ""}` });
 
-    const userData = {
-      username,
-      role,
-      status: "active",
-      createdBy: currentData.username,
-      createdAt: new Date(),
-      maxQuota: role === 'agency' ? quota : 0,
-      usedQuota: 0
-    };
-    await setDoc(doc(db, "users", newUid), userData);
-
-    toast(`Đã tạo ${role} "${username}".`, "ok");
-    $("createUserForm").reset();
-    $("quotaField").style.display = "";
-    await loadUsers();
-  } catch(err){
+    toast(`Đã tạo ${role} "${username}".`);
+    $("userForm").reset();
+    $("quotaField").hidden = false;
+    await refresh("users");
+  } catch (err) {
     console.error(err);
     let msg = err.message || String(err);
     if (err.code === "auth/email-already-in-use") msg = "Username đã tồn tại trong Auth.";
     if (err.code === "auth/weak-password") msg = "Mật khẩu quá yếu.";
     toast("Lỗi: " + msg, "err");
-  } finally {
-    btn.disabled = false;
-  }
+  } finally { btn.disabled = false; }
 });
 
-// Modal quota
-$("quotaModalCancel").addEventListener("click", () => {
-  $("quotaModalBackdrop").classList.remove("open");
-  editingQuotaUid = null;
-});
-$("quotaModalSave").addEventListener("click", async () => {
-  if (!editingQuotaUid) return;
-  const val = parseInt($("modalQuota").value, 10);
-  if (isNaN(val) || val < 0){ toast("Hạn mức không hợp lệ.", "err"); return; }
-  try {
-    const target = allUsers.find(u => u.uid === editingQuotaUid);
-    if (target && val < (target.usedQuota||0)){
-      if (!confirm(`Hạn mức mới (${val}) < đã dùng (${target.usedQuota}). Tiếp tục?`)) return;
-    }
-    await updateDoc(doc(db, "users", editingQuotaUid), { maxQuota: val });
-    toast("Đã cập nhật quota.", "ok");
-    $("quotaModalBackdrop").classList.remove("open");
-    editingQuotaUid = null;
-    await loadUsers();
-  } catch(e){ toast("Lỗi: " + e.message, "err"); }
+/* ---------- Tab ---------- */
+const tabs = [...document.querySelectorAll("[role=tab]")];
+function openTab(name) {
+  tabs.forEach(t => { const on = t.dataset.tab === name; t.setAttribute("aria-selected", String(on)); t.tabIndex = on ? 0 : -1; });
+  ["codes", "users", "logs"].forEach(k => $("pane-" + k).hidden = k !== name);
+  if (!loaded[name]) { loaded[name] = true; loadList(name); }
+}
+tabs.forEach((t, i) => {
+  t.addEventListener("click", () => openTab(t.dataset.tab));
+  t.addEventListener("keydown", e => {
+    if (!["ArrowLeft", "ArrowRight"].includes(e.key)) return;
+    const n = tabs[(i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length];
+    openTab(n.dataset.tab); n.focus();
+  });
 });
 
-// Filters
-$("searchCode").addEventListener("input", renderCodes);
-$("searchCodeUser").addEventListener("input", renderCodes);
-$("filterCodeStatus").addEventListener("change", renderCodes);
-$("reloadCodesBtn").addEventListener("click", loadCodes);
-$("searchUser").addEventListener("input", renderUsers);
-$("filterRole").addEventListener("change", renderUsers);
-$("reloadUsersBtn").addEventListener("click", loadUsers);
+$("logoutBtn").addEventListener("click", async () => { await signOut(auth); window.location.replace(LOGIN_URL); });
 
-// Top actions
-$("logoutBtn").addEventListener("click", async () => {
-  await signOut(auth);
-  window.location.replace("/login/index.html");
-});
-$("viewUserPage").addEventListener("click", () => window.open("/index.html", "_blank"));
-
-// === AUTH GUARD ===
-onAuthStateChanged(auth, async (user) => {
-  if (!user){ window.location.replace("/login/index.html"); return; }
+/* ---------- Kiểm soát truy cập ---------- */
+onAuthStateChanged(auth, async user => {
+  if (!user) { window.location.replace(LOGIN_URL); return; }
   currentUser = user;
   try {
     const snap = await getDoc(doc(db, "users", user.uid));
-    if (!snap.exists()){ await signOut(auth); window.location.replace("/login/index.html"); return; }
+    if (!snap.exists()) { await signOut(auth); window.location.replace(LOGIN_URL); return; }
     const d = snap.data();
-    if (d.status === "locked"){ await signOut(auth); window.location.replace("/login/index.html"); return; }
-    if (d.role === "agency"){ window.location.replace("/agency/index.html"); return; }
-    if (d.role !== "admin"){ await signOut(auth); window.location.replace("/login/index.html"); return; }
-    await loadMe();
-    await Promise.all([loadCodes(), loadUsers()]);
-  } catch(e){
+    if (d.status === "locked") { await signOut(auth); window.location.replace(LOGIN_URL); return; }
+    if (d.role === "agency") { window.location.replace("/agency/index.html"); return; }
+    if (d.role !== "admin") { await signOut(auth); window.location.replace(LOGIN_URL); return; }
+    currentData = d;
+    $("who").textContent = `Đăng nhập với tài khoản ${d.username} (admin)`;
+    await Promise.all([loadList("codes"), loadStats()]);
+  } catch (e) {
     toast(e.message || "Lỗi truy cập.", "err");
-    setTimeout(async () => { await signOut(auth); window.location.replace("/login/index.html"); }, 1500);
+    setTimeout(async () => { await signOut(auth); window.location.replace(LOGIN_URL); }, 1500);
   }
 });
 </script>
